@@ -13,7 +13,7 @@ function idToName(id){
 }
 
 $(document).ready(function() {
-	Crafty.init();
+	Crafty.init(924,736);
 
 	Crafty.sprite(64, "img/tiles_moje.png", {
 		grass: 		[0,0,1,1],
@@ -40,7 +40,6 @@ $(document).ready(function() {
 			.areaMap([0,38],[15,23],[48,23],[62,38],[48,50],[15,50])
 			.bind("Click", function(e) {
 				console.log(e.mouseButton);
-				this.destroy();
 			}).bind("MouseOver", function() {
 				for(var m=0;m<7;m++)
 					if(this.has(spriteArray[m])) this.sprite(m,1);

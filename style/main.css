@@ -1,3 +1,227 @@
-body{
-	background-color:#D8D8C0;
-	}
+
+@font-face {
+	font-family: 'Babas';
+	src: url('czionki/BebasNeue.otf');
+}
+
+body {
+	background-color: #D8D8C0;
+	color:#FFF;
+	font-family:"Babas";
+	font-size:20px;
+}
+* {
+	padding: 0;
+	margin: 0;
+}
+
+canvas {
+	width: 924px;
+	height: 736px;
+}
+#cr-stage{
+	float:left;
+}
+
+#container {
+	margin: 0 auto;
+	width: 1130px;
+	height: 768px;
+}
+
+#gora {
+	width: 1127px;
+	height: 35px;
+	float: left;
+	border-bottom: solid 3px #FFF;
+}
+
+#belkaSurowcow {
+	width: 775px;
+	height: 35px;
+	background-color: #554236;
+	border-bottom: solid 3px #FFF;
+	float:left;
+}
+
+#belkaCzas{
+	float:left;
+	width:176px;
+	height: 30px;
+	text-align:center;
+	padding-top:5px;
+	background-color: #554236;
+	
+}
+
+#belkaTura{
+	float:left;
+	width:176px;
+	height: 30px;
+	text-align:center;
+	padding-top:5px;
+	background-color: #554236;
+}
+
+#dol {
+	width: 1230px;
+	height: 736px;
+	float: left;
+}
+
+#prawa{
+	width:200px;
+	height:736px;
+	float:left;
+	background-color:#554236;
+	border-bottom: solid 3px #FFF;
+	border-left: solid 3px #fff;
+}
+
+#miniMapa {
+	width: 197px;
+	height: 175px;
+}
+
+#miniM{
+	width:150px;
+	height:150px;
+	background-color:#D8D8C0; 
+	margin:25px 25px 25px 25px
+}
+
+#oddzialy {
+	width: 197px;
+	height: 298px;
+}
+
+.belka {
+	width: 200px;
+	height: 35px;
+	border-bottom: solid 3px #FFF;
+	background-color: #7b644a;
+	text-align:center;
+}
+
+.belka p{
+	padding-top:5px;
+}
+
+#siatkaPrzyciskow {
+	width: 200px;
+	height: 200px;
+}
+
+.surowiec{
+	width:154px;
+	height:35px;
+	border-right:solid 1px #e8c23b;
+	float:left;
+}
+
+.surowiec img{
+	width:32px;
+	height:32px;
+	padding-left:42px;
+	float:left;
+}
+
+.surowiec p{
+	float:left;
+	padding-left:10px;
+	padding-top:8px;
+}
+
+#siatkaGora{
+	width:200px;
+	height:50px;
+}
+
+#siatkaSrodek{
+	width:200px;
+	height:100px;
+}
+#siatkaSrodekLewa{
+	width: 50px;
+	height:100px;
+	float:left;
+}
+
+#pole13{
+	width: 98px;
+	height:98px;
+	border:solid 1px #94735e;
+	float:left;
+}
+
+#siatkaSrodekPrawa{
+	width: 50px;
+	height:100px;
+	float:left;
+}
+
+
+#siatkaDol{
+	width:200px;
+	height:50px;
+}
+
+.poleSiatki{
+	width:46px;
+	height:46px;
+	border:solid 1px #94735e;
+	float:left;
+	margin:1px 1px 1px 1px;
+}
+
+#pole1  {
+	background-image: url("../img/ikony/ico_01.png");
+}
+
+#pole2  {
+	background-image: url("../img/ikony/ico_02.png");
+}
+
+#pole3  {
+	background-image: url("../img/ikony/ico_03.png");
+}
+
+#pole4  {
+	background-image: url("../img/ikony/ico_04.png");
+}
+
+#pole5  {
+	background-image: url("../img/ikony/ico_05.png");
+}
+
+#pole6  {
+	background-image: url("../img/ikony/ico_06.png");
+}
+
+#pole7  {
+	background-image: url("../img/ikony/ico_07.png");
+}
+
+#pole8  {
+	background-image: url("../img/ikony/ico_08.png");
+}
+
+#pole9  {
+	background-image: url("../img/ikony/ico_09.png");
+}
+
+#pole10  {
+	background-image: url("../img/ikony/ico_10.png");
+}
+
+#pole11  {
+	background-image: url("../img/ikony/ico_11.png");
+}
+
+#pole12  {
+	background-image: url("../img/ikony/ico_12.png");
+}
+
+#pole13{
+	background-image: url("../img/ikony/duze.png");
+}
