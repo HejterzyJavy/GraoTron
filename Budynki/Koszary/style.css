@@ -1,0 +1,223 @@
+@font-face {
+	font-family: 'Babas';
+	src: url('czionki/BebasNeue.otf');
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+body {
+	background: #f1d379;
+	color: #F6F5F1;
+	font-family:"Babas";
+}
+
+#container {
+	width: 1000px;
+	height: 600px;
+	margin: 0 auto;
+}
+#siatka {
+	background: #807255;
+	width: 612px;
+	height: 612px;
+	float: left;
+}
+
+#menu {
+	background: #554236;
+	width: 386px;
+	height: 611px;
+	float: left;
+	margin-left: 2px;
+}
+
+#tytul {
+
+	width: 385px;
+	height: 30px;
+	text-align:center;
+}
+
+#menuInfo {
+	width: 385px;
+	height: 197px;
+	text-align: justify;
+	font-size: 30px;
+}
+
+#staty {
+	width: 140px;
+	height: 165px;
+	float:left;
+	padding-left:60px;
+}
+
+#staty p{
+	font-size:21px;
+}
+#staty p img{
+	width:24px;
+	height:24px;
+}
+
+#staty p strong{
+	margin-left:5px;
+}
+
+#obrazek {
+	width:120px;
+	height:120px;
+	background-image: url("img/topor.png");
+	float: left;
+}
+
+#menuLinia {
+	width: 386px;
+	height: 10px;
+	background-color: #F6F5F1;
+}
+
+#menuListaWojsk {
+	width: 388px;
+	height: 410px;
+}
+#menuLista {
+	width: 337px;
+	height: 232px;
+	padding-top: 15px;
+	padding-left: 25px;
+	font-family: "Babas";
+	font-size: 20px;
+}
+
+#menuLista p {
+	border-bottom: solid 1px #F6F5F1;
+}
+
+#menuNaglowek {
+	width: 386px;
+	height: 24px;
+	background-color: #807446;
+	font-family: "Babas";
+	text-align: center;
+	padding-top: 6px;
+	font-size: 22px;
+}
+
+#menuPrzycisk {
+	position: relative;
+	background-image: url("img/przycisk.png");
+	width: 120px;
+	height: 120px;
+	left: 125px;
+	float: left;
+	overflow: auto;
+}
+
+.poleSiatki {
+	background: #554236;
+	width: 200px;
+	height: 200px;
+	float: left;
+	border: solid 1px #f1efa5;
+	margin-left: 2px;
+	margin-top: 2px;
+}
+
+.goraPola {
+	background: #f6f5f1;
+	width: 200px;
+	height: 25px;
+	float: left;
+	color: #554236;
+	font-family: "Babas";
+	font-size: 18px;
+	padding-top: 5px;
+	text-align: center;
+}
+
+.goraPola strong, #menuLista strong {
+	color: #BB3B38;
+	padding-right: 10px;
+	float: right;
+	font-weight: 500;
+}
+.srodekPola {
+	background: #554236;
+	width: 200px;
+	height: 140px;
+	float: left;
+}
+
+.dolPola {
+	background: #bb3b38;
+	width: 200px;
+	height: 30px;
+	float: left;
+	overflow: auto;
+}
+.add {
+	position: relative;
+	background-image: url("img/add.png");
+	width: 27px;
+	height: 30px;
+	left: 52px;
+	top: 35px;
+	float: left;
+}
+.sub {
+	position: relative;
+	background-image: url("img/sub.png");
+	width: 27px;
+	height: 30px;
+	left: 25px;
+	top: 70px;
+	float: left;
+}
+.obrazekJednostki {
+	position: relative;
+	width: 120px;
+	height: 120px;
+	left: 35px;
+	top: 10px;
+	float: left;
+}
+
+#pole1 .obrazekJednostki {
+	background-image: url("img/topor.png");
+}
+
+#pole2 .obrazekJednostki {
+	background-image: url("img/pikinier.png");
+}
+
+#pole3 .obrazekJednostki {
+	background-image: url("img/lucznik.png");
+}
+
+#pole4 .obrazekJednostki {
+	background-image: url("img/kawaleria.png");
+}
+
+#pole5 .obrazekJednostki {
+	background-image: url("img/Ckawaleria.png");
+}
+
+#pole6 .obrazekJednostki {
+	background-image: url("img/rycerz.png");
+}
+
+#pole7 .obrazekJednostki {
+	background-image: url("img/kleryk.png");
+}
+
+#pole8 .obrazekJednostki {
+	background-image: url("img/dowodzca.png");
+}
+
+#pole9 .obrazekJednostki {
+	background-image: url("img/wilkor.png");
+}
+
