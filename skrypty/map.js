@@ -1,3 +1,6 @@
+var mapaKopaln ;
+var pozZamku;
+
 function linearInterpolate(before, after, atPoint) {
 	return before + (after - before) * atPoint;
 };
@@ -27,22 +30,21 @@ function sprawdzOdleglosc(tab, x, y, odleglosc) {
 	return true;
 };
 
-function wylosujPozGraczy(ilu, rozm) {
+function wylosujPoz(iluGraczy, rozm,odleglosc) {
 	var tabGraczy = [];
 	var koniec = false;
 	var nrGracza = 0;
-	tabGraczy.push([Crafty.math.randomInt(4, rozm - 4), Crafty.math.randomInt(4, rozm - 4)]);
+	tabGraczy.push([Crafty.math.randomInt(iluGraczy, rozm - 4), Crafty.math.randomInt(iluGraczy, rozm - 4)]);
 	while (!koniec) {
-		if (nrGracza >= ilu - 1)
+		if (nrGracza >= iluGraczy - 1)
 			break;
-		var x = Crafty.math.randomInt(4, rozm - 4);
-		var y = Crafty.math.randomInt(4, rozm - 4);
-		if (sprawdzOdleglosc(tabGraczy, x, y, rozm / 2.5)) {
+		var x = Crafty.math.randomInt(iluGraczy, rozm - 4);
+		var y = Crafty.math.randomInt(iluGraczy, rozm - 4);
+		if (sprawdzOdleglosc(tabGraczy, x, y, rozm / odleglosc)) {
 			tabGraczy.push([x, y]);
 			nrGracza++;
 		}
 	}
-	pozZamku = tabGraczy;
 	return tabGraczy;
 };
 
@@ -59,6 +61,7 @@ function generate(size, czulosc, prog) {
 			var value = noise.perlin2(x / 100, y / 100);
 			if (Math.round(Math.abs(value * 255)) > prog)
 				map[x][y] = 1;
+				
 		}
 	}
 
@@ -70,7 +73,21 @@ function generate(size, czulosc, prog) {
 		if (x % Math.round(czulosc / size) == 0)
 			mapNowa[x / Math.round(czulosc / size)] = interpolate(map[x], size);
 
-	var tmpArray = wylosujPozGraczy(4, size);
+	var tmpArray = wylosujPoz(4, size,2.5);
+	pozZamku = tmpArray;
+	//Ustawia poczatkowe odziały
+	for (var k = 0; k < pozZamku.length; k++) {
+		gracz[k].x=pozZamku[k][0]+1;
+		gracz[k].y=pozZamku[k][1];
+	}
+	
+	mapaKopaln = wylosujPoz(8, size,6);
+	console.log(mapaKopaln);
+	for (var k = 0; k < mapaKopaln.length; k++) {
+		mapNowa[mapaKopaln[k][0]][mapaKopaln[k][1]] = 2;
+	}
+	
+	//obrysowanie terenu gracza i  wokolo gracza
 	for (var m = 0; m < tmpArray.length; m++) {
 		mapNowa[tmpArray[m][0]][tmpArray[m][1]] = m + 3;
 		

@@ -20,7 +20,7 @@ $(document).ready(function() {
 	$('.sub').click(function() {
 		id = $(this).parent().parent().attr("id");
 		klasa = $(this).parent().parent().attr("id");
-		if (tablica[id.charAt(id.length - 1)] > 0)
+		if (tablica[id.charAt(id.length - 1)-1] > 0)
 			ilosc = --tablica[id.charAt(id.length - 1) - 1];
 		$("#" + id + " .goraPola strong").html("[" + ilosc + "]");
 

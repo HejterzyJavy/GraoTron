@@ -15,7 +15,6 @@ $(document).ready(function() {
 	});
 
 	$("body").mousemove(function() {
-		console.log("dd");
 		if (oknoKoszar && !oknoKoszar.closed) {
 		window.parent.document.getElementById("container").style.visibility="hidden";
 		}
