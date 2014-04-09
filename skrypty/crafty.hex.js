@@ -42,9 +42,8 @@ Crafty.extend({
 		},
 
 		centerAt : function(x, y) {
-			var pos = this.pos2px(x, y);
-			Crafty.viewport.x = -pos.left + Crafty.viewport.width / 2 - this._tile.width;
-			Crafty.viewport.y = -pos.top + Crafty.viewport.height / 2;
+			Crafty.viewport.x = -x+300;
+			Crafty.viewport.y = -y+200;
 		},
 
 		area : function(offset) {
@@ -90,14 +89,18 @@ Crafty.extend({
 		},
 
 		px2pos : function(left, top) {
-
+			
 			var x, y;
+			x = (((left- this._tile.width) / 45 ) )+ 1;
+			if((left - 3)%10 == 0) y = (top / 28);
+			else y = ((top+14) / 28);
+			
+			//if((left - 3)%10 == 0) console.log("NieParzysta");
+			//if((left - 9)%10 == 0) console.log("Parzysta");
+			
+			x=Math.round(x);
+			y=Math.round(y);
 
-			x = ((left / this._tile.width ) );
-			y = (top / (this._tile.height / 2 ) );
-
-			if (y % 2)
-				x += 0.5;
 
 			return {
 				x : x,
@@ -116,7 +119,29 @@ Crafty.extend({
 			var points = [[marginX - 0, obj.h - marginY - this._tile.height / 2], [marginX - this._tile.width / 2, obj.h - marginY - 0], [marginX - this._tile.width, obj.h - marginY - this._tile.height / 2], [marginX - this._tile.width / 2, obj.h - marginY - this._tile.height]];
 			var poly = new Crafty.polygon(points);
 			return poly;
+		},
+		
+		
+		obszarWokol:function(x,y) {
+			var tablica = new Array();
+			
+			tablica.push([x,y-1]);
+			tablica.push([x,y+1]);
+			tablica.push([x-1,y]);
+			tablica.push([x+1,y]);
+			
+			if ((x % 2) === 0) {
+				tablica.push([x-1,y-1]);
+				tablica.push([x+1,y-1]);
+			}
+			if ((x % 2) != 0) {
+				tablica.push([x-1,y+1]);
+				tablica.push([x+1,y+1]);
+			}
+			
+			return tablica;
 
 		}
+
 	}
 }); 
