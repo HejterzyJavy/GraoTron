@@ -139,11 +139,14 @@ $(document).ready(function() {
 				for (var a = 0; a < mozliwyRuchTab.length; a++){
 					podswietlenie = Crafty.e("2D, Canvas, podswietl");
 					isoH.place(podswietlenie, mozliwyRuchTab[a][0], mozliwyRuchTab[a][1], 2);
-					podswietlenieTab.push(podswietlenie);
-				
+					podswietlenieTab.push(podswietlenie);				
 				}
-
+				
 				oddzialKlikniety = this;
+				$("#miniM").css("background-image","url(img/herby/"+Object.keys(oddzialKlikniety.get(0).__c)[6].slice(4)+".png)");
+				console.log("img/herby/"+Object.keys(oddzialKlikniety.get(0).__c)[6].slice(4)+".png");
+				//$("#miniM").css("background-color","red");
+
 
 			}
 
