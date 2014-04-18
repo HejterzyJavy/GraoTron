@@ -114,25 +114,27 @@ console.log("KONIEC GENEROWANIA MAPY");
 
 function wypelnij(x, y,kto) {
 	
-	if(x>0 && x<=40 && y>=0 && y<40){
-		mapaT[x][y] = kto;
+	if(x>0 && x<40 && y>0 && y<40){
+		mapaTest[x][y] = kto;
 		listaDoZajecia.push({x:x,y:y});
-		isoH.place(Crafty.e("2D, Canvas, baratheon"), x, y, 1);
 		
-		if (mapaT[x][y - 1] != kto) wypelnij(x, y-1,kto);
-		if (mapaT[x][y + 1] != kto) wypelnij(x, y+1,kto);
-		if (mapaT[x + 1][y] != kto) wypelnij(x+1, y,kto);
-		if (mapaT[x - 1][y] != kto) wypelnij(x-1, y,kto);
+		if (mapaTest[x][y - 1] != kto) wypelnij(x, y-1,kto);
+		if (mapaTest[x][y + 1] != kto) wypelnij(x, y+1,kto);
+		if (mapaTest[x + 1][y] != kto) wypelnij(x+1, y,kto);
+		if (mapaTest[x - 1][y] != kto) wypelnij(x-1, y,kto);
 	
 		if ((x % 2) === 0) {
-			if (mapaT[x - 1][y - 1] != kto) wypelnij(x-1, y-1,kto);
-			if (mapaT[x + 1][y - 1] != kto) wypelnij(x+1, y-1,kto);
+			if (mapaTest[x - 1][y - 1] != kto) wypelnij(x-1, y-1,kto);
+			if (mapaTest[x + 1][y - 1] != kto) wypelnij(x+1, y-1,kto);
 		}
 		if ((x % 2) != 0) {
-			if (mapaT[x - 1][y + 1] != kto) wypelnij(x-1, y+1,kto);
-			if (mapaT[x + 1][y + 1] != kto) wypelnij(x+1, y+1,kto);
+			if (mapaTest[x - 1][y + 1] != kto) wypelnij(x-1, y+1,kto);
+			if (mapaTest[x + 1][y + 1] != kto) wypelnij(x+1, y+1,kto);
 		}
-	}else return;
+	}else {
+		listaDoZajecia.length = 0;
+		return;
+	}
 	
 }
 

@@ -34,11 +34,25 @@ var podswietlenie ;
 var podswietlenieTab = [];
 var mozliwyRuchTab = [];
 var oddzialKlikniety = null;
-var mapaT= [];
+var mapaTest= new Array();
 var mapa = [];
 
 function idToName(id) {
 	return spriteArray[id];
+}
+
+function kopiujTablice(stara,nowa){
+		for (var i = 0; i < stara.length; i++) {
+		nowa.push(stara[i].slice(0));
+	}
+}
+
+function kopiujMape(stara,nowa){
+		for (var i = 0; i < stara.length; i++) {
+			for (var j = 0; j < stara[0].length; j++) {
+				nowa[i][j]=stara[i][j];
+		}
+	}
 }
 
 function ruchMozliwy(x,y){
@@ -65,6 +79,17 @@ var ruszJednostka = function(obiekt) {
 	var rod = Object.keys(oddzialKlikniety.get(0).__c)[6].slice(4);
 	isoH.place(Crafty.e("2D, Canvas, "+rod), pos.x, pos.y, 1);
 	mapa[pos.x][pos.y] = 3;//na pale
+	kopiujMape(mapa,mapaTest);
+	wypelnij(pos.x, pos.y, 3);
+
+		while (listaDoZajecia.length > 0) {
+			isoH.place(Crafty.e("2D, Canvas, baratheon"), listaDoZajecia[0].x, listaDoZajecia[0].y, 1);
+			mapa[listaDoZajecia[0].x][listaDoZajecia[0].y] = 3;
+			listaDoZajecia.shift();
+		}
+			
+
+	
 	oddzialKlikniety = null;
 };
 
@@ -91,8 +116,7 @@ $(document).ready(function() {
 	isoH = Crafty.hexametric.init(64, 64, 40, 40);
 	var z = 0;
 	mapa = generate(40, 700, 70);
-	console.log(mapa);
-	mapaT = mapa; //mapa Testowa
+	kopiujTablice(mapa,mapaTest);
 
 	
 	for (var i = 40; i > 0; i--) {
@@ -106,8 +130,7 @@ $(document).ready(function() {
 			.bind("MouseDown", function(e) {
 				if (e.button>1) {
 					console.log(isoH.px2pos(this.x,this.y));
-					wypelnij(isoH.px2pos(this.x,this.y).x,isoH.px2pos(this.x,this.y).y,3);
-					console.log(listaDoZajecia[0].x);
+					
 				}
 				if (oddzialKlikniety) {	
 					for (var a = 0; a < podswietlenieTab.length; a++)		
