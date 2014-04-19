@@ -170,7 +170,6 @@ $(document).ready(function() {
 	var z = 0;
 	mapa = generate(40, 700, 70);
 	mapaDzicy = losujDzikich(mapa);
-	console.log(mapaDzicy);
 	kopiujTablice(mapa,mapaTest);
 	console.log(dziki.getJednostka(1));
 	
@@ -184,7 +183,9 @@ $(document).ready(function() {
 			}).areaMap([0, 38], [15, 23], [48, 23], [62, 38], [48, 50], [15, 50])
 			.bind("MouseDown", function(e) {
 				if (e.button>1) {
-					console.log(isoH.px2pos(this.x,this.y));				
+					pos = isoH.px2pos(this.x,this.y);
+					console.log(isoH.px2pos(this.x,this.y));	
+					console.log(mapaDzicy[pos.x][pos.y]);			
 					}
 					
 				if (oddzialKlikniety) {	

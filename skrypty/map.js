@@ -149,8 +149,14 @@ function losujDzikich(map){
 				mapaDzikich[i][j] = new Array(6);
 				for (var k = 0; k < 6; k++) {
 					mapaDzikich[i][j][k] = new Array(3);
-					if(Crafty.math.withinRange(Crafty.math.randomNumber(0,100),0,wsp1)){
-						mapaDzikich[i][j][k][0]="Dziki";
+					if(Crafty.math.withinRange(Crafty.math.randomInt(0,100),0,wsp1)){//sprawdza prawdo. wystpienia dzikich na danym terenie
+						var wylosowana = Crafty.math.randomInt(0,100);
+						if(Crafty.math.withinRange(wylosowana,0,28))   {mapaDzikich[i][j][k][0] = 0;mapaDzikich[i][j][k][1] = Crafty.math.randomInt(1,6);}
+						if(Crafty.math.withinRange(wylosowana,29,56))  {mapaDzikich[i][j][k][0] = 1;mapaDzikich[i][j][k][1] = Crafty.math.randomInt(1,6);}
+						if(Crafty.math.withinRange(wylosowana,57,84))  {mapaDzikich[i][j][k][0] = 2;mapaDzikich[i][j][k][1] = Crafty.math.randomInt(1,6);}
+						if(Crafty.math.withinRange(wylosowana,85,90))  {mapaDzikich[i][j][k][0] = 3;mapaDzikich[i][j][k][1] = Crafty.math.randomInt(1,2);}
+						if(Crafty.math.withinRange(wylosowana,91,94))  {mapaDzikich[i][j][k][0] = 4;mapaDzikich[i][j][k][1] = Crafty.math.randomInt(1,3);}
+						if(Crafty.math.withinRange(wylosowana,95,100)) {mapaDzikich[i][j][k][0] = 5;mapaDzikich[i][j][k][1] = Crafty.math.randomInt(1,2);}
 					}
 				}
 			}
