@@ -6,6 +6,50 @@ var spriteArray = [
 "lannister", 
 "stark", 
 "targaryen"];
+var dziki = {
+	wlocznik: {
+		atk:50,
+		def:100,
+		hp:40,
+	},
+	zabojca :  {
+		atk:100,
+		def:50,
+		hp:80,
+		
+	},
+	lucznik : {
+		atk:100,
+		def:20,
+		hp:40,
+	},
+	olbrzym :  {
+		atk:200,
+		def:200,
+		hp:200,
+	},
+	niedzwiedz :  {
+		atk:200,
+		def:200,
+		hp:200,
+	},
+	inny :  {
+		atk:400,
+		def:400,
+		hp:200,
+	},
+	getJednostka: function(id){
+		if(id==0) return this.wlocznik;
+		if(id==1) return this.zabojca;
+		if(id==2) return this.lucznik;
+		if(id==3) return this.olbrzym;
+		if(id==4) return this.niedzwiedz;
+		if(id==5) return this.inny;
+		if(id>5 || id<0) return false;
+	}
+	
+};
+
 var gracz = [
 {
 	x : 10,
@@ -64,8 +108,15 @@ function ruchMozliwy(x,y){
 			return true;
 		}
 	}
-		
 	return false;
+}
+
+
+
+function indexInGracz(szukane) {
+	for (var i = 0; i < gracz.length; i++) 
+		if (gracz[i].rod == szukane) return i;
+	return "false";
 }
 
 
@@ -78,13 +129,14 @@ var ruszJednostka = function(obiekt) {
 	isoH.centerAt(obiekt.x, obiekt.y);
 	var rod = Object.keys(oddzialKlikniety.get(0).__c)[6].slice(4);
 	isoH.place(Crafty.e("2D, Canvas, "+rod), pos.x, pos.y, 1);
-	mapa[pos.x][pos.y] = 3;//na pale
+	
+	mapa[pos.x][pos.y] = indexInGracz(rod)+3;//na pale
 	kopiujMape(mapa,mapaTest);
-	wypelnij(pos.x, pos.y, 3);
+	wypelnij(pos.x, pos.y, indexInGracz(rod)+3);
 
 		while (listaDoZajecia.length > 0) {
-			isoH.place(Crafty.e("2D, Canvas, baratheon"), listaDoZajecia[0].x, listaDoZajecia[0].y, 1);
-			mapa[listaDoZajecia[0].x][listaDoZajecia[0].y] = 3;
+			isoH.place(Crafty.e("2D, Canvas, "+rod), listaDoZajecia[0].x, listaDoZajecia[0].y, 1);
+			mapa[listaDoZajecia[0].x][listaDoZajecia[0].y] = indexInGracz(rod)+3;
 			listaDoZajecia.shift();
 		}
 			
@@ -95,7 +147,7 @@ var ruszJednostka = function(obiekt) {
 
 $(document).ready(function() {
 	Crafty.init(924, 736);
-	Crafty.viewport.scale(0.8);
+	Crafty.viewport.scale(1.2);
 
 	Crafty.sprite(64, "img/tiles_rozdz.png", {
 		grass : [0, 0, 1, 1],
@@ -117,7 +169,7 @@ $(document).ready(function() {
 	var z = 0;
 	mapa = generate(40, 700, 70);
 	kopiujTablice(mapa,mapaTest);
-
+	console.log(dziki.getJednostka(1));
 	
 	for (var i = 40; i > 0; i--) {
 		for (var y = 0; y < 40; y++) {
@@ -129,9 +181,9 @@ $(document).ready(function() {
 			}).areaMap([0, 38], [15, 23], [48, 23], [62, 38], [48, 50], [15, 50])
 			.bind("MouseDown", function(e) {
 				if (e.button>1) {
-					console.log(isoH.px2pos(this.x,this.y));
+					console.log(isoH.px2pos(this.x,this.y));				
+					}
 					
-				}
 				if (oddzialKlikniety) {	
 					for (var a = 0; a < podswietlenieTab.length; a++)		
 						podswietlenieTab[a].destroy();	
