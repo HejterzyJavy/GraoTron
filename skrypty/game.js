@@ -80,6 +80,7 @@ var mozliwyRuchTab = [];
 var oddzialKlikniety = null;
 var mapaTest= new Array();
 var mapa = [];
+var mapaDzicy;
 
 function idToName(id) {
 	return spriteArray[id];
@@ -168,6 +169,8 @@ $(document).ready(function() {
 	isoH = Crafty.hexametric.init(64, 64, 40, 40);
 	var z = 0;
 	mapa = generate(40, 700, 70);
+	mapaDzicy = losujDzikich(mapa);
+	console.log(mapaDzicy);
 	kopiujTablice(mapa,mapaTest);
 	console.log(dziki.getJednostka(1));
 	
