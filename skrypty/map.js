@@ -138,4 +138,24 @@ function wypelnij(x, y,kto) {
 	
 }
 
+function losujDzikich(map){
+	var mapaDzikich = new Array(map.length);
+	var wsp1 = 15; // wspolczynnik prawdopodobienstwa wystapienia dzikiego na danym polu
+		for (var i = 0; i < map.length; i++) {
+			mapaDzikich[i] = new Array(map.length);
+			for (var j = 0; j < map.length; j++) {
+				if (map[i][j] == 1) wsp1 *=2;
+				else wsp1 = 15;
+				mapaDzikich[i][j] = new Array(6);
+				for (var k = 0; k < 6; k++) {
+					mapaDzikich[i][j][k] = new Array(3);
+					if(Crafty.math.withinRange(Crafty.math.randomNumber(0,100),0,wsp1)){
+						mapaDzikich[i][j][k][0]="Dziki";
+					}
+				}
+			}
+		}
+		return mapaDzikich;
+	
+}
 
