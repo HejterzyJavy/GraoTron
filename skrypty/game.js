@@ -90,6 +90,7 @@ function kopiujTablice(stara,nowa){
 		for (var i = 0; i < stara.length; i++) {
 		nowa.push(stara[i].slice(0));
 	}
+	return nowa;
 }
 
 function kopiujMape(stara,nowa){
@@ -98,6 +99,7 @@ function kopiujMape(stara,nowa){
 				nowa[i][j]=stara[i][j];
 		}
 	}
+	return nowa;
 }
 
 function ruchMozliwy(x,y){
@@ -132,7 +134,7 @@ var ruszJednostka = function(obiekt) {
 	isoH.place(Crafty.e("2D, Canvas, "+rod), pos.x, pos.y, 1);
 	
 	mapa[pos.x][pos.y] = indexInGracz(rod)+3;//na pale
-	kopiujMape(mapa,mapaTest);
+	mapaTest = kopiujMape(mapa,mapaTest);
 	wypelnij(pos.x, pos.y, indexInGracz(rod)+3);
 
 		while (listaDoZajecia.length > 0) {
@@ -170,8 +172,7 @@ $(document).ready(function() {
 	var z = 0;
 	mapa = generate(40, 700, 70);
 	mapaDzicy = losujDzikich(mapa);
-	kopiujTablice(mapa,mapaTest);
-	console.log(dziki.getJednostka(1));
+	mapaTest = kopiujTablice(mapa,mapaTest);
 	
 	for (var i = 40; i > 0; i--) {
 		for (var y = 0; y < 40; y++) {

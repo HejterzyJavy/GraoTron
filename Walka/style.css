@@ -1,0 +1,104 @@
+@font-face {
+	font-family: 'Babas';
+	src: url('czcionki/BebasNeue.otf');
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+body {
+	background: #554236;
+	color: #F6F5F1;
+	font-family:"Babas";
+}
+
+#container {
+	position:relative;
+	width: 1024px;
+	height: 640px;
+	margin: 0 auto;
+}
+
+#lewa{
+	width: 510px;
+	height:640px;
+	border-right: solid 2px #E8C23B;
+	float:left;
+}
+
+#prawa{
+	width: 510px;
+	height:640px;
+	border-left: solid 2px #E8C23B;
+	float:left;
+}
+
+#srodek{
+	position:absolute;
+	left:410px;
+	top:128px;
+	width: 206px;
+	height: 384px;
+	background-color: #552b2e;
+	border: solid 4px #E8C23B;
+	font-family:Calibri;
+	text-align:center;
+}
+
+.naglowek{
+	width:385px;
+	height:64px;
+	margin-left:62px;
+	padding-top: 10px;
+	background-color: #D8D8C0;
+	font-size:32px;
+	color:#BB3B38;
+	text-align: center;
+}
+
+.siatka{
+	width:256px;
+	height:384px;
+	margin-top:54px;
+	margin-left: 128px;
+}
+
+.poleSiatki{
+	width:120px;
+	height:120px;
+	float:left;
+	border:solid 2px #F1D379;
+	margin:2px 2px;	
+	opacity: 0.60;
+	cursor: pointer; cursor: hand;
+}
+
+.ilosc{
+	position: absolute;
+	width:32px;
+	font-size:18px;
+	color:#E8C23B;
+	border-bottom: solid 2px #E8C23B;
+	border-right:solid 2px #E8C23B;
+	text-align: center;
+	background-color: #807255;
+	}
+
+.przyciski{
+	width: 340px;
+	height:128px;
+	margin-top:28px;
+	margin-left:82px;
+}
+
+.przycisk{
+	width:74px;
+	height: 74px;
+	float:left;
+	margin-left:10px;
+	cursor: pointer; 
+	cursor: hand;
+}
+
+
