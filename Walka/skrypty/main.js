@@ -132,6 +132,7 @@ $(document).ready(function() {
 					zabiteJednostki = Math.floor(zadaneObrazenia / oddzial_2[broniaca].hp);
 					$("#prawa_" + broniaca + " .ilosc").html(oddzial_2[broniaca].ilosc - zabiteJednostki);
 					oddzial_2[broniaca].ilosc -= zabiteJednostki;
+					if(oddzial_2[broniaca].ilosc <= 0) $("#prawa_" + broniaca).hide( "fast" );
 					$("#srodek").html("Gracz " + turaGracza + " zadal: " + zadaneObrazenia + " obrazen <br> Zabijajac: " + zabiteJednostki + " jednostki");
 					turaGracza = 2;
 					zmienGracza();
@@ -185,7 +186,9 @@ $(document).ready(function() {
 					zadaneObrazenia = Math.abs(oddzial_1[broniaca].hp - (oddzial_2[atakujaca].atk - oddzial_1[broniaca].def ));
 					zabiteJednostki = Math.floor(zadaneObrazenia / oddzial_1[broniaca].hp);
 					$("#lewa_" + broniaca + " .ilosc").html(oddzial_1[broniaca].ilosc - zabiteJednostki);
+					
 					oddzial_1[broniaca].ilosc -= zabiteJednostki;
+					if(oddzial_1[broniaca].ilosc <= 0) $("#lewa_" + broniaca).hide( "fast" );
 					$("#srodek").html("Gracz " + turaGracza + " zadal: " + zadaneObrazenia + " obrazen <br> Zabijajac: " + zabiteJednostki + " jednostki");
 					turaGracza = 1;
 					zmienGracza();
