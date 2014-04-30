@@ -1,23 +1,45 @@
+var broniaca;
+
 $(document).ready(function() {
 	//TRZEBA POPRAWIC INDEKSY!!!
-
+	dziki = window.opener.dziki;
+	oddzialAtk = window.opener.oddzialAtk;
+	console.log(window.opener.oddzialAtk);
+	var atak= window.opener.mapaDzicy[oddzialAtk[0]][oddzialAtk[1]];
+	console.log(atak);
 	var turaGracza = 1;
 	var oddzial_1 = new Array(6);
 	var oddzial_2 = new Array(6);
 
 	var atakujaca;
-	var broniaca;
+	
 
 	for (var i = 0; i < oddzial_1.length; i++) {
-		oddzial_1[i] = {
-			nazwa : "lucznik",
-			ilosc : 10,
-			mozeAtakowac : true,
-			stan : 0,
-			atk : 32,
-			def : 10,
-			hp : 5
-		};
+		try
+  {
+		if (atak[i][1] > 0){
+			oddzial_1[i+1] = {
+				nazwa : dziki.getJednostka(atak[i][0]).nazwa,
+				ilosc : atak[i][1],
+				mozeAtakowac : true,
+				stan : 0,
+				atk : 32,
+				def : 10,
+				hp : 5
+			};
+			$("#lewa_" + (i + 1) + " img").attr('src', "img/" + oddzial_1[i+1].nazwa + ".png");
+			$("#lewa_" + (i + 1) + " .ilosc").html(oddzial_1[i+1].ilosc);
+		}
+		else{
+
+			$("#lewa_" + (i + 1) + " img").hide();
+			$("#lewa_" + (i + 1) + " .ilosc").hide();
+		}
+		}
+		catch(err)
+  {
+  //Handle errors here
+  }
 
 		oddzial_2[i] = {
 			nazwa : "lucznik",
@@ -29,10 +51,8 @@ $(document).ready(function() {
 			hp : 5
 		};
 
-		$("#lewa_" + (i + 1) + " img").attr('src', "img/" + oddzial_1[i].nazwa + ".png");
-		$("#prawa_" + (i + 1) + " img").attr('src', "img/" + oddzial_1[i].nazwa + ".png");
+		$("#prawa_" + (i + 1) + " img").attr('src', "img/" + oddzial_2[i].nazwa + ".png");
 
-		$("#lewa_" + (i + 1) + " .ilosc").html(oddzial_2[i].ilosc);
 		$("#prawa_" + (i + 1) + " .ilosc").html(oddzial_2[i].ilosc);
 	}
 
@@ -191,8 +211,11 @@ $(document).ready(function() {
 					if(oddzial_1[broniaca].ilosc <= 0) $("#lewa_" + broniaca).hide( "fast" );
 					$("#srodek").html("Gracz " + turaGracza + " zadal: " + zadaneObrazenia + " obrazen <br> Zabijajac: " + zabiteJednostki + " jednostki");
 					turaGracza = 1;
-					zmienGracza();
 					console.log("TURA:" + turaGracza);
+					
+					window.opener.mapaDzicy[oddzialAtk[0]][oddzialAtk[1]][broniaca-1][1] = oddzial_1[broniaca].ilosc ; 
+					zmienGracza();
+					
 				}
 			});
 		}

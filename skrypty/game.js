@@ -8,32 +8,38 @@ var spriteArray = [
 "targaryen"];
 var dziki = {
 	wlocznik: {
+		nazwa: 'wlocznik',
 		atk:50,
 		def:100,
 		hp:40,
 	},
 	zabojca :  {
+		nazwa: 'zabojca',
 		atk:100,
 		def:50,
 		hp:80,
 		
 	},
 	lucznik : {
+		nazwa: 'lucznik',
 		atk:100,
 		def:20,
 		hp:40,
 	},
 	olbrzym :  {
+		nazwa: 'olbrzym',
 		atk:200,
 		def:200,
 		hp:200,
 	},
 	niedzwiedz :  {
+		nazwa: 'niedzwiedz',
 		atk:200,
 		def:200,
 		hp:200,
 	},
 	inny :  {
+		nazwa: 'inny',
 		atk:400,
 		def:400,
 		hp:200,
@@ -81,6 +87,10 @@ var oddzialKlikniety = null;
 var mapaTest= new Array();
 var mapa = [];
 var mapaDzicy;
+var oknoWalki;
+
+var oddzialAtk = new Array(6);
+var oddzialDef = new Array(6);
 
 function idToName(id) {
 	return spriteArray[id];
@@ -114,6 +124,13 @@ function ruchMozliwy(x,y){
 	return false;
 }
 
+function obecneJednostki(tab){
+	for (var i = 0; i < tab.length; i++){ 
+		if(tab[i][1]>0) return true;
+	}
+	return false;
+}
+
 
 
 function indexInGracz(szukane) {
@@ -133,20 +150,31 @@ var ruszJednostka = function(obiekt) {
 	var rod = Object.keys(oddzialKlikniety.get(0).__c)[6].slice(4);
 	isoH.place(Crafty.e("2D, Canvas, "+rod), pos.x, pos.y, 1);
 	
-	mapa[pos.x][pos.y] = indexInGracz(rod)+3;//na pale
+	mapa[pos.x][pos.y] = indexInGracz(rod)+3;
 	mapaTest = kopiujMape(mapa,mapaTest);
 	wypelnij(pos.x, pos.y, indexInGracz(rod)+3);
+	console.log("wielkosc:"+listaDoZajecia.length );
+	console.log(listaDoZajecia);
 
 		while (listaDoZajecia.length > 0) {
 			isoH.place(Crafty.e("2D, Canvas, "+rod), listaDoZajecia[0].x, listaDoZajecia[0].y, 1);
 			mapa[listaDoZajecia[0].x][listaDoZajecia[0].y] = indexInGracz(rod)+3;
 			listaDoZajecia.shift();
 		}
-			
+
+	oddzialAtk = [pos.x,pos.y];
+	if (obecneJednostki(mapaDzicy[pos.x][pos.y])) {
+		console.log(mapaDzicy[pos.x][pos.y]);
+		oknoWalki = window.open("Walka/index.html", "_blank", "toolbar=no, scrollbars=no, resizable=no, top=100, left=100, width=1020, height=680", "walka", "");
+	}
 
 	
 	oddzialKlikniety = null;
 };
+
+
+
+
 
 $(document).ready(function() {
 	Crafty.init(924, 736);
@@ -260,7 +288,16 @@ $(document).ready(function() {
 
 		Crafty.addEvent(this, Crafty.stage.elem, "mousemove", scroll);
 		Crafty.addEvent(this, Crafty.stage.elem, "mouseup", function() {
-			Crafty.removeEvent(this, Crafty.stage.elem, "mousemove", scroll);
+		Crafty.removeEvent(this, Crafty.stage.elem, "mousemove", scroll);
 		});
 	});
+	
+	$("body").mousemove(function() {
+	if (oknoWalki && !oknoWalki.closed) {
+		window.parent.document.getElementById("container").style.visibility = "hidden";
+	}
+	if (oknoWalki && oknoWalki.closed){
+		window.parent.document.getElementById("container").style.visibility = "visible";
+	}
+}); 
 });
