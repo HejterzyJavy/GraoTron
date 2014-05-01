@@ -1,3 +1,21 @@
+function stworzOddzial(idGracza, nazwaOddzialu, tabJednostek, pozycja) {
+	var tablica = [];
+	for (var i = 0; i < 6; i++) {
+		tablica.push({
+			nazwa : "lucznik",
+			ilosc : i
+		});
+	}
+	gracz[idGracza].oddzialy.push({
+		nazwa : nazwaOddzialu,
+		jednostki : tablica,
+		x : pozycja.x,
+		y : pozycja.y
+	});
+
+}
+
+
 var spriteArray = [
 "grass", 
 "bloto", 
@@ -44,7 +62,7 @@ var dziki = {
 		def:400,
 		hp:200,
 	},
-	getJednostka: function(id){
+	getjednostki: function(id){
 		if(id==0) return this.wlocznik;
 		if(id==1) return this.zabojca;
 		if(id==2) return this.lucznik;
@@ -57,11 +75,27 @@ var dziki = {
 };
 
 var gracz = [
-{
-	x : 10,
-	y : 20,
-	rod:"baratheon"
+
+{ imie :"Imie Gracza",
+	rod:"baratheon",
+	oddzialy :[{
+		nazwa : "Nazwa Oddzialu",
+		jednostki : [{
+			nazwa:"Nazwa Jednostki",
+			ilosc:0
+		}],
+		x:10,
+		y:20
+	}],
+	surowce:{
+		zloto:10,
+		zelazo:10,
+		drzewo:10,
+		ludzie:10,
+		teren:5
+	}
 },
+
 {
 	x : 10,
 	y : 30,
@@ -177,6 +211,7 @@ var ruszJednostka = function(obiekt) {
 
 
 $(document).ready(function() {
+	
 	Crafty.init(924, 736);
 	Crafty.viewport.scale(1.2);
 
