@@ -1,20 +1,3 @@
-function stworzOddzial(idGracza, nazwaOddzialu, tabJednostek, pozycja) {
-	var tablica = [];
-	for (var i = 0; i < 6; i++) {
-		tablica.push({
-			nazwa : "lucznik",
-			ilosc : i
-		});
-	}
-	gracz[idGracza].oddzialy.push({
-		nazwa : nazwaOddzialu,
-		jednostki : tablica,
-		x : pozycja.x,
-		y : pozycja.y
-	});
-
-}
-
 
 var spriteArray = [
 "grass", 
@@ -24,6 +7,7 @@ var spriteArray = [
 "lannister", 
 "stark", 
 "targaryen"];
+
 var dziki = {
 	wlocznik: {
 		nazwa: 'wlocznik',
@@ -62,7 +46,7 @@ var dziki = {
 		def:400,
 		hp:200,
 	},
-	getjednostki: function(id){
+	getJednostka: function(id){
 		if(id==0) return this.wlocznik;
 		if(id==1) return this.zabojca;
 		if(id==2) return this.lucznik;
@@ -74,45 +58,71 @@ var dziki = {
 	
 };
 
-var gracz = [
-
-{ imie :"Imie Gracza",
-	rod:"baratheon",
-	oddzialy :[{
-		nazwa : "Nazwa Oddzialu",
-		jednostki : [{
-			nazwa:"Nazwa Jednostki",
-			ilosc:0
-		}],
-		x:10,
-		y:20
-	}],
-	surowce:{
-		zloto:10,
-		zelazo:10,
-		drzewo:10,
-		ludzie:10,
-		teren:5
+function checkIsFree(obiekt){
+		//Sprawdza czy to miejsce jest puste
+	for (var i = 0; i < gracz.length; i++) { // PETLE PO oddzialach
+		for (var j = 0; j < gracz[i].oddzialy.length; j++) {
+			if(gracz[i].oddzialy[j].x == obiekt.x && gracz[i].oddzialy[j].y == obiekt.y) return false;
+		}
 	}
-},
+	return true;
+};
 
-{
-	x : 10,
-	y : 30,
-	rod:"lannister"
-},
-{
-	x : 10,
-	y : 10,
-	rod:"stark"
-}
-,
-{
-	x : 10,
-	y : 15,
-	rod:"targaryen"
-}
-];
+
+function wylosujPozycjeNowegoOddzialu(pozycja) {
+	var tablica = isoH.obszarWokol(pozycja.x, pozycja.y);
+	var obiektZwracany = null;
+	for (var i = 0; i < tablica.length; i++) {
+		if (checkIsFree({x:tablica[i][0],y:tablica[i][1]})) {
+			obiektZwracany = {x:tablica[i][0],y:tablica[i][1]};
+			break;
+		}
+	};
+	console.log(obiektZwracany);
+	return obiektZwracany;
+};
+
+
+
+var Gracz = function(imieGracza, rodGracza) {
+	var obj = {
+		imie : imieGracza,
+		rod : rodGracza,
+		oddzialy : [],
+		surowce : {
+			zloto : 10,
+			zelazo : 10,
+			drzewo : 10,
+			ludzie : 10,
+			teren : 5
+		},
+		zamek:{
+			x:0,
+			y:0
+		},
+		addOddzial : function(nazwaOddzialu, tabJednostek) {
+			var tablica = [];
+			var pozycja = wylosujPozycjeNowegoOddzialu(this.zamek);
+			for (var i = 0; i < 6; i++) {
+				tablica.push({
+					nazwa : "lucznik",
+					ilosc : i
+				});
+			}
+			this.oddzialy.push({
+				nazwa : nazwaOddzialu,
+				jednostki : tablica,
+				x : pozycja.x,
+				y : pozycja.y
+			});
+		}
+	};
+	return obj;
+}; 
+
+
+
+
 var isoH;
 var podswietlenie ;
 var podswietlenieTab = [];
@@ -122,6 +132,7 @@ var mapaTest= new Array();
 var mapa = [];
 var mapaDzicy;
 var oknoWalki;
+var gracz = [];
 
 var oddzialAtk = new Array(6);
 var oddzialDef = new Array(6);
@@ -166,7 +177,6 @@ function obecneJednostki(tab){
 }
 
 
-
 function indexInGracz(szukane) {
 	for (var i = 0; i < gracz.length; i++) 
 		if (gracz[i].rod == szukane) return i;
@@ -201,8 +211,6 @@ var ruszJednostka = function(obiekt) {
 		console.log(mapaDzicy[pos.x][pos.y]);
 		oknoWalki = window.open("Walka/index.html", "_blank", "toolbar=no, scrollbars=no, resizable=no, top=100, left=100, width=1020, height=680", "walka", "");
 	}
-
-	
 	oddzialKlikniety = null;
 };
 
@@ -211,6 +219,9 @@ var ruszJednostka = function(obiekt) {
 
 
 $(document).ready(function() {
+	isoH = Crafty.hexametric.init(64, 64, 40, 40);
+	
+	
 	
 	Crafty.init(924, 736);
 	Crafty.viewport.scale(1.2);
@@ -231,11 +242,30 @@ $(document).ready(function() {
 
 	});
 
-	isoH = Crafty.hexametric.init(64, 64, 40, 40);
+	
 	var z = 0;
 	mapa = generate(40, 700, 70);
 	mapaDzicy = losujDzikich(mapa);
 	mapaTest = kopiujTablice(mapa,mapaTest);
+	
+	// TWORZENIE GRACZY
+	gracz.push(new Gracz("Teo","baratheon"));
+	gracz.push(new Gracz("Gardian","lannister"));
+	gracz.push(new Gracz("Przemek","stark"));
+	gracz.push(new Gracz("Wyczes","targaryen"));
+	
+	// PRZYPISUJE ZAMKI GRACZOM
+	for (var k = 0; k < pozZamku.length; k++) {
+		gracz[k].zamek.x=pozZamku[k][0];
+		gracz[k].zamek.y=pozZamku[k][1];
+	}
+	
+	gracz[0].addOddzial("Wormsy",0);
+	gracz[0].addOddzial("Robaczki",0);
+	gracz[0].addOddzial("Pogromcy",0);
+	gracz[0].addOddzial("Najemnicy",0);
+	
+	console.log(gracz);
 	
 	for (var i = 40; i > 0; i--) {
 		for (var y = 0; y < 40; y++) {
@@ -284,6 +314,7 @@ $(document).ready(function() {
 	}
 	//Rysowanie oddzialow
 	for (var i = 0; i < gracz.length; i++) {
+		for (var j = 0; j < gracz[i].oddzialy.length; j++) {
 		var rycerz = Crafty.e("2D, Canvas, rycerz, Mouse, Tween, rod_"+ gracz[i].rod).areaMap([0, 38], [15, 23], [48, 23], [62, 38], [48, 50], [15, 50]).bind("Click", function(e) {
 			if (oddzialKlikniety) {
 			} else {
@@ -300,7 +331,8 @@ $(document).ready(function() {
 
 			});
 			
-		isoH.place(rycerz, gracz[i].x, gracz[i].y, 5);
+		isoH.place(rycerz, gracz[i].oddzialy[j].x, gracz[i].oddzialy[j].y, 5);
+		}
 	}
 
 	Crafty.addEvent(this, Crafty.stage.elem, "mousedown", function(e) {
@@ -327,12 +359,15 @@ $(document).ready(function() {
 		});
 	});
 	
-	$("body").mousemove(function() {
-	if (oknoWalki && !oknoWalki.closed) {
-		window.parent.document.getElementById("container").style.visibility = "hidden";
-	}
-	if (oknoWalki && oknoWalki.closed){
-		window.parent.document.getElementById("container").style.visibility = "visible";
-	}
-}); 
+
+	$("body").mouseover(function() {
+		if (oknoWalki && !oknoWalki.closed) {
+			window.parent.document.getElementById("container").style.visibility = "hidden";
+		}
+		if (oknoWalki && oknoWalki.closed) {
+			window.parent.document.getElementById("container").style.visibility = "visible";
+
+		}
+	});
+
 });

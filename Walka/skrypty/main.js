@@ -17,7 +17,9 @@ $(document).ready(function() {
 	for (var i = 0; i < oddzial_1.length; i++) {
 		try
   {
+  	if (typeof atak[i] !== 'undefined' && atak[i].length > 0) 
 		if (atak[i][1] > 0){
+			var nazwa = 
 			oddzial_1[i+1] = {
 				nazwa : dziki.getJednostka(atak[i][0]).nazwa,
 				ilosc : atak[i][1],
@@ -38,7 +40,7 @@ $(document).ready(function() {
 		}
 		catch(err)
   {
-  //Handle errors here
+  console.log(err);
   }
 
 		oddzial_2[i] = {

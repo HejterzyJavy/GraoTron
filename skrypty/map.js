@@ -74,13 +74,10 @@ function generate(size, czulosc, prog) {
 		if (x % Math.round(czulosc / size) == 0)
 			mapNowa[x / Math.round(czulosc / size)] = interpolate(map[x], size);
 
+	
 	var tmpArray = wylosujPoz(4, size,2.5);
 	pozZamku = tmpArray;
-	//Ustawia poczatkowe odziały
-	for (var k = 0; k < pozZamku.length; k++) {
-		gracz[k].x=pozZamku[k][0]+1;
-		gracz[k].y=pozZamku[k][1];
-	}
+	
 	
 	mapaKopaln = wylosujPoz(8, size,6);
 	console.log(mapaKopaln);
