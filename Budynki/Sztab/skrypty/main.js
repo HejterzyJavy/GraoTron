@@ -37,6 +37,7 @@ $(document).ready(function() {
         $( this ).find("img").attr('src',ui.draggable.find("img").attr('src'));
          spinner = $( "#spinner" ).spinner({min: 0, max: ile});
          spinner.spinner( "value", ile );
+         $("#przyciski").show();
       }
     });
     
@@ -50,6 +51,7 @@ $(document).ready(function() {
 		$("#pole" + id + " .dolPola p").html( tablicaJednostek [id]);
 		$("#fs" + pozycjaW + " .ile p").html( tablicaOddzialu[pozycjaW]);
 		spinner.spinner( "value", 0 );
+		$("#przyciski").hide();
 	
     });
 
