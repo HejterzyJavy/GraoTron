@@ -1,0 +1,179 @@
+@font-face {
+	font-family: 'Babas';
+	src: url('czionki/BebasNeue.otf');
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+body {
+	background: #f1d379;
+	color: #F6F5F1;
+	font-family:"Babas";
+}
+
+#container {
+	width: 1120px;
+	height: 680px;
+	margin: 0 auto;
+	background-color: #554236;
+}
+#siatka {
+	background: #807255;
+	width: 1120px;
+	height: 160px;
+	float: left;
+}
+
+#menu {
+	background: #554236;
+	width: 200px;
+	height: 160px;
+	float: left;
+	margin-left: 200px;
+	margin-top: 5px;
+	border-top:solid 5px #D8D8C0;
+}
+
+#tytul {
+
+	width: 200px;
+	height: 30px;
+	text-align:center;
+}
+
+#menuInfo {
+	width: 200px;
+	height: 160px;
+	text-align: justify;
+	font-size: 30px;
+}
+
+#staty {
+	width: 140px;
+	height: 165px;
+	float:left;
+	padding-left:10px;
+}
+
+#staty p{
+	font-size:21px;
+}
+#staty p img{
+	width:24px;
+	height:24px;
+}
+
+#staty p strong{
+	margin-left:5px;
+}
+
+
+#menuLinia {
+	width: 200px;
+	height: 10px;
+	background-color: #F6F5F1;
+}
+
+
+.poleSiatki {
+	background: #554236;
+	width: 120px;
+	height: 135px;
+	float: left;
+	border: solid 1px #f1efa5;
+	margin-left: 2px;
+	margin-top: 2px;
+}
+
+.goraPola {
+	background: #f6f5f1;
+	width: 120px;
+	height: 25px;
+	float: left;
+	color: #554236;
+	font-family: "Babas";
+	font-size: 18px;
+	padding-top: 5px;
+	text-align: center;
+}
+
+.goraPola strong, #menuLista strong {
+	color: #BB3B38;
+	padding-right: 10px;
+	float: right;
+	font-weight: 500;
+}
+
+.dolPola {
+	background: #f6f5f1;
+	width: 121px;
+	height: 20px;
+	float: left;
+	color: #554236;
+	font-family: "Babas";
+	font-size: 20px;
+	text-align: center;
+	font-weight:100;
+	color:#BB3B38;
+	margin-top:5px;
+	
+}
+
+
+.srodekPola {
+	background: #554236;
+	width: 120px;
+	height: 100px;
+	float: left;
+}
+
+
+.srodekPola img{
+    width:100px; 
+    height: auto;
+    padding-left:10px;
+}
+
+#formacja{
+	width:500px;
+	height:500px;
+	float:right;
+	background-color: #554236;
+}
+
+#formacjaSiatka{
+	width:320px;
+	height:500px;
+	float:left;
+	margin-left:100px;
+	margin-top: 20px;
+}
+
+.pole{
+	width:150px;
+	height:150px;
+	float:left;
+	border: solid 1px #f1efa5;
+	margin-left: 4px;
+	margin-top: 4px;
+}
+.pole img{
+	margin-top: 15px;
+	float:left
+}
+
+.ile{
+	width:25px;
+	height: 25px;
+	background-color:#807255;
+	float:left;
+}
+
+.ile p {
+	padding-left: 6px;
+	padding-top:4px;
+}
+
+
