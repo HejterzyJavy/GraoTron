@@ -3,7 +3,9 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<script src="skrypty/jquery.js"></script>
+		<script src="skrypty/Dane/jednostka.js"></script>
 		<script src="skrypty/main.js"></script>
+
 		<script src="skrypty/jquery-ui-1.10.4.custom.min.js"></script>
 		<link rel="stylesheet" href="css/blitzer/jquery-ui-1.10.4.custom.min.css">
 		
@@ -12,9 +14,6 @@
 	<body>
 
 
-	
-	
-	
 		<div id="container">
 
 			<div id="siatka">
@@ -131,7 +130,14 @@
 				<div id="menuLinia"></div>
 			</div>
 			
+			<div id="panel">
+				<div id="panelNaglowek"> NAZWA ODDZIAŁU:</div>
+					<input id="nazwaOddzialu" type="text">
+					<button id="akceptuj">STWÓRZ ODDZIAŁ</button>
+			</div>
+			
 			<div id="formacja" >
+				<div id="formacjaTytul"> FORMACJA</div>
 				<div id="formacjaSiatka" >
 					<div id="fs1" class="pole"><div class="ile"><p></p></div> <img /> </div>
 					<div id="fs2" class="pole"><div class="ile"><p></p></div> <img /> </div>
@@ -139,21 +145,17 @@
 					<div id="fs4" class="pole"><div class="ile"><p></p></div> <img />  </div>
 					<div id="fs5" class="pole"><div class="ile"><p></p></div> <img /> </div>
 					<div id="fs6" class="pole"><div class="ile"><p></p></div> <img />  </div>
-					
-					<div id="przyciski">
+				</div>
+			</div>
+			<div id="przyciski">
 						<p>
 							<label for="spinner">Ile jednostek:</label>
 							<input id="spinner" name="value">
 						</p>
 						<p>
-							<button id="akceptuj">
-								Akceptuj
-							</button>
+			
 						</p>
 					</div>
-				</div>
-			</div>
-
 		</div>
 
 	</body>

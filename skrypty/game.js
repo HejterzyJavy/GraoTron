@@ -261,9 +261,6 @@ $(document).ready(function() {
 	}
 	
 	gracz[0].addOddzial("Wormsy",0);
-	gracz[0].addOddzial("Robaczki",0);
-	gracz[0].addOddzial("Pogromcy",0);
-	gracz[0].addOddzial("Najemnicy",0);
 	
 	console.log(gracz);
 	
