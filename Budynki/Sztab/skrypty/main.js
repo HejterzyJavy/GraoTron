@@ -46,15 +46,26 @@ $(document).ready(function() {
 				modal : true,
 				buttons : {
 					
-						Ok : function() {
-							tablicaJednostek[id] = ileMax - spinner.spinner("value");
-							tablicaOddzialu[pozycjaW] = spinner.spinner("value");
-							$("#pole" + id + " .dolPola p").html(tablicaJednostek[id]);
-							$("#fs" + pozycjaW + " .ile p").html(tablicaOddzialu[pozycjaW]);
-							if(spinner.spinner("value")>0)  {pole.find("img").attr('src',ui.draggable.find("img").attr('src'));}// Kopiowanie elementu przeciaganego 
-							spinner.spinner("value", 0);
-							$(this).dialog("close");
-						}, 
+						
+					Ok : function() {
+						tablicaJednostek[id] = ileMax - spinner.spinner("value");
+						
+						
+						if (spinner.spinner("value") > 0) {
+							pole.find("img").attr('src', ui.draggable.find("img").attr('src'));
+							tablicaOddzialu[pozycjaW] = new Array(2);
+							tablicaOddzialu[pozycjaW][0] = id; // ID
+							tablicaOddzialu[pozycjaW][1] = spinner.spinner("value");// ILOSC
+							console.log(tablicaOddzialu);
+						}// Kopiowanie elementu przeciaganego
+						
+						$("#pole" + id + " .dolPola p").html(tablicaJednostek[id]);
+						$("#fs" + pozycjaW + " .ile p").html(tablicaOddzialu[pozycjaW][1]);
+						
+						spinner.spinner("value", 0);
+						$(this).dialog("close");
+					}, 
+
 						Cancel: function() {
 							$(this).dialog("close");
 						}
@@ -77,17 +88,24 @@ $(document).ready(function() {
       items: $(".poleSiatki")
     });
     
-    $( "#formacjaSiatka" ).sortable({
-        update: function(event, ui) {
-        	var newTab = $("#formacjaSiatka" ).sortable('toArray'); 
-            console.log($("#formacjaSiatka" ).sortable('toArray'));
-            for(var i=0;i<tablicaOddzialu.length;i++){
-            	 if ($("#"+newTab[i]).find("p").html() != undefined )
-            	tablicaOddzialu[i] = $("#"+newTab[i]).find("p").html().replace(/[A-Za-z$-]/g, "");
-            }
-            console.log(tablicaOddzialu);
-        }
-    });
+    var tmpTab= new Array(2);
+  
+	$("#formacjaSiatka").sortable({
+		start : function(event, ui) {
+			pozycjaStartowa = ui.item.index() + 1;
+			tmpTab[0] = tablicaOddzialu[pozycjaStartowa][0];
+			tmpTab[1] = tablicaOddzialu[pozycjaStartowa][1];
+
+		},
+		stop : function(event, ui) {
+			pozycjaKoncowa = ui.item.index()+1;
+			tablicaOddzialu[pozycjaStartowa][0] = tablicaOddzialu[pozycjaKoncowa][0];
+			tablicaOddzialu[pozycjaStartowa][1] = tablicaOddzialu[pozycjaKoncowa][1];
+			tablicaOddzialu[pozycjaKoncowa][0] = tmpTab[0];
+			tablicaOddzialu[pozycjaKoncowa][1] = tmpTab[1];
+		}
+	}); 
+
     $( "#formacjaSiatka" ).disableSelection();
     
  	console.log($("#nazwaOddzialu"));
@@ -95,6 +113,7 @@ $(document).ready(function() {
       .click(function( event ) {
       	var nazwaOddzialu =$("#nazwaOddzialu").val();
         event.preventDefault();
+        console.log(tablicaOddzialu);
         window.opener.gracz[0].addOddzial(nazwaOddzialu,tablicaOddzialu);
       });
 

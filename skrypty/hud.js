@@ -26,7 +26,7 @@ $(document).ready(function() {
 		window.parent.document.getElementById("container").style.visibility="hidden";
 		}
 		if(oknoKoszar && oknoKoszar.closed) window.parent.document.getElementById("container").style.visibility="visible";
-		if(oknoSztabu && oknoSztabu.closed) console.log(gracz);
+		if(oknoSztabu && oknoSztabu.closed)  window.parent.document.getElementById("container").style.visibility="visible";
 	});
 
 });

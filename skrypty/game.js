@@ -58,6 +58,8 @@ var dziki = {
 	
 };
 
+
+
 function checkIsFree(obiekt){
 		//Sprawdza czy to miejsce jest puste
 	for (var i = 0; i < gracz.length; i++) { // PETLE PO oddzialach
@@ -103,11 +105,18 @@ var Gracz = function(imieGracza, rodGracza) {
 		addOddzial : function(nazwaOddzialu, tabJednostek) {
 			var tablica = [];
 			var pozycja = wylosujPozycjeNowegoOddzialu(this.zamek);
-			for (var i = 0; i < 6; i++) {
+			for (var i = 0; i < 7; i++) {
+				if(tabJednostek[i] != undefined)
 				tablica.push({
-					nazwa : "lucznik",
-					ilosc : i
+					id : tabJednostek[i][0],
+					ilosc : tabJednostek[i][1]
 				});
+				else{
+					tablica.push({
+					id : 0,
+					ilosc : 0
+				});
+				}
 			}
 			this.oddzialy.push({
 				nazwa : nazwaOddzialu,
@@ -115,11 +124,38 @@ var Gracz = function(imieGracza, rodGracza) {
 				x : pozycja.x,
 				y : pozycja.y
 			});
+			rysujOddzialy();
+			
 		}
 	};
 	return obj;
 }; 
 
+function rysujOddzialy(){
+	for (var i = 0; i < gracz.length; i++) {
+		console.log(gracz[i].oddzialy);
+		for (var j = 0; j < gracz[i].oddzialy.length; j++) {
+			
+		var rycerz = Crafty.e("2D, Canvas, rycerz, Mouse, Tween, rod_"+ gracz[i].rod).areaMap([0, 38], [15, 23], [48, 23], [62, 38], [48, 50], [15, 50]).bind("Click", function(e) {
+			if (oddzialKlikniety) {
+			} else {
+				var pos = isoH.px2pos(this.x, this.y);
+				mozliwyRuchTab = isoH.obszarWokol(pos.x, pos.y);
+				for (var a = 0; a < mozliwyRuchTab.length; a++){
+					podswietlenie = Crafty.e("2D, Canvas, podswietl");
+					isoH.place(podswietlenie, mozliwyRuchTab[a][0], mozliwyRuchTab[a][1], 2);
+					podswietlenieTab.push(podswietlenie);				
+				}
+				oddzialKlikniety = this;
+				$("#miniM").css("background-image","url(img/herby/"+Object.keys(oddzialKlikniety.get(0).__c)[6].slice(4)+".png)");
+			}
+
+			});
+			
+		isoH.place(rycerz, gracz[i].oddzialy[j].x, gracz[i].oddzialy[j].y, 5);
+		}
+	}
+};
 
 
 
@@ -260,7 +296,7 @@ $(document).ready(function() {
 		gracz[k].zamek.y=pozZamku[k][1];
 	}
 	
-	gracz[0].addOddzial("Wormsy",0);
+	//gracz[0].addOddzial("Wormsy",0);
 	
 	console.log(gracz);
 	
@@ -308,28 +344,6 @@ $(document).ready(function() {
 	//Rysowanie zamków
 	for (var i = 0; i < pozZamku.length; i++) {
 		isoH.place(Crafty.e("2D, Canvas, castle"), pozZamku[i][0], pozZamku[i][1], 2);
-	}
-	//Rysowanie oddzialow
-	for (var i = 0; i < gracz.length; i++) {
-		for (var j = 0; j < gracz[i].oddzialy.length; j++) {
-		var rycerz = Crafty.e("2D, Canvas, rycerz, Mouse, Tween, rod_"+ gracz[i].rod).areaMap([0, 38], [15, 23], [48, 23], [62, 38], [48, 50], [15, 50]).bind("Click", function(e) {
-			if (oddzialKlikniety) {
-			} else {
-				var pos = isoH.px2pos(this.x, this.y);
-				mozliwyRuchTab = isoH.obszarWokol(pos.x, pos.y);
-				for (var a = 0; a < mozliwyRuchTab.length; a++){
-					podswietlenie = Crafty.e("2D, Canvas, podswietl");
-					isoH.place(podswietlenie, mozliwyRuchTab[a][0], mozliwyRuchTab[a][1], 2);
-					podswietlenieTab.push(podswietlenie);				
-				}
-				oddzialKlikniety = this;
-				$("#miniM").css("background-image","url(img/herby/"+Object.keys(oddzialKlikniety.get(0).__c)[6].slice(4)+".png)");
-			}
-
-			});
-			
-		isoH.place(rycerz, gracz[i].oddzialy[j].x, gracz[i].oddzialy[j].y, 5);
-		}
 	}
 
 	Crafty.addEvent(this, Crafty.stage.elem, "mousedown", function(e) {
