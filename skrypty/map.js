@@ -143,8 +143,8 @@ function losujDzikich(map){
 			for (var j = 0; j < map.length; j++) {
 				if (map[i][j] == 1) wsp1 *=2;
 				else wsp1 = 15;
-				mapaDzikich[i][j] = new Array(6);
-				for (var k = 0; k < 6; k++) {
+				mapaDzikich[i][j] = new Array(7);
+				for (var k = 1; k < 7; k++) {
 					mapaDzikich[i][j][k] = new Array(3);
 					if(Crafty.math.withinRange(Crafty.math.randomInt(0,100),0,wsp1)){//sprawdza prawdo. wystapienia dzikich na danym terenie
 						var wylosowana = Crafty.math.randomInt(0,100);

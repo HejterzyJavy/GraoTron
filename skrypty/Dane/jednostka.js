@@ -1,11 +1,13 @@
 var jednostka=[
+	{},//puste
     {
     	"nazwa":"Miotacz Toporów",
         "hp":"100",
         "atk":"55",
         "def":"60",
 		"luck":"20",
-		"koszt":"1000"
+		"koszt":"1000",
+		"nazwaObrazka":"topor"
     },
     {
         "nazwa":"Pikinier",
@@ -13,7 +15,8 @@ var jednostka=[
         "atk":"65",
         "def":"60",
 		"luck":"40",
-		"koszt":"1200"
+		"koszt":"1200",
+		"nazwaObrazka":"pikinier"
     },
 	    {
 	    "nazwa":"Łucznik",
@@ -21,7 +24,8 @@ var jednostka=[
         "atk":"95",
         "def":"60",
 		"luck":"60",
-		"koszt":"1100"
+		"koszt":"1100",
+		"nazwaObrazka":"lucznik"
     },
 	    {
 	    "nazwa":"Kawaleria",
@@ -29,7 +33,9 @@ var jednostka=[
         "atk":"67",
         "def":"65",
 		"luck":"46",
-		"koszt":"1700"
+		"koszt":"1700",
+		"nazwaObrazka":"kawaleria"
+		
     },
 	    {
 	    "nazwa":"Ciężka Kawaleria",
@@ -37,7 +43,8 @@ var jednostka=[
         "atk":"95",
         "def":"50",
 		"luck":"60",
-		"koszt":"2200"
+		"koszt":"2200",
+		"nazwaObrazka":"Ckawaleria"
     },
 	    {
 	    "nazwa":"Rycerz",
@@ -45,7 +52,9 @@ var jednostka=[
         "atk":"165",
         "def":"160",
 		"luck":"140",
-		"koszt":"3200"
+		"koszt":"3200",
+		"nazwaObrazka":"rycerz"
+		
     },
 	    {
 	    "nazwa":"Kleryk",
@@ -53,7 +62,8 @@ var jednostka=[
         "atk":"25",
         "def":"20",
 		"luck":"240",
-		"koszt":"700"
+		"koszt":"700",
+		"nazwaObrazka":"kleryk"
     },
 	    {
 	    "nazwa":"Dowódca",
@@ -61,7 +71,8 @@ var jednostka=[
         "atk":"465",
         "def":"360",
 		"luck":"540",
-		"koszt":"3200"
+		"koszt":"3200"		,
+		"nazwaObrazka":"dowodzca"
     },
 	    {
 	    "nazwa":"Wilkor",
@@ -69,6 +80,7 @@ var jednostka=[
         "atk":"665",
         "def":"360",
 		"luck":"440",
-		"koszt":"4200"
+		"koszt":"4200",
+		"nazwaObrazka":"wilkor"
     }
 ];

@@ -4,6 +4,8 @@ $(document).ready(function() {
 	//TRZEBA POPRAWIC INDEKSY!!!
 	dziki = window.opener.dziki;
 	oddzialAtk = window.opener.oddzialAtk;
+	oddzialDef = window.opener.oddzialDef;
+	console.log(oddzialDef);
 	console.log(window.opener.oddzialAtk);
 	var atak= window.opener.mapaDzicy[oddzialAtk[0]][oddzialAtk[1]];
 	console.log(atak);
@@ -13,54 +15,50 @@ $(document).ready(function() {
 
 	var atakujaca;
 	
+	$("#prawa .naglowek").html(oddzialDef.nazwa);
 
-	for (var i = 0; i < oddzial_1.length; i++) {
-		try
-  {
-  	if (typeof atak[i] !== 'undefined' && atak[i].length > 0) 
-		if (atak[i][1] > 0){
-			var nazwa = 
-			oddzial_1[i+1] = {
-				nazwa : dziki.getJednostka(atak[i][0]).nazwa,
-				ilosc : atak[i][1],
+	console.log(atak);
+	console.log(oddzialDef);
+	for (var i = 1; i < 7; i++) {
+		try {
+				if (atak[i][1] > 0) {//sprawdza ilosc
+					var nazwa = oddzial_1[i] = {
+						nazwa : dziki.getJednostka(atak[i][0]).nazwa,
+						ilosc : atak[i][1],
+						mozeAtakowac : true,
+						stan : 0,
+						atk : 32,
+						def : 10,
+						hp : 5
+					};
+					$("#lewa_" + (i  ) + " img").attr('src', "img/" + oddzial_1[i  ].nazwa + ".png");
+					$("#lewa_" + (i  ) + " .ilosc").html(oddzial_1[i  ].ilosc);
+				} else {
+
+					$("#lewa_" + (i  ) + " img").hide();
+					$("#lewa_" + (i  ) + " .ilosc").hide();
+				}
+		} catch(err) {
+			console.log(err);
+		}
+		var id = oddzialDef.jednostki[i].id;
+		if (id > 0) {
+			oddzial_2[i] = {
+				nazwa : jednostka[id].nazwaObrazka,
+				ilosc : oddzialDef.jednostki[i].ilosc,
 				mozeAtakowac : true,
 				stan : 0,
-				atk : 32,
-				def : 10,
-				hp : 5
+				atk : jednostka[id].atk,
+				def : jednostka[id].def,
+				hp : jednostka[id].hp
 			};
-			$("#lewa_" + (i + 1) + " img").attr('src', "img/" + oddzial_1[i+1].nazwa + ".png");
-			$("#lewa_" + (i + 1) + " .ilosc").html(oddzial_1[i+1].ilosc);
+
+			$("#prawa_" + (i  ) + " img").attr('src', "img/" + oddzial_2[i].nazwa + ".png");
+			$("#prawa_" + (i  ) + " .ilosc").html(oddzial_2[i].ilosc);
 		}
-		else{
-
-			$("#lewa_" + (i + 1) + " img").hide();
-			$("#lewa_" + (i + 1) + " .ilosc").hide();
-		}
-		}
-		catch(err)
-  {
-  console.log(err);
-  }
-
-		oddzial_2[i] = {
-			nazwa : "lucznik",
-			ilosc : 10,
-			mozeAtakowac : true,
-			stan : 0,
-			atk : 10,
-			def : 10,
-			hp : 5
-		};
-
-		$("#prawa_" + (i + 1) + " img").attr('src', "img/" + oddzial_2[i].nazwa + ".png");
-
-		$("#prawa_" + (i + 1) + " .ilosc").html(oddzial_2[i].ilosc);
 	}
 
-	$('.przycisk').click(function() {
 
-	});
 
 	$('.poleSiatki').mouseenter(function() {
 		id = $(this).attr("id");
@@ -154,6 +152,7 @@ $(document).ready(function() {
 					zabiteJednostki = Math.floor(zadaneObrazenia / oddzial_2[broniaca].hp);
 					$("#prawa_" + broniaca + " .ilosc").html(oddzial_2[broniaca].ilosc - zabiteJednostki);
 					oddzial_2[broniaca].ilosc -= zabiteJednostki;
+					oddzialDef.jednostki[broniaca].ilosc = oddzial_2[broniaca].ilosc;
 					if(oddzial_2[broniaca].ilosc <= 0) $("#prawa_" + broniaca).hide( "fast" );
 					$("#srodek").html("Gracz " + turaGracza + " zadal: " + zadaneObrazenia + " obrazen <br> Zabijajac: " + zabiteJednostki + " jednostki");
 					turaGracza = 2;
@@ -210,12 +209,13 @@ $(document).ready(function() {
 					$("#lewa_" + broniaca + " .ilosc").html(oddzial_1[broniaca].ilosc - zabiteJednostki);
 					
 					oddzial_1[broniaca].ilosc -= zabiteJednostki;
+					atak[broniaca][1] = oddzial_1[broniaca].ilosc;
 					if(oddzial_1[broniaca].ilosc <= 0) $("#lewa_" + broniaca).hide( "fast" );
 					$("#srodek").html("Gracz " + turaGracza + " zadal: " + zadaneObrazenia + " obrazen <br> Zabijajac: " + zabiteJednostki + " jednostki");
 					turaGracza = 1;
 					console.log("TURA:" + turaGracza);
 					
-					window.opener.mapaDzicy[oddzialAtk[0]][oddzialAtk[1]][broniaca-1][1] = oddzial_1[broniaca].ilosc ; 
+					window.opener.mapaDzicy[oddzialAtk[0]][oddzialAtk[1]][broniaca][1] = oddzial_1[broniaca].ilosc ; 
 					zmienGracza();
 					
 				}

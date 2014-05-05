@@ -93,16 +93,19 @@ $(document).ready(function() {
 	$("#formacjaSiatka").sortable({
 		start : function(event, ui) {
 			pozycjaStartowa = ui.item.index() + 1;
+			if(tablicaOddzialu[pozycjaStartowa] != undefined){
 			tmpTab[0] = tablicaOddzialu[pozycjaStartowa][0];
-			tmpTab[1] = tablicaOddzialu[pozycjaStartowa][1];
+			tmpTab[1] = tablicaOddzialu[pozycjaStartowa][1];}
 
 		},
 		stop : function(event, ui) {
 			pozycjaKoncowa = ui.item.index()+1;
+			if(tablicaOddzialu[pozycjaStartowa] != undefined){
 			tablicaOddzialu[pozycjaStartowa][0] = tablicaOddzialu[pozycjaKoncowa][0];
 			tablicaOddzialu[pozycjaStartowa][1] = tablicaOddzialu[pozycjaKoncowa][1];
 			tablicaOddzialu[pozycjaKoncowa][0] = tmpTab[0];
 			tablicaOddzialu[pozycjaKoncowa][1] = tmpTab[1];
+			}
 		}
 	}); 
 

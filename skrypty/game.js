@@ -80,12 +80,11 @@ function wylosujPozycjeNowegoOddzialu(pozycja) {
 			break;
 		}
 	};
-	console.log(obiektZwracany);
 	return obiektZwracany;
 };
 
 
-
+//GLOWNY OBIEKT GRACZA
 var Gracz = function(imieGracza, rodGracza) {
 	var obj = {
 		imie : imieGracza,
@@ -124,39 +123,41 @@ var Gracz = function(imieGracza, rodGracza) {
 				x : pozycja.x,
 				y : pozycja.y
 			});
-			rysujOddzialy();
+			rysujOddzial(turaGracza);
 			
 		}
 	};
 	return obj;
-}; 
-
-function rysujOddzialy(){
-	for (var i = 0; i < gracz.length; i++) {
-		console.log(gracz[i].oddzialy);
-		for (var j = 0; j < gracz[i].oddzialy.length; j++) {
-			
-		var rycerz = Crafty.e("2D, Canvas, rycerz, Mouse, Tween, rod_"+ gracz[i].rod).areaMap([0, 38], [15, 23], [48, 23], [62, 38], [48, 50], [15, 50]).bind("Click", function(e) {
-			if (oddzialKlikniety) {
-			} else {
-				var pos = isoH.px2pos(this.x, this.y);
-				mozliwyRuchTab = isoH.obszarWokol(pos.x, pos.y);
-				for (var a = 0; a < mozliwyRuchTab.length; a++){
-					podswietlenie = Crafty.e("2D, Canvas, podswietl");
-					isoH.place(podswietlenie, mozliwyRuchTab[a][0], mozliwyRuchTab[a][1], 2);
-					podswietlenieTab.push(podswietlenie);				
-				}
-				oddzialKlikniety = this;
-				$("#miniM").css("background-image","url(img/herby/"+Object.keys(oddzialKlikniety.get(0).__c)[6].slice(4)+".png)");
-			}
-
-			});
-			
-		isoH.place(rycerz, gracz[i].oddzialy[j].x, gracz[i].oddzialy[j].y, 5);
-		}
-	}
 };
 
+ 
+function rysujOddzial(idGracza) {
+	var j = gracz[idGracza].oddzialy.length - 1;	//id ost elementu
+
+	var rycerz = Crafty.e("2D, Canvas, rycerz, Mouse, Tween, rod_" + gracz[idGracza].rod).areaMap([0, 38], [15, 23], [48, 23], [62, 38], [48, 50], [15, 50]).bind("Click", function(e) {
+		if (oddzialKlikniety) {
+
+		} else {
+			var pos = isoH.px2pos(this.x, this.y);
+			mozliwyRuchTab = isoH.obszarWokol(pos.x, pos.y);
+			for (var a = 0; a < mozliwyRuchTab.length; a++) {
+				podswietlenie = Crafty.e("2D, Canvas, podswietl");
+				isoH.place(podswietlenie, mozliwyRuchTab[a][0], mozliwyRuchTab[a][1], 2);
+				podswietlenieTab.push(podswietlenie);
+			}
+			oddzialKlikniety = this;
+			$("#miniM").css("background-image", "url(img/herby/" + Object.keys(oddzialKlikniety.get(0).__c)[6].slice(4) + ".png)");
+		}
+
+	});
+	rycerz.attr({
+		id : j,
+		nazwa : gracz[idGracza].oddzialy[j].nazwa
+	});
+
+	isoH.place(rycerz, gracz[idGracza].oddzialy[j].x, gracz[idGracza].oddzialy[j].y, 5);
+
+};
 
 
 var isoH;
@@ -169,6 +170,7 @@ var mapa = [];
 var mapaDzicy;
 var oknoWalki;
 var gracz = [];
+var turaGracza = 0;
 
 var oddzialAtk = new Array(6);
 var oddzialDef = new Array(6);
@@ -206,7 +208,7 @@ function ruchMozliwy(x,y){
 }
 
 function obecneJednostki(tab){
-	for (var i = 0; i < tab.length; i++){ 
+	for (var i = 1; i < tab.length; i++){ 
 		if(tab[i][1]>0) return true;
 	}
 	return false;
@@ -218,6 +220,7 @@ function indexInGracz(szukane) {
 		if (gracz[i].rod == szukane) return i;
 	return "false";
 }
+
 
 
 var ruszJednostka = function(obiekt) {
@@ -244,7 +247,7 @@ var ruszJednostka = function(obiekt) {
 
 	oddzialAtk = [pos.x,pos.y];
 	if (obecneJednostki(mapaDzicy[pos.x][pos.y])) {
-		console.log(mapaDzicy[pos.x][pos.y]);
+		oddzialDef = gracz[turaGracza].oddzialy[oddzialKlikniety.id];
 		oknoWalki = window.open("Walka/index.html", "_blank", "toolbar=no, scrollbars=no, resizable=no, top=100, left=100, width=1020, height=680", "walka", "");
 	}
 	oddzialKlikniety = null;
@@ -296,9 +299,6 @@ $(document).ready(function() {
 		gracz[k].zamek.y=pozZamku[k][1];
 	}
 	
-	//gracz[0].addOddzial("Wormsy",0);
-	
-	console.log(gracz);
 	
 	for (var i = 40; i > 0; i--) {
 		for (var y = 0; y < 40; y++) {
