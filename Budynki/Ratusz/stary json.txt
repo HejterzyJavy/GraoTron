@@ -1,0 +1,133 @@
+var index=0,index2=0;
+var info=new Array();
+var output =new Array();
+var info2=new Array();
+var output2 =new Array();	
+var poziomRozbudowania = new Array(2,1,2,3,2,4,1,2);
+var jednostkaId = 0;
+
+$(document).ready(function() {
+	
+	$.getJSON('JSON/dane.json', function(data){
+    
+    for (var i in data.budynekDrwal){
+        output[index] = data.budynekDrwal[i].poziom;
+		index++;
+        output[index] = data.budynekDrwal[i].drewno;
+        index++;
+		output[index] = data.budynekDrwal[i].zloto;
+		index++;
+		output[index] = data.budynekDrwal[i].zelazo;
+		index++;
+    	}
+	});
+	/*
+	$.getJSON('JSON/budynki.json', function(data){
+    
+    for (var ii in data.budynek) {
+        output2[index2] = data.budynek[ii].nazwa ;
+		index2++;
+        output2[index2] = data.budynek[ii].bonus1 ;
+        index2++;
+		output2[index2] = data.budynek[ii].bonus2 ;
+		index2++;
+		output2[index2] = data.budynek[ii].bonus3 ;
+		index2++;
+    	}*/
+    	Surowce();/*
+	});*/
+	
+	$('.pole').mouseenter(function() {
+		id = $(this).attr("id");
+		jednostkaId = id[id.length - 1];
+		
+		$.getJSON('JSON/budynki.json', function(data) {
+			$("#nazwa").html(data.budynek[jednostkaId-1].nazwa);
+			$("#bonus1").html(data.budynek[jednostkaId-1].bonus1);
+			$("#bonus2").html(data.budynek[jednostkaId-1].bonus2);
+			$("#bonus3").html(data.budynek[jednostkaId-1].bonus3);
+		});
+
+	});
+});	
+	/*
+function Click(wskazany){
+	var index=0;
+	for (var q=1;q<9;q++) {
+		if (wskazany==q) {
+			index=(q-1)*4;
+			info = "<hr><hr><center><p><strong> "+output2[index]+"</strong></p></center><hr><hr><br /> <p><strong> "+output2[index+1]+"</strong></p><br /> <p><strong> "+output2[index+2]+"</strong></p><br /> <p><strong> "+output2[index+3];
+			wysuwanyText.innerHTML = info;
+		}
+	}
+}*/
+
+function Surowce() {
+	for (var i=0;i<9;i++) {
+		if (i==1) {
+			for (var j=0;j<5;j++)
+			if (poziomRozbudowania[0]==output[j*4]) {
+				index = j*4;
+				info = "<p style=\"font-size:26px;color:black;\"><strong> D:"+output[index+1]+" $:"+output[index+2]+" Z:"+output[index+3]+"</strong></p>";
+    			kolDos1.innerHTML = info;   	
+			}
+    	}
+    	if (i==2) {
+			for (var j=0;j<5;j++)
+			if (poziomRozbudowania[1]==output[j*4]) {
+				index = j*4;
+				info = "<p style=\"font-size:26px;color:black;\"><strong> D:"+output[index+1]+" $:"+output[index+2]+" Z:"+output[index+3]+"</strong></p>";
+    			kolDos2.innerHTML = info;   	
+			}
+    	}
+		if (i==3) {
+			for (var j=0;j<5;j++)
+			if (poziomRozbudowania[2]==output[j*4]) {
+				index = j*4;
+				info = "<p style=\"font-size:26px;color:black;\"><strong> D:"+output[index+1]+" $:"+output[index+2]+" Z:"+output[index+3]+"</strong></p>";
+    			kolDos3.innerHTML = info;   	
+			}
+    	}
+		if (i==4) {
+			for (var j=0;j<5;j++)
+			if (poziomRozbudowania[3]==output[j*4]) {
+				index = j*4;
+				info = "<p style=\"font-size:26px;color:black;\"><strong> D:"+output[index+1]+" $:"+output[index+2]+" Z:"+output[index+3]+"</strong></p>";
+    			kolDos4.innerHTML = info;   	
+			}
+    	}
+		if (i==5) {
+			for (var j=0;j<5;j++)
+			if (poziomRozbudowania[4]==output[j*4]) {
+				index = j*4;
+				info = "<p style=\"font-size:26px;color:black;\"><strong> D:"+output[index+1]+" $:"+output[index+2]+" Z:"+output[index+3]+"</strong></p>";
+    			kolDos5.innerHTML = info;   	
+			}
+    	}
+		if (i==6) {
+			for (var j=0;j<5;j++)
+			if (poziomRozbudowania[5]==output[j*4]) {
+				index = j*4;
+				info = "<p style=\"font-size:26px;color:black;\"><strong> D:"+output[index+1]+" $:"+output[index+2]+" Z:"+output[index+3]+"</strong></p>";
+    			kolDos6.innerHTML = info;   	
+			}
+    	}
+		if (i==7) {
+			for (var j=0;j<5;j++)
+			if (poziomRozbudowania[6]==output[j*4]) {
+				index = j*4;
+				info = "<p style=\"font-size:26px;color:black;\"><strong> D:"+output[index+1]+" $:"+output[index+2]+" Z:"+output[index+3]+"</strong></p>";
+    			kolDos7.innerHTML = info;   	
+			}
+    	}
+		if (i==8) {
+			for (var j=0;j<5;j++)
+			if (poziomRozbudowania[7]==output[j*4]) {
+				index = j*4;
+				info = "<p style=\"font-size:26px;color:black;\"><strong> D:"+output[index+1]+" $:"+output[index+2]+" Z:"+output[index+3]+"</strong></p>";
+    			kolDos8.innerHTML = info;   	
+			}
+    	}
+    	
+    }
+}
