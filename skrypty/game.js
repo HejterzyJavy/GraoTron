@@ -99,7 +99,8 @@ var Gracz = function(imieGracza, rodGracza) {
 		},
 		zamek:{
 			x:0,
-			y:0
+			y:0,
+			jednostki : []
 		},
 		addOddzial : function(nazwaOddzialu, tabJednostek) {
 			var tablica = [];
@@ -127,6 +128,8 @@ var Gracz = function(imieGracza, rodGracza) {
 			
 		}
 	};
+	for(var i=0;i<jednostka.length;i++) jednostki : obj.zamek.jednostki.push(0);
+	console.log(obj);
 	return obj;
 };
 
@@ -222,7 +225,6 @@ function indexInGracz(szukane) {
 }
 
 
-
 var ruszJednostka = function(obiekt) {
 	oddzialKlikniety.tween({
 		x : obiekt.x,
@@ -254,14 +256,8 @@ var ruszJednostka = function(obiekt) {
 };
 
 
-
-
-
 $(document).ready(function() {
 	isoH = Crafty.hexametric.init(64, 64, 40, 40);
-	
-	
-	
 	Crafty.init(924, 736);
 	Crafty.viewport.scale(1.2);
 

@@ -3,7 +3,7 @@ var tablicaOddzialu =  new Array(10);
 var jednostkaId = 0;
 
 $(document).ready(function() {
-	
+	var turaGracza =  window.opener.turaGracza;
 	
 	for(var i=0;i<tablicaJednostek.length;i++){
 		tablicaJednostek [i] = i;
@@ -16,11 +16,13 @@ $(document).ready(function() {
 		id = $(this).attr("id");
 		var index = 0;
 		jednostkaId = id[id.length - 1];
-			$("#tytul").html(jednostka[jednostkaId-1].nazwa);
-			$("#hp strong").html(jednostka[jednostkaId-1].hp);
-			$("#atk strong").html(jednostka[jednostkaId-1].atk);
-			$("#def strong").html(jednostka[jednostkaId-1].def);
-			$("#luck strong").html(jednostka[jednostkaId-1].luck);
+		console.log(jednostkaId);
+		$("#tytul").html(jednostka[jednostkaId].nazwa);
+		$("#hp strong").html(jednostka[jednostkaId].hp);
+		$("#atk strong").html(jednostka[jednostkaId].atk);
+		$("#def strong").html(jednostka[jednostkaId].def);
+		$("#luck strong").html(jednostka[jednostkaId].luck); 
+
 	});
 	$(".poleSiatki").draggable({ revert: "valid",helper: "clone" });
 	
@@ -117,7 +119,7 @@ $(document).ready(function() {
       	var nazwaOddzialu =$("#nazwaOddzialu").val();
         event.preventDefault();
         console.log(tablicaOddzialu);
-        window.opener.gracz[0].addOddzial(nazwaOddzialu,tablicaOddzialu);
+        window.opener.gracz[turaGracza].addOddzial(nazwaOddzialu,tablicaOddzialu);
       });
 
 
