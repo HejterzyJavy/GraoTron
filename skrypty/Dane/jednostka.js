@@ -84,3 +84,53 @@ var jednostka=[
 		"nazwaObrazka":"wilkor"
     }
 ];
+
+var dziki = {
+	wlocznik: {
+		nazwa: 'wlocznik',
+		atk:50,
+		def:100,
+		hp:40,
+	},
+	zabojca :  {
+		nazwa: 'zabojca',
+		atk:100,
+		def:50,
+		hp:80,
+		
+	},
+	lucznik : {
+		nazwa: 'lucznik',
+		atk:100,
+		def:20,
+		hp:40,
+	},
+	olbrzym :  {
+		nazwa: 'olbrzym',
+		atk:200,
+		def:200,
+		hp:200,
+	},
+	niedzwiedz :  {
+		nazwa: 'niedzwiedz',
+		atk:200,
+		def:200,
+		hp:200,
+	},
+	inny :  {
+		nazwa: 'inny',
+		atk:400,
+		def:400,
+		hp:200,
+	},
+	getJednostka: function(id){
+		if(id==0) return this.wlocznik;
+		if(id==1) return this.zabojca;
+		if(id==2) return this.lucznik;
+		if(id==3) return this.olbrzym;
+		if(id==4) return this.niedzwiedz;
+		if(id==5) return this.inny;
+		if(id>5 || id<0) return false;
+	}
+	
+};

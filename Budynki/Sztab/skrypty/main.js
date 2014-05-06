@@ -1,13 +1,13 @@
-var tablicaJednostek =  new Array(10);
 var tablicaOddzialu =  new Array(10);
 var jednostkaId = 0;
 
 $(document).ready(function() {
 	var turaGracza =  window.opener.turaGracza;
+	jednostkiGracza =  window.opener.gracz[turaGracza].zamek.jednostki;
+	console.log(jednostkiGracza);
 	
-	for(var i=0;i<tablicaJednostek.length;i++){
-		tablicaJednostek [i] = i;
-		$("#pole" + i + " .dolPola p").html( tablicaJednostek [i] + 5 );
+	for(var i=0;i<jednostkiGracza.length;i++){
+		$("#pole" + i + " .dolPola p").html( jednostkiGracza [i]  );
 	}
 
 	var index = 0;
@@ -50,9 +50,7 @@ $(document).ready(function() {
 					
 						
 					Ok : function() {
-						tablicaJednostek[id] = ileMax - spinner.spinner("value");
-						
-						
+						jednostkiGracza[id] = ileMax - spinner.spinner("value");
 						if (spinner.spinner("value") > 0) {
 							pole.find("img").attr('src', ui.draggable.find("img").attr('src'));
 							tablicaOddzialu[pozycjaW] = new Array(2);
@@ -61,7 +59,7 @@ $(document).ready(function() {
 							console.log(tablicaOddzialu);
 						}// Kopiowanie elementu przeciaganego
 						
-						$("#pole" + id + " .dolPola p").html(tablicaJednostek[id]);
+						$("#pole" + id + " .dolPola p").html(jednostkiGracza[id]);
 						$("#fs" + pozycjaW + " .ile p").html(tablicaOddzialu[pozycjaW][1]);
 						
 						spinner.spinner("value", 0);

@@ -31,18 +31,18 @@ $(document).ready(function() {
 						def : 10,
 						hp : 5
 					};
-					$("#lewa_" + (i  ) + " img").attr('src', "img/" + oddzial_1[i  ].nazwa + ".png");
-					$("#lewa_" + (i  ) + " .ilosc").html(oddzial_1[i  ].ilosc);
+					$("#lewa_" + i + " img").attr('src', "img/" + oddzial_1[i].nazwa + ".png");
+					$("#lewa_" + i + " .ilosc").html(oddzial_1[i].ilosc);
 				} else {
 
-					$("#lewa_" + (i  ) + " img").hide();
-					$("#lewa_" + (i  ) + " .ilosc").hide();
+					$("#lewa_" + i + " img").hide();
+					$("#lewa_" + i + " .ilosc").hide();
 				}
 		} catch(err) {
 			console.log(err);
 		}
 		var id = oddzialDef.jednostki[i].id;
-		if (id > 0) {
+		if (id > 0 && oddzialDef.jednostki[i].ilosc >0) {
 			oddzial_2[i] = {
 				nazwa : jednostka[id].nazwaObrazka,
 				ilosc : oddzialDef.jednostki[i].ilosc,
@@ -53,8 +53,8 @@ $(document).ready(function() {
 				hp : jednostka[id].hp
 			};
 
-			$("#prawa_" + (i  ) + " img").attr('src', "img/" + oddzial_2[i].nazwa + ".png");
-			$("#prawa_" + (i  ) + " .ilosc").html(oddzial_2[i].ilosc);
+			$("#prawa_" + i + " img").attr('src', "img/" + oddzial_2[i].nazwa + ".png");
+			$("#prawa_" + i + " .ilosc").html(oddzial_2[i].ilosc);
 		}
 	}
 
@@ -70,14 +70,12 @@ $(document).ready(function() {
 
 		jednostkaId = id[id.length - 1];
 
-		$.getJSON('dane.json', function(data) {
-			$("#tytul").html(data.jednostka[jednostkaId - 1].nazwa);
-			$("#hp strong").html(data.jednostka[jednostkaId - 1].hp);
-			$("#atk strong").html(data.jednostka[jednostkaId - 1].atk);
-			$("#def strong").html(data.jednostka[jednostkaId - 1].def);
-			$("#luck strong").html(data.jednostka[jednostkaId - 1].luck);
-			$("#koszt strong").html(data.jednostka[jednostkaId - 1].koszt);
-		});
+		$("#tytul").html(jednostka[jednostkaId].nazwa);
+		$("#hp strong").html(jednostka[jednostkaId ].hp);
+		$("#atk strong").html(jednostka[jednostkaId ].atk);
+		$("#def strong").html(jednostka[jednostkaId ].def);
+		$("#luck strong").html(jednostka[jednostkaId ].luck);
+		$("#koszt strong").html(jednostka[jednostkaId].koszt); 
 
 	});
 
@@ -148,7 +146,7 @@ $(document).ready(function() {
 				if (turaGracza == 1) {
 					var zadaneObrazenia = 0;
 					var zabiteJednostki = 0;
-					zadaneObrazenia = Math.abs(oddzial_2[broniaca].hp - (oddzial_1[atakujaca].atk - oddzial_2[broniaca].def ));
+					zadaneObrazenia = Math.abs(oddzial_2[broniaca].hp - (oddzial_1[atakujaca].atk - oddzial_2[broniaca].def )*oddzial_1[atakujaca].ilosc );
 					zabiteJednostki = Math.floor(zadaneObrazenia / oddzial_2[broniaca].hp);
 					$("#prawa_" + broniaca + " .ilosc").html(oddzial_2[broniaca].ilosc - zabiteJednostki);
 					oddzial_2[broniaca].ilosc -= zabiteJednostki;
@@ -204,7 +202,7 @@ $(document).ready(function() {
 				if (turaGracza == 2) {
 					var zadaneObrazenia = 0;
 					var zabiteJednostki = 0;
-					zadaneObrazenia = Math.abs(oddzial_1[broniaca].hp - (oddzial_2[atakujaca].atk - oddzial_1[broniaca].def ));
+					zadaneObrazenia = Math.abs(oddzial_1[broniaca].hp - (oddzial_2[atakujaca].atk - oddzial_1[broniaca].def ) *oddzial_2[atakujaca].ilosc);
 					zabiteJednostki = Math.floor(zadaneObrazenia / oddzial_1[broniaca].hp);
 					$("#lewa_" + broniaca + " .ilosc").html(oddzial_1[broniaca].ilosc - zabiteJednostki);
 					

@@ -5,7 +5,7 @@ var jednostkaId = 0;
 
 $(document).ready(function() {
 	var turaGracza = window.opener.turaGracza;
-	var jednostkiGracza =  window.opener.gracz[turaGracza].zamek.jednostki;
+	jednostkiGracza =  window.opener.gracz[turaGracza].zamek.jednostki;
 	console.log(jednostkiGracza);
 
 	info =  "<p>Miotacz TOPORÓW  <strong> " + wszystkieJednostki[1] + "</strong></p>"+ 
@@ -46,6 +46,7 @@ $(document).ready(function() {
 			$("#pole" + (i + 1) + " .goraPola strong").html("");
 		}
 		jednostkiGracza = wszystkieJednostki;
+		window.opener.gracz[turaGracza].zamek.jednostki = wszystkieJednostki;
 		console.log(jednostkiGracza);
 		info =  
 			"<p>Miotacz TOPORÓW  <strong> " + wszystkieJednostki[1] + "</strong></p>"+ 

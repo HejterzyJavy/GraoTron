@@ -8,56 +8,6 @@ var spriteArray = [
 "stark", 
 "targaryen"];
 
-var dziki = {
-	wlocznik: {
-		nazwa: 'wlocznik',
-		atk:50,
-		def:100,
-		hp:40,
-	},
-	zabojca :  {
-		nazwa: 'zabojca',
-		atk:100,
-		def:50,
-		hp:80,
-		
-	},
-	lucznik : {
-		nazwa: 'lucznik',
-		atk:100,
-		def:20,
-		hp:40,
-	},
-	olbrzym :  {
-		nazwa: 'olbrzym',
-		atk:200,
-		def:200,
-		hp:200,
-	},
-	niedzwiedz :  {
-		nazwa: 'niedzwiedz',
-		atk:200,
-		def:200,
-		hp:200,
-	},
-	inny :  {
-		nazwa: 'inny',
-		atk:400,
-		def:400,
-		hp:200,
-	},
-	getJednostka: function(id){
-		if(id==0) return this.wlocznik;
-		if(id==1) return this.zabojca;
-		if(id==2) return this.lucznik;
-		if(id==3) return this.olbrzym;
-		if(id==4) return this.niedzwiedz;
-		if(id==5) return this.inny;
-		if(id>5 || id<0) return false;
-	}
-	
-};
-
 
 
 function checkIsFree(obiekt){
@@ -178,6 +128,16 @@ var turaGracza = 0;
 var oddzialAtk = new Array(6);
 var oddzialDef = new Array(6);
 
+
+function nowaTura(){
+	$("#zloto p").html(gracz[turaGracza].surowce.zloto);
+	$("#zelazo p").html(gracz[turaGracza].surowce.zelazo);
+	$("#drewno p").html(gracz[turaGracza].surowce.drzewo);
+	$("#ludzie p").html(gracz[turaGracza].surowce.ludzie);
+	$("#teren p").html(gracz[turaGracza].surowce.teren);
+}
+
+
 function idToName(id) {
 	return spriteArray[id];
 }
@@ -289,6 +249,8 @@ $(document).ready(function() {
 	gracz.push(new Gracz("Przemek","stark"));
 	gracz.push(new Gracz("Wyczes","targaryen"));
 	
+	nowaTura();
+	
 	// PRZYPISUJE ZAMKI GRACZOM
 	for (var k = 0; k < pozZamku.length; k++) {
 		gracz[k].zamek.x=pozZamku[k][0];
@@ -373,7 +335,6 @@ $(document).ready(function() {
 		}
 		if (oknoWalki && oknoWalki.closed) {
 			window.parent.document.getElementById("container").style.visibility = "visible";
-
 		}
 	});
 
