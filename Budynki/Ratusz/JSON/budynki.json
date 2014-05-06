@@ -1,0 +1,50 @@
+{"budynek":[
+    {
+        "nazwa":"Tartak",
+        "bonus1":"  +100% Produkcji surowca",
+        "bonus2":"  ",
+        "bonus3":"  "
+    },
+    {
+        "nazwa":"Kopalnia",
+        "bonus1":"  +100% Produkcji surowca",
+        "bonus2":"  ",
+        "bonus3":"  "
+    },
+    {
+        "nazwa":"Koszary",
+        "bonus1":"  +50% do max liczby jednostek",
+        "bonus2":"  ",
+        "bonus3":"  "
+    },
+    {
+        "nazwa":"Kowal",
+        "bonus1":"  +100% Produkcji surowca",
+        "bonus2":"  +50% CZASU",
+        "bonus3":"  +50% SIŁY"
+    },
+    {
+        "nazwa":"Mur",
+        "bonus1":"  +10% Ochrony wioski",
+        "bonus2":"  +40% CZASU",
+        "bonus3":"  +40% SIŁY"
+    },
+    {
+        "nazwa":"Ratusz",
+        "bonus1":"  +30% PRODUKCJI",
+        "bonus2":"  +30% CZASU",
+        "bonus3":"  +30% SIŁY"
+    },
+    {
+        "nazwa":"Sanktuarium",
+        "bonus1":"  +20% PRODUKCJI",
+        "bonus2":"  +20% CZASU",
+        "bonus3":"  +20% SIŁY"
+    },
+    {
+        "nazwa":"Spichlerz",
+        "bonus1":"  +10% PRODUKCJI",
+        "bonus2":"  +10% CZASU",
+        "bonus3":"  +10% SIŁY"
+    }
+]}

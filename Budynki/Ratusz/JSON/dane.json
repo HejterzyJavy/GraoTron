@@ -1,0 +1,22 @@
+{"budynekDrwal":[
+    {
+        "drewno":"15",
+        "zloto":"20",
+        "zelazo":"15"
+    },
+    {
+        "drewno":"20",
+        "zloto":"25",
+        "zelazo":"20"
+    },
+    {
+        "drewno":"60",
+        "zloto":"50",
+        "zelazo":"55"
+    },
+    {
+        "drewno":"300",
+        "zloto":"250",
+        "zelazo":"220"
+    }
+]}
