@@ -1,5 +1,6 @@
 var oknoKoszar = null;
 var oknoSztabu = null;
+var oknoRatusz = null;
 $(document).ready(function() {
 	$('.poleSiatki,#pole13').mouseenter(function() {
 		$(this).css("background-color", "#660000");
@@ -8,6 +9,13 @@ $(document).ready(function() {
 	$('.poleSiatki,#pole13').mouseleave(function() {
 		$(this).css("background-color", "#554236");
 	});
+
+	$('#pole6').click(function() {
+
+		oknoSztabu = window.open("Budynki/Ratusz/index.htm", "_blank", "toolbar=no, scrollbars=no, resizable=no, top=100, left=100, width=1140, height=710", "sztab", "");
+
+	});
+
 
 	$('#pole10').click(function() {
 

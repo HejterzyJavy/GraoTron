@@ -77,6 +77,7 @@ $(document).ready(function() {
 				drewno=drewno-data2.budynekDrwal[poziomRozbudowania[aktualnaPozycja-1]].drewno;
 				zloto=zloto-data2.budynekDrwal[poziomRozbudowania[aktualnaPozycja-1]].zloto;
 				zelazo=zelazo-data2.budynekDrwal[poziomRozbudowania[aktualnaPozycja-1]].zelazo;
+				poziomRozbudowania[aktualnaPozycja-1] = poziomRozbudowania[aktualnaPozycja-1] +1; 
 				
 				alert('Wybudowano: '+asocjacja[aktualnaPozycja]+' po: '+drewno+' '+zloto+' '+zelazo);
 		});
