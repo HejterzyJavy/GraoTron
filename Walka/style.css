@@ -101,4 +101,38 @@ body {
 	cursor: hand;
 }
 
+#dialog{
+	margin-left:50px;
+	display:none;
+}
+#dialog_straty{
+	color:#800F25;
+}
 
+#dialog_straty p{
+	font-size:14px;
+}
+
+
+#dialog_zdobyte{
+	color:#025D8C;
+	margin-top:10px;
+}
+
+#dialog_zdobyte p{
+	font-size:14px;
+}
+
+
+.ui-widget-header {
+border: 1px solid #E8C23B;
+background: #7B644A;
+color: #fff;
+font-weight: bold;
+}
+
+.ui-widget-content {
+border: 1px solid #eee;
+background: #EEEEEE;
+color: #333;
+}

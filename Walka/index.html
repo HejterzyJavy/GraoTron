@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="../css/blitzer/jquery-ui-1.10.4.custom.min.css" />
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<script src="skrypty/jquery.js"></script>
 		<script src="../skrypty/Dane/jednostka.js"></script>
+		<script src="../skrypty/lib/jquery-ui-1.10.4.custom.min.js"></script>
 		<script src="skrypty/main.js"></script>
 		<meta charset="UTF-8" />
 	</head>
 	<body>
+		<div id="dialog" title="Koniec Walki">
+			<h1>Wygrana!</h1>
+			<img src="img/Victory.png">
+			<div id="dialog_straty">
+				<h4>Stracone jednostki:</h4>
+				<div id="stracone_tresc">
+					<p>	2 x TOPORY	</p>
+				</div>
+			</div>
+			<div id="dialog_zdobyte">
+				<h4>Zdobyto:</h4>
+				<div id="zdobyte_tresc">
+					<p>	15 x ZLOTO	</p>
+				</div>
+			</div>
+		</div>
 
 		<div id="container" >
 			<div id="srodek"> </div>

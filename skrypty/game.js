@@ -129,12 +129,27 @@ var oddzialAtk = new Array(6);
 var oddzialDef = new Array(6);
 
 
-function nowaTura(){
+function aktualizujSurowce(){
 	$("#zloto p").html(gracz[turaGracza].surowce.zloto);
 	$("#zelazo p").html(gracz[turaGracza].surowce.zelazo);
 	$("#drewno p").html(gracz[turaGracza].surowce.drzewo);
 	$("#ludzie p").html(gracz[turaGracza].surowce.ludzie);
 	$("#teren p").html(gracz[turaGracza].surowce.teren);
+}
+
+
+function nowaTura(){
+		var iloscTerenu =0;
+	for (var i = 0; i < 40; i++) {
+		for (var j = 0; j < 40; j++) {
+			if(mapa[i][j] == turaGracza+3) iloscTerenu++;
+		}
+	}
+	
+	gracz[turaGracza].surowce.teren = iloscTerenu;
+	console.log(iloscTerenu);
+	
+	aktualizujSurowce();
 }
 
 
@@ -206,13 +221,15 @@ var ruszJednostka = function(obiekt) {
 			mapa[listaDoZajecia[0].x][listaDoZajecia[0].y] = indexInGracz(rod)+3;
 			listaDoZajecia.shift();
 		}
-
+		
 	oddzialAtk = [pos.x,pos.y];
 	if (obecneJednostki(mapaDzicy[pos.x][pos.y])) {
 		oddzialDef = gracz[turaGracza].oddzialy[oddzialKlikniety.id];
 		oknoWalki = window.open("Walka/index.html", "_blank", "toolbar=no, scrollbars=no, resizable=no, top=100, left=100, width=1020, height=680", "walka", "");
 	}
 	oddzialKlikniety = null;
+	
+	aktualizujSurowce();
 };
 
 
@@ -335,6 +352,7 @@ $(document).ready(function() {
 		}
 		if (oknoWalki && oknoWalki.closed) {
 			window.parent.document.getElementById("container").style.visibility = "visible";
+			aktualizujSurowce();
 		}
 	});
 
