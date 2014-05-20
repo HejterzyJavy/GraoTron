@@ -24,6 +24,8 @@ function add() {
 function refresh() {
    var text = "Do konca tury  " + min + " : " + sek;
    var text2 = "Do konca tury  " + min + " : 0" + sek;
+   var text3 = "Tura " + turaGlowna;
+   document.getElementById("belkaTura").innerHTML = text3;
    if (sek<10) 
    		document.getElementById("belkaCzas").innerHTML = text2;
    else
