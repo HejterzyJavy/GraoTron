@@ -137,7 +137,6 @@ function aktualizujSurowce(){
 	$("#teren p").html(gracz[turaGracza].surowce.teren);
 }
 
-
 function nowaTura(){
 		var iloscTerenu =0;
 	for (var i = 0; i < 40; i++) {
