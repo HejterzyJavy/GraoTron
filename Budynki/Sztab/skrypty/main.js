@@ -35,34 +35,41 @@ $(document).ready(function() {
       	id = ui.draggable.attr( "id").replace(/[A-Za-z$-]/g, ""); // pobiera id
       	pozycjaW = $(this).attr( "id").replace(/[A-Za-z$-]/g, "");
       	ileMax = ui.draggable.find(".dolPola").find("p").html();
-      	
-			spinner = $("#spinner").spinner({
+      	$("#amount").html(ileMax);
+		
+			slider = $("#slider").slider({
+				range : "min",
 				min : 0,
-				max : ileMax
+				max : ileMax,
+				value : 0,
+				slide : function(event, ui) {
+					$("#amount").html(ui.value);
+				}
 			});
-			spinner.spinner("value", ileMax);
-			//ustawia wart poczatkowa spinnera
+			
+
+			slider.slider("value", ileMax);
+			//ustawia wart poczatkowa slidera
 			var pole = $(this); 
 
 			$("#przyciski").dialog({
 				modal : true,
-				buttons : {
-					
-						
+				title: "Wybierz ilosc" ,
+				buttons : {				
 					Ok : function() {
-						jednostkiGracza[id] = ileMax - spinner.spinner("value");
-						if (spinner.spinner("value") > 0) {
+						jednostkiGracza[id] = ileMax - slider.slider("value");
+						if (slider.slider("value") > 0) {
 							pole.find("img").attr('src', ui.draggable.find("img").attr('src'));
 							tablicaOddzialu[pozycjaW] = new Array(2);
 							tablicaOddzialu[pozycjaW][0] = id; // ID
-							tablicaOddzialu[pozycjaW][1] = spinner.spinner("value");// ILOSC
+							tablicaOddzialu[pozycjaW][1] = slider.slider("value");// ILOSC
 							console.log(tablicaOddzialu);
 						}// Kopiowanie elementu przeciaganego
 						
 						$("#pole" + id + " .dolPola p").html(jednostkiGracza[id]);
 						$("#fs" + pozycjaW + " .ile p").html(tablicaOddzialu[pozycjaW][1]);
 						
-						spinner.spinner("value", 0);
+						slider.slider("value", 0);
 						$(this).dialog("close");
 					}, 
 
@@ -76,8 +83,8 @@ $(document).ready(function() {
       }
     });
     
-    var spinner = $( "#spinner" ).spinner({min: 0, max: 10});
-    spinner.spinner( "enable" );
+    var slider = $( "#slider" ).slider({min: 0, max: 10});
+    slider.slider( "enable" );
     
 
 
