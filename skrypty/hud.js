@@ -8,16 +8,12 @@ function updateListyOddzialow() {
 		lista += wiersz;
 	};
 	$("#listaOddzialow").html(lista);
-	var tid= gracz[turaGracza].oddzialy.length-1;
-		$('#odd'+tid).click(function() {
+	$(".odd").click(function() {
+			tid = $(this).attr('id').replace(/[A-Za-z$-]/g, "");
 			var pos = isoH.pos2px(gracz[turaGracza].oddzialy[tid].x-2, gracz[turaGracza].oddzialy[tid].y-3);
 			isoH.centerAt(pos.left,pos.top);
-			console.log(pos);
 		});
 	
-
-	
-
 };
 
 
