@@ -7,17 +7,14 @@ function updateListyOddzialow() {
 		var wiersz = '<p class="odd" id="odd' + i + '"> ' + gracz[turaGracza].oddzialy[i].nazwa + ' </p>';
 		lista += wiersz;
 	};
-	
 	$("#listaOddzialow").html(lista);
-	console.log("dl:"+gracz[turaGracza].oddzialy.length);
-	for (var k = 0; k < gracz[turaGracza].oddzialy.length; k++) {
-		$('#odd'+k).click(function() {
-			console.log(k-1);
-			var pos = isoH.pos2px(gracz[turaGracza].oddzialy[k-1].x-2, gracz[turaGracza].oddzialy[k-1].y-3);
+	var tid= gracz[turaGracza].oddzialy.length-1;
+		$('#odd'+tid).click(function() {
+			var pos = isoH.pos2px(gracz[turaGracza].oddzialy[tid].x-2, gracz[turaGracza].oddzialy[tid].y-3);
 			isoH.centerAt(pos.left,pos.top);
 			console.log(pos);
 		});
-	}
+	
 
 	
 
