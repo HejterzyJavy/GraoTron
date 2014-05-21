@@ -222,6 +222,8 @@ var ruszJednostka = function(obiekt) {
 		}
 		
 	oddzialAtk = [pos.x,pos.y];
+	gracz[turaGracza].oddzialy[oddzialKlikniety.id].x =pos.x;
+	gracz[turaGracza].oddzialy[oddzialKlikniety.id].y =pos.y;
 	if (obecneJednostki(mapaDzicy[pos.x][pos.y])) {
 		oddzialDef = gracz[turaGracza].oddzialy[oddzialKlikniety.id];
 		oknoWalki = window.open("Walka/index.html", "_blank", "toolbar=no, scrollbars=no, resizable=no, top=100, left=100, width=1020, height=680", "walka", "");

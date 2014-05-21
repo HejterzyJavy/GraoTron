@@ -4,6 +4,7 @@ var jednostkaId = 0;
 $(document).ready(function() {
 	var turaGracza =  window.opener.turaGracza;
 	jednostkiGracza =  window.opener.gracz[turaGracza].zamek.jednostki;
+	
 	console.log(jednostkiGracza);
 	
 	for(var i=0;i<jednostkiGracza.length;i++){
@@ -125,6 +126,7 @@ $(document).ready(function() {
         event.preventDefault();
         console.log(tablicaOddzialu);
         window.opener.gracz[turaGracza].addOddzial(nazwaOddzialu,tablicaOddzialu);
+        window.opener.updateListyOddzialow();
       });
 
 
