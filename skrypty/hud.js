@@ -2,17 +2,25 @@ var oknoKoszar = null;
 var oknoSztabu = null;
 var oknoRatusz = null;
 function updateListyOddzialow() {
-	var lista = "";
-	for (var i = 0; i < gracz[turaGracza].oddzialy.length; i++) {
-		var wiersz = '<p class="odd" id="odd' + i + '"> ' + gracz[turaGracza].oddzialy[i].nazwa + ' </p>';
-		lista += wiersz;
-	};
-	$("#listaOddzialow").html(lista);
+	var iloscOddzialow =  gracz[turaGracza].oddzialy.length-1;
+	console.log(iloscOddzialow);
+	var wiersz = '<p class="odd" id="odd' + iloscOddzialow + '"> ' + gracz[turaGracza].oddzialy[iloscOddzialow].nazwa + ' </p>';
+	$("#listaOddzialow").append(wiersz);
 	$(".odd").click(function() {
 			tid = $(this).attr('id').replace(/[A-Za-z$-]/g, "");
 			var pos = isoH.pos2px(gracz[turaGracza].oddzialy[tid].x-2, gracz[turaGracza].oddzialy[tid].y-3);
 			isoH.centerAt(pos.left,pos.top);
 		});
+
+	$(".odd").mouseenter(function() {
+		$(this).animate({ color: "#E8C23B" });
+	}); 
+	
+	$(".odd").mouseleave(function() {
+		$(this).animate({ color: "#D8D8C0" });
+	}); 
+	
+
 	
 };
 
