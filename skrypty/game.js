@@ -121,9 +121,11 @@ var oddzialKlikniety = null;
 var mapaTest= new Array();
 var mapa = [];
 var mapaDzicy;
-var oknoWalki;
+var oknoWalki = null;
 var gracz = [];
 var turaGracza = 0;
+var turaGlowna = 1;
+var oknoCzyZamkniete = 1;
 
 var oddzialAtk = new Array(6);
 var oddzialDef = new Array(6);
@@ -225,6 +227,7 @@ var ruszJednostka = function(obiekt) {
 	if (obecneJednostki(mapaDzicy[pos.x][pos.y])) {
 		oddzialDef = gracz[turaGracza].oddzialy[oddzialKlikniety.id];
 		oknoWalki = window.open("Walka/index.html", "_blank", "toolbar=no, scrollbars=no, resizable=no, top=100, left=100, width=1020, height=680", "walka", "");
+		oknoCzyZamkniete = 0;
 	}
 	oddzialKlikniety = null;
 	

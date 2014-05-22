@@ -2,38 +2,53 @@
  * @author w4nted
  */
 
-var turaGracza = 0;
-var turaGlowna = 1;
 
 function add() {
-   if ( sek == 0 ) {
-      sek = 60;
-      min--;
-      if ( min == 0 && sek == 0) {
-         turaGracza++;
-         if (turaGracza == 4) {
-         	turaGlowna++;
-         	turaGracza=0;
-         }
-      }
-   }
-   sek--; 
-   refresh(); 
+	//if (oknoCzyZamkniete==1) {
+	//if (oknoWalki.closed) {
+	   	if (sek == 0) {
+	   		turaGracza++;
+	   		alert("Koniec tury gracza");
+	        if (turaGracza == 4) {
+	         	turaGlowna++;
+	         	turaGracza=0;
+	         	sek = 60;
+	      	}
+	      	sek = 60;
+	   	}
+   		sek--; 
+   		refresh(); 
+   //}
 }
 
 function refresh() {
-   var text = "Do konca tury  " + min + " : " + sek;
-   var text2 = "Do konca tury  " + min + " : 0" + sek;
-   var text3 = "Tura " + turaGlowna;
-   document.getElementById("belkaTura").innerHTML = text3;
+   var textTura = "Do konca tury  " + sek;
+   var textTura2 = "<font color=\"red\">Do konca tury  0" + sek + "</font>";
+   var text ="";
+   switch (turaGracza) {
+   	case 0: 
+   		text1 = "baratheon";
+   		break;
+   	case 1: 
+   		text1 = "lannister";
+   		break;
+   	case 2: 
+   		text1 = "stark";
+   		break;
+   	case 3: 
+   		text1 = "targaryen";
+   		break;
+   }
+   document.getElementById("belkaTura").innerHTML = "Tura " + turaGlowna + " - " + text1;
+   $("#miniM").css("background-image", "url(img/herby/"+text1+".png)"); 
+ 
    if (sek<10) 
-   		document.getElementById("belkaCzas").innerHTML = text2;
+   		document.getElementById("belkaCzas").innerHTML = textTura2;
    else
-   		document.getElementById("belkaCzas").innerHTML = text;
+   		document.getElementById("belkaCzas").innerHTML = textTura;
 }
 
-var min, sek;
-min = 2;
-sek = 0;
+var sek = 60;
 setInterval( "add()", 1000 );
+
 add();
