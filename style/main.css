@@ -225,3 +225,10 @@ canvas {
 #pole13{
 	background-image: url("../img/ikony/duze.png");
 }
+
+#listaOddzialow{
+	width:180px;
+	height: 230px;
+	margin-left: 10px;
+	margin-top:10px;
+}

@@ -231,6 +231,7 @@ $(document).ready(function() {
 					oddzial_2[broniaca].ilosc -= zabiteJednostki;
 					listaStratObr.push({nazwa:oddzial_2[broniaca].nazwa, ilosc: zabiteJednostki});
 					oddzialDef.jednostki[broniaca].ilosc = oddzial_2[broniaca].ilosc;
+					$("#prawa_" + broniaca).effect( "shake" );
 					if(oddzial_2[broniaca].ilosc <= 0) $("#prawa_" + broniaca).hide( "fast" );
 					$("#prawa_" + broniaca).effect("shake");
 					$("#srodek").html("Gracz " + turaGracza + " zadal: " + zadaneObrazenia + " obrazen <br> Zabijajac: " + zabiteJednostki + " jednostki");
@@ -291,7 +292,9 @@ $(document).ready(function() {
 					atak[broniaca][1] = oddzial_1[broniaca].ilosc;
 					listaStratAtk.push({nazwa:oddzial_1[broniaca].nazwa, ilosc: zabiteJednostki});
 					if(oddzial_1[broniaca].ilosc <= 0) $("#lewa_" + broniaca).hide( "fast" );
+
 					$("#lewa_" + broniaca).effect("shake");
+
 					$("#srodek").html("Gracz " + turaGracza + " zadal: " + zadaneObrazenia + " obrazen <br> Zabijajac: " + zabiteJednostki + " jednostki");
 					turaGracza = 1;
 					console.log("TURA:" + turaGracza);

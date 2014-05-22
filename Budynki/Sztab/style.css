@@ -247,5 +247,17 @@ input[type="text"]:focus{
 	border: 1px solid #ed1c24;
 	outline: none;
 }
+#amount{
+	width:20px;
+	float:left;
+}
 
+#slider{
+	margin-left: 25px;
+	width: 200px;
+	margin-top:45px;
+}
 
+#opis{
+	float:left; 
+}
