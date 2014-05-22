@@ -87,7 +87,7 @@ var Gracz = function(imieGracza, rodGracza) {
 function rysujOddzial(idGracza) {
 	var j = gracz[idGracza].oddzialy.length - 1;	//id ost elementu
 
-	var rycerz = Crafty.e("2D, Canvas, rycerz, Mouse, Tween, rod_" + gracz[idGracza].rod).areaMap([0, 38], [15, 23], [48, 23], [62, 38], [48, 50], [15, 50]).bind("Click", function(e) {
+	var rycerz = Crafty.e("2D, Canvas, rycerz"+idGracza+", Mouse, Tween, rod_" + gracz[idGracza].rod).areaMap([0, 38], [15, 23], [48, 23], [62, 38], [48, 50], [15, 50]).bind("Click", function(e) {
 		if (oddzialKlikniety) {
 
 		} else {
@@ -250,7 +250,10 @@ $(document).ready(function() {
 		castle : [7, 0, 1, 1],
 		drzewa : [8, 0, 1, 1],
 		kopalniaZlota : [0, 2, 1, 1],
-		rycerz:[9,0,1,1],
+		rycerz0:[9,0,1,1],
+		rycerz2:[10,0,1,1],
+		rycerz3:[11,0,1,1],
+		rycerz4:[12,0,1,1],
 		podswietl:[1,2,1,1]
 
 	});
