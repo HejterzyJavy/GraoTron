@@ -147,10 +147,14 @@ function nowaTura(){
 		}
 	}
 	
-	gracz[turaGracza].surowce.teren = iloscTerenu;
-	console.log(iloscTerenu);
-	
-	aktualizujSurowce();
+	gracz[turaGracza].surowce.teren = iloscTerenu; // aktualizacja terenu	
+	aktualizujSurowce(); // aktualizacja Surowcow
+	$("#ntm_nazwa").html("Tura gracza: "+gracz[turaGracza].imie);
+	$("#nowaTuraModal").dialog({
+				height : 140,
+				modal : true,
+				title: "Nowa tura"
+			});
 }
 
 
@@ -254,9 +258,9 @@ $(document).ready(function() {
 		drzewa : [8, 0, 1, 1],
 		kopalniaZlota : [0, 2, 1, 1],
 		rycerz0:[9,0,1,1],
-		rycerz2:[10,0,1,1],
-		rycerz3:[11,0,1,1],
-		rycerz4:[12,0,1,1],
+		rycerz1:[10,0,1,1],
+		rycerz2:[11,0,1,1],
+		rycerz3:[12,0,1,1],
 		podswietl:[1,2,1,1]
 
 	});

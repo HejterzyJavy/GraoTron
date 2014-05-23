@@ -1,6 +1,27 @@
 var tablicaOddzialu =  new Array(10);
 var jednostkaId = 0;
 
+function oddzialPusty(){
+	for(var i=0;i<tablicaOddzialu.length;i++)
+		if(tablicaOddzialu[i] != undefined && tablicaOddzialu[i][1]>0) {
+			$("#err1").hide();
+			return false;
+		}
+	$("#err1").show();
+	return true;
+};
+
+function nazwaPusta(nazwa){
+	console.log(nazwa);
+	if(nazwa != "" ){
+		$("#err0").hide();
+		 return false;
+		}
+	$("#err0").show(); 
+	return true;
+	
+}
+
 $(document).ready(function() {
 	var turaGracza =  window.opener.turaGracza;
 	jednostkiGracza =  window.opener.gracz[turaGracza].zamek.jednostki;
@@ -119,14 +140,33 @@ $(document).ready(function() {
 
     $( "#formacjaSiatka" ).disableSelection();
     
- 	console.log($("#nazwaOddzialu"));
  	$("#akceptuj").button()
       .click(function( event ) {
       	var nazwaOddzialu =$("#nazwaOddzialu").val();
+      	
+		if (nazwaPusta(nazwaOddzialu) || oddzialPusty())
+			$("#dialog-modal").dialog({
+				height : 140,
+				modal : true
+			});
+		else{
+			$("#correctDialog").dialog({
+				height : 280,
+				modal : true,
+			 close: function( event, ui ) {
+			 	window.opener.gracz[turaGracza].addOddzial(nazwaOddzialu,tablicaOddzialu);
+      		    window.opener.updateListyOddzialow();
+			 	window.close();
+			 }
+			});
+			
+			  
+       
+			
+		};
+
         event.preventDefault();
-        console.log(tablicaOddzialu);
-        window.opener.gracz[turaGracza].addOddzial(nazwaOddzialu,tablicaOddzialu);
-        window.opener.updateListyOddzialow();
+      
       });
 
 

@@ -8,7 +8,7 @@ function add() {
 	//if (oknoWalki.closed) {
 	   	if (sek == 0) {
 	   		turaGracza++;
-	   		alert("Koniec tury gracza");
+	   		nowaTura();
 	        if (turaGracza == 4) {
 	         	turaGlowna++;
 	         	turaGracza=0;
@@ -47,6 +47,7 @@ function refresh() {
    else
    		document.getElementById("belkaCzas").innerHTML = textTura;
 }
+
 
 var sek = 60;
 setInterval( "add()", 1000 );

@@ -261,3 +261,11 @@ input[type="text"]:focus{
 #opis{
 	float:left; 
 }
+
+#dialog-modal,#correctDialog{
+	display:none;
+}
+
+#err0, #err1{
+	display:none;
+}
