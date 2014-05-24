@@ -18,7 +18,7 @@ function checkIsFree(obiekt){
 		}
 	}
 	return true;
-};
+}
 
 
 function wylosujPozycjeNowegoOddzialu(pozycja) {
@@ -29,9 +29,9 @@ function wylosujPozycjeNowegoOddzialu(pozycja) {
 			obiektZwracany = {x:tablica[i][0],y:tablica[i][1]};
 			break;
 		}
-	};
+	}
 	return obiektZwracany;
-};
+}
 
 
 //GLOWNY OBIEKT GRACZA
@@ -52,6 +52,12 @@ var Gracz = function(imieGracza, rodGracza) {
 			y:0,
 			jednostki : []
 		},
+        przychod:{
+            zloto : 10,
+            zelazo : 10,
+            drzewo : 10,
+            ludzie : 10
+        },
 		addOddzial : function(nazwaOddzialu, tabJednostek) {
 			var tablica = [];
 			var pozycja = wylosujPozycjeNowegoOddzialu(this.zamek);
@@ -78,7 +84,7 @@ var Gracz = function(imieGracza, rodGracza) {
 			
 		}
 	};
-	for(var i=0;i<jednostka.length;i++) jednostki : obj.zamek.jednostki.push(0);
+	for(var i=0;i<jednostka.length;i++) obj.zamek.jednostki.push(0);
 	console.log(obj);
 	return obj;
 };
@@ -87,8 +93,8 @@ var Gracz = function(imieGracza, rodGracza) {
 function rysujOddzial(idGracza) {
 	var j = gracz[idGracza].oddzialy.length - 1;	//id ost elementu
 
-	var rycerz = Crafty.e("2D, Canvas, rycerz"+idGracza+", Mouse, Tween, rod_" + gracz[idGracza].rod).areaMap([0, 38], [15, 23], [48, 23], [62, 38], [48, 50], [15, 50]).bind("Click", function(e) {
-		if (oddzialKlikniety) {
+var rycerz = Crafty.e("2D, Canvas, rycerz" + idGracza + ", Mouse, Tween, rod_" + gracz[idGracza].rod).areaMap([0, 38], [15, 23], [48, 23], [62, 38], [48, 50], [15, 50]).bind("Click", function () {
+        if (oddzialKlikniety) {
 
 		} else {
 			var pos = isoH.px2pos(this.x, this.y);
@@ -110,7 +116,7 @@ function rysujOddzial(idGracza) {
 
 	isoH.place(rycerz, gracz[idGracza].oddzialy[j].x, gracz[idGracza].oddzialy[j].y, 5);
 
-};
+}
 
 
 var isoH;
@@ -118,7 +124,7 @@ var podswietlenie ;
 var podswietlenieTab = [];
 var mozliwyRuchTab = [];
 var oddzialKlikniety = null;
-var mapaTest= new Array();
+var mapaTest= [];
 var mapa = [];
 var mapaDzicy;
 var oknoWalki = null;
@@ -132,11 +138,11 @@ var oddzialDef = new Array(6);
 
 
 function aktualizujSurowce(){
-	$("#zloto p").html(gracz[turaGracza].surowce.zloto);
-	$("#zelazo p").html(gracz[turaGracza].surowce.zelazo);
-	$("#drewno p").html(gracz[turaGracza].surowce.drzewo);
-	$("#ludzie p").html(gracz[turaGracza].surowce.ludzie);
-	$("#teren p").html(gracz[turaGracza].surowce.teren);
+	$("#zloto").find("p").html(gracz[turaGracza].surowce.zloto);
+	$("#zelazo").find("p").html(gracz[turaGracza].surowce.zelazo);
+	$("#drewno").find("p").html(gracz[turaGracza].surowce.drzewo);
+	$("#ludzie").find("p").html(gracz[turaGracza].surowce.ludzie);
+	$("#teren").find("p").html(gracz[turaGracza].surowce.teren);
 }
 
 function nowaTura(){
@@ -151,10 +157,14 @@ function nowaTura(){
 	aktualizujSurowce(); // aktualizacja Surowcow
 	$("#ntm_nazwa").html("Tura gracza: "+gracz[turaGracza].imie);
 	$("#nowaTuraModal").dialog({
-				height : 140,
+				height : 350,
 				modal : true,
 				title: "Nowa tura"
 			});
+    $("#przychod_zlota").append(gracz[turaGracza].przychod.zloto);
+    $("#przychod_drewno").append(gracz[turaGracza].przychod.drzewo);
+    $("#przychod_zelaza").append(gracz[turaGracza].przychod.zelazo);
+    $("#przychod_ludzi").append(gracz[turaGracza].przychod.ludzie);
 }
 
 
@@ -181,8 +191,8 @@ function kopiujMape(stara,nowa){
 function ruchMozliwy(x,y){
 	var pos = isoH.px2pos(x,y);
 	for (var i = 0; i < mozliwyRuchTab.length; i++){ 
-		a = new Crafty.math.Vector2D(mozliwyRuchTab[i][0],mozliwyRuchTab[i][1]);
-		b = new Crafty.math.Vector2D(pos.x,pos.y);
+		var a = new Crafty.math.Vector2D(mozliwyRuchTab[i][0],mozliwyRuchTab[i][1]);
+		var b = new Crafty.math.Vector2D(pos.x,pos.y);
 		if(a.equals(b)){
 			return true;
 		}
@@ -265,8 +275,7 @@ $(document).ready(function() {
 
 	});
 
-	
-	var z = 0;
+
 	mapa = generate(40, 700, 70);
 	mapaDzicy = losujDzikich(mapa);
 	mapaTest = kopiujTablice(mapa,mapaTest);
@@ -286,47 +295,46 @@ $(document).ready(function() {
 	}
 	
 	
-	for (var i = 40; i > 0; i--) {
-		for (var y = 0; y < 40; y++) {
-			var which = mapa[i][y];
-			if (!which)
-				which = 0;
-			var tile = Crafty.e("2D, Canvas, " + idToName(which) + ", Mouse").attr({
-				z : i + 1 * y + 1
-			}).areaMap([0, 38], [15, 23], [48, 23], [62, 38], [48, 50], [15, 50])
-			.bind("MouseDown", function(e) {
-				if (e.button>1) {
-					pos = isoH.px2pos(this.x,this.y);
-					console.log(isoH.px2pos(this.x,this.y));	
-					console.log(mapaDzicy[pos.x][pos.y]);			
-					}
-					
-				if (oddzialKlikniety) {	
-					for (var a = 0; a < podswietlenieTab.length; a++)		
-						podswietlenieTab[a].destroy();	
-					if(ruchMozliwy(this.x,this.y)){
-						ruszJednostka(this);
-					}
-					else oddzialKlikniety = null;
-				}
+	for (var i = 40; i > 0; i--) for (var y = 0; y < 40; y++) {
+        var which = mapa[i][y];
+        if (!which)
+            which = 0;
+        var tile = Crafty.e("2D, Canvas, " + idToName(which) + ", Mouse").attr({
+            z: i +  y + 1
+        }).areaMap([0, 38], [15, 23], [48, 23], [62, 38], [48, 50], [15, 50])
+            .bind("MouseDown",function (e) {
+                var pos;
+                if (e.button > 1) {
+                    pos = isoH.px2pos(this.x, this.y);
+                    console.log(isoH.px2pos(this.x, this.y));
+                    console.log(mapaDzicy[pos.x][pos.y]);
+                }
 
-			}).bind("MouseOver", function() {
-				for (var m = 0; m < spriteArray.length; m++)
-					if (this.has(spriteArray[m]))
-						this.sprite(m, 1);
-			}).bind("MouseOut", function() {
-				for (var m = 0; m < spriteArray.length; m++)
-					if (this.has(spriteArray[m]))
-						this.sprite(m, 0);
-			});
-			isoH.place(tile, i, y, 1);
-			if (which == 1)
-				isoH.place(Crafty.e("2D, Canvas, drzewa"), i, y, 2);
-			if (which == 2) {
-				isoH.place(Crafty.e("2D, Canvas, kopalniaZlota"), i, y, 2);
-			}
-		}
-	}
+                if (oddzialKlikniety) {
+                    for (var a = 0; a < podswietlenieTab.length; a++)
+                        podswietlenieTab[a].destroy();
+                    if (ruchMozliwy(this.x, this.y)) {
+                        ruszJednostka(this);
+                    }
+                    else oddzialKlikniety = null;
+                }
+
+            }).bind("MouseOver",function () {
+                for (var m = 0; m < spriteArray.length; m++)
+                    if (this.has(spriteArray[m]))
+                        this.sprite(m, 1);
+            }).bind("MouseOut", function () {
+                for (var m = 0; m < spriteArray.length; m++)
+                    if (this.has(spriteArray[m]))
+                        this.sprite(m, 0);
+            });
+        isoH.place(tile, i, y, 1);
+        if (which == 1)
+            isoH.place(Crafty.e("2D, Canvas, drzewa"), i, y, 2);
+        if (which == 2) {
+            isoH.place(Crafty.e("2D, Canvas, kopalniaZlota"), i, y, 2);
+        }
+    }
 	//Rysowanie zamków
 	for (var i = 0; i < pozZamku.length; i++) {
 		isoH.place(Crafty.e("2D, Canvas, castle"), pozZamku[i][0], pozZamku[i][1], 2);
@@ -348,9 +356,8 @@ $(document).ready(function() {
 			};
 			Crafty.viewport.x -= dx;
 			Crafty.viewport.y -= dy;
-		};
-
-		Crafty.addEvent(this, Crafty.stage.elem, "mousemove", scroll);
+        }
+        Crafty.addEvent(this, Crafty.stage.elem, "mousemove", scroll);
 		Crafty.addEvent(this, Crafty.stage.elem, "mouseup", function() {
 		Crafty.removeEvent(this, Crafty.stage.elem, "mousemove", scroll);
 		});
