@@ -1,6 +1,5 @@
 var oknoKoszar = null;
 var oknoSztabu = null;
-var oknoRatusz = null;
 function updateListyOddzialow() {
 	var iloscOddzialow =  gracz[turaGracza].oddzialy.length-1;
 	console.log(iloscOddzialow);
@@ -28,6 +27,29 @@ function updateListyOddzialow() {
 
 
 $(document).ready(function() {
+    //Sciemnia te nieobslugiwane
+    $('#pole1').css("opacity", "0.5");
+    $('#pole2').css("opacity", "0.5");
+    $('#pole3').css("opacity", "0.5");
+    $('#pole4').css("opacity", "0.5");
+    $('#pole5').css("opacity", "0.5");
+  //  $('#pole6').css("opacity", "0.5");
+    $('#pole7').css("opacity", "0.5");
+    $('#pole8').css("opacity", "0.5");
+    $('#pole9').css("opacity", "0.5");
+  //  $('#pole10').css("opacity", "0.5");
+  //  $('#pole11').css("opacity", "0.5");
+    $('#pole12').css("opacity", "0.5");
+    $('#pole13').css("opacity", "0.5");
+
+
+
+
+
+
+
+
+
 	$('.poleSiatki,#pole13').mouseenter(function() {
 		$(this).css("background-color", "#660000");
 	});
@@ -62,7 +84,11 @@ $(document).ready(function() {
 		if(oknoKoszar && oknoKoszar.closed) window.parent.document.getElementById("container").style.visibility="visible";
 		if(oknoSztabu && oknoSztabu.closed)  window.parent.document.getElementById("container").style.visibility="visible";
 	});
-	
+
+
+
+     $(".poleSiatki").tooltip();
+
 
 
 });

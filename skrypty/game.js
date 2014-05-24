@@ -45,7 +45,9 @@ var Gracz = function(imieGracza, rodGracza) {
 			zelazo : 10,
 			drzewo : 10,
 			ludzie : 10,
-			teren : 5
+			teren : 5,
+            kopalnie:0,
+            lasy:0
 		},
 		zamek:{
 			x:0,
@@ -161,10 +163,10 @@ function nowaTura(){
 				modal : true,
 				title: "Nowa tura"
 			});
-    $("#przychod_zlota").append(gracz[turaGracza].przychod.zloto);
-    $("#przychod_drewno").append(gracz[turaGracza].przychod.drzewo);
-    $("#przychod_zelaza").append(gracz[turaGracza].przychod.zelazo);
-    $("#przychod_ludzi").append(gracz[turaGracza].przychod.ludzie);
+    $("#przychod_zlota").html(gracz[turaGracza].przychod.zloto);
+    $("#przychod_drewna").html(gracz[turaGracza].przychod.drzewo);
+    $("#przychod_zelaza").html(gracz[turaGracza].przychod.zelazo);
+    $("#przychod_ludzi").html(gracz[turaGracza].przychod.ludzie);
 }
 
 

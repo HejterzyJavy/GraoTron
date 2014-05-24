@@ -3,10 +3,10 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>Gra o Tron</title>
-		<link rel=stylesheet href="css/blitzer/jquery-ui-1.10.4.custom.css" />
+		<link rel=stylesheet href="css/jQury_UI/custom-theme/jquery-ui-1.9.2.custom.min.css"/>
 		<link rel=stylesheet href="style/main.css" />
-		<script src="skrypty/jquery.js"></script>
-		<script src="skrypty/jquery-ui.js"></script>
+		<script src="skrypty/jQuery/jquery-1.8.3.js"></script>
+		<script src="skrypty/jQuery/jquery-ui-1.9.2.custom.min.js"></script>
 		<script src="skrypty/crafty.js"></script>
 		<script src="skrypty/Dane/jednostka.js"></script>
 		<script src="skrypty/game.js"></script>
@@ -25,10 +25,10 @@
 			<div id="nowaTuraModal">
 				<p id="ntm_nazwa"> Tura gracza: </p>
                 <h3>Przychod: </h3>
-                <p id="przychod_zlota"><img src="img/surowce/zloto.png"/></p>
-                <p id="przychod_zelaza"><img src="img/surowce/zelazo.png"/></p>
-                <p id="przychod_drewno"><img src="img/surowce/drewno.png"/></p>
-                <p id="przychod_ludzi"><img src="img/surowce/ludzie.png"/></p>
+                <p><img src="img/surowce/zloto.png"/><span id="przychod_zlota"></span> </p>
+                <p><img src="img/surowce/zelazo.png"/><span id="przychod_zelaza"></span> </p>
+                <p><img src="img/surowce/drewno.png"/><span id="przychod_drewna"></span> </p>
+                <p><img src="img/surowce/ludzie.png"/><span id="przychod_ludzi"></span> </p>
 			</div>
 			<div id="gora">
 				<div id="belkaSurowcow">
@@ -87,7 +87,7 @@
 							<div id="siatkaSrodek">
 								<div id="siatkaSrodekLewa">
 									<div class="poleSiatki" id="pole5"> </div>
-								<div class="poleSiatki" id="pole6"> </div>
+								<div class="poleSiatki" id="pole6" title="Budynki"> </div>
 								</div>
 								<div id="pole13"></div>
 								<div id="siatkaSrodekPrawa">
@@ -98,8 +98,8 @@
 							
 							<div id="siatkaDol">
 								<div class="poleSiatki" id="pole9"> </div>
-								<div class="poleSiatki" id="pole10"> </div>
-								<div class="poleSiatki" id="pole11"> </div>
+								<div class="poleSiatki" id="pole10" title="Koszary"> </div>
+								<div class="poleSiatki" id="pole11" title="Sztab"> </div>
 								<div class="poleSiatki" id="pole12"> </div>
 							</div>
 							
