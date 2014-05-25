@@ -1,7 +1,7 @@
 /**
  * @author w4nted
  */
-var czasRundy = 120;
+var czasRundy = 90;
 var sek = czasRundy;
 
 function add() {
@@ -22,9 +22,16 @@ function add() {
     //}
 }
 
+function ustawKolor(czas){
+    var wiersz;
+    wiersz = "<span style='"+
+        "color: rgb("+(100-(czas/5))+"%, "+(czas+10)+"%, 0%)'>"+
+        " Do konca tury:  " + czas + " sec</span>";
+    return wiersz;
+}
+
 function refresh() {
-    var textTura = "Do konca tury  " + sek;
-    var textTura2 = "<span style='color: red; >Do konca tury  0" + sek + "</span>";
+    var textTura = ustawKolor(sek);
     switch (turaGracza) {
         case 0:
             text1 = "baratheon";
@@ -42,9 +49,7 @@ function refresh() {
     document.getElementById("belkaTura").innerHTML = "Tura " + turaGlowna + " - " + text1;
     $("#miniM").css("background-image", "url(img/herby/" + text1 + ".png)");
 
-    if (sek < 10)
-        document.getElementById("belkaCzas").innerHTML = textTura2;
-    else
+
         document.getElementById("belkaCzas").innerHTML = textTura;
 }
 

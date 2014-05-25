@@ -180,6 +180,8 @@ function nowaTura(){
     //Centruje kamere na zamku
     var pos = isoH.pos2px(gracz[turaGracza].zamek.x-2, gracz[turaGracza].zamek.y-3);
     isoH.centerAt(pos.left,pos.top);
+
+    if(oknoWalki) oknoWalki.close();
 }
 
 
