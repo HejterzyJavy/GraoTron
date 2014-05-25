@@ -6,22 +6,18 @@ function updateListyOddzialow() {
 	console.log(iloscOddzialow);
 	var wiersz = '<p class="odd" id="odd' + iloscOddzialow + '"> ' + gracz[turaGracza].oddzialy[iloscOddzialow].nazwa + ' </p>';
 	$("#listaOddzialow").append(wiersz);
-	$(".odd").click(function() {
+    $(".odd").click(function () {
         var tid = $(this).attr('id').replace(/[A-Za-z$-]/g, "");
-		var pos = isoH.pos2px(gracz[turaGracza].oddzialy[tid].x-2, gracz[turaGracza].oddzialy[tid].y-3);
-			isoH.centerAt(pos.left,pos.top);
-		});
+        var pos = isoH.pos2px(gracz[turaGracza].oddzialy[tid].x - 2, gracz[turaGracza].oddzialy[tid].y - 3);
+        isoH.centerAt(pos.left, pos.top);
+    }).mouseenter(function () {
+            $(this).animate({ color: "#E8C23B" });
+    }).mouseleave(function () {
+            $(this).animate({ color: "#D8D8C0" });
+        });
 
-	$(".odd").mouseenter(function() {
-		$(this).animate({ color: "#E8C23B" });
-	}); 
-	
-	$(".odd").mouseleave(function() {
-		$(this).animate({ color: "#D8D8C0" });
-	}); 
 
-	
-};
+}
 
 
 $(document).ready(function() {
@@ -37,17 +33,17 @@ $(document).ready(function() {
     $('#pole9').css("opacity", "0.5");
   //  $('#pole10').css("opacity", "0.5");
   //  $('#pole11').css("opacity", "0.5");
-    $('#pole12').css("opacity", "0.5");
+  //  $('#pole12').css("opacity", "0.5");
   //  $('#pole13').css("opacity", "0.5");
 
 
-	$('.poleSiatki,#pole13').mouseenter(function() {
-		$(this).css("background-color", "#660000");
-	});
+    $('.poleSiatki,#pole13').mouseenter(function () {
+        $(this).css("background-color", "#660000");
+    }).mouseleave(function () {
+            $(this).css("background-color", "#554236");
+        });
 
-	$('.poleSiatki,#pole13').mouseleave(function() {
-		$(this).css("background-color", "#554236");
-	});
+
 
 	$('#pole6').click(function() {
 
@@ -67,6 +63,11 @@ $(document).ready(function() {
 		oknoSztabu = window.open("Budynki/Sztab/index.html", "_blank", "toolbar=no, scrollbars=no, resizable=no, top=100, left=100, width=1140, height=710", "sztab", "");
 
 	});
+
+    $('#pole12').click(function() {
+    sek=0;
+    nowaTura();
+    });
 
     $('#pole13').click(function() {
 
