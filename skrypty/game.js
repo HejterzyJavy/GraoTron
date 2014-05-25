@@ -9,6 +9,82 @@ var spriteArray = [
 "targaryen"];
 
 
+var isoH;
+var podswietlenie ;
+var podswietlenieTab = [];
+var mozliwyRuchTab = [];
+var oddzialKlikniety = null;
+var jednostkaAktywna = null;
+var mapaTest= [];
+var mapa = [];
+var mapaDzicy;
+var oknoWalki = null;
+var gracz = [];
+var turaGracza = 0;
+var turaGlowna = 1;
+var oknoCzyZamkniete = 1;
+
+var oddzialAtk = new Array(6);
+var oddzialDef = new Array(6);
+
+//GLOWNY OBIEKT GRACZA
+var Gracz = function(imieGracza, rodGracza) {
+    var obj = {
+        imie : imieGracza,
+        rod : rodGracza,
+        oddzialy : [],
+        surowce : {
+            zloto : 10,
+            zelazo : 10,
+            drzewo : 10,
+            ludzie : 10,
+            teren : 5,
+            kopalnie:0,
+            lasy:0
+        },
+        zamek:{
+            x:0,
+            y:0,
+            jednostki : []
+        },
+        przychod:{
+            zloto : 10,
+            zelazo : 10,
+            drzewo : 10,
+            ludzie : 10
+        },
+        addOddzial : function(nazwaOddzialu, tabJednostek) {
+            var tablica = [];
+            var pozycja = wylosujPozycjeNowegoOddzialu(this.zamek);
+            for (var i = 0; i < 7; i++) {
+                if(tabJednostek[i] != undefined)
+                    tablica.push({
+                        id : tabJednostek[i][0],
+                        ilosc : tabJednostek[i][1]
+                    });
+                else{
+                    tablica.push({
+                        id : 0,
+                        ilosc : 0
+                    });
+                }
+            }
+            this.oddzialy.push({
+                nazwa : nazwaOddzialu,
+                jednostki : tablica,
+                x : pozycja.x,
+                y : pozycja.y
+            });
+            rysujOddzial(turaGracza);
+
+        }
+    };
+    for(var i=0;i<jednostka.length;i++) obj.zamek.jednostki.push(0);
+    console.log(obj);
+    return obj;
+};
+
+
 
 function checkIsFree(obiekt){
 		//Sprawdza czy to miejsce jest puste
@@ -34,62 +110,7 @@ function wylosujPozycjeNowegoOddzialu(pozycja) {
 }
 
 
-//GLOWNY OBIEKT GRACZA
-var Gracz = function(imieGracza, rodGracza) {
-	var obj = {
-		imie : imieGracza,
-		rod : rodGracza,
-		oddzialy : [],
-		surowce : {
-			zloto : 10,
-			zelazo : 10,
-			drzewo : 10,
-			ludzie : 10,
-			teren : 5,
-            kopalnie:0,
-            lasy:0
-		},
-		zamek:{
-			x:0,
-			y:0,
-			jednostki : []
-		},
-        przychod:{
-            zloto : 10,
-            zelazo : 10,
-            drzewo : 10,
-            ludzie : 10
-        },
-		addOddzial : function(nazwaOddzialu, tabJednostek) {
-			var tablica = [];
-			var pozycja = wylosujPozycjeNowegoOddzialu(this.zamek);
-			for (var i = 0; i < 7; i++) {
-				if(tabJednostek[i] != undefined)
-				tablica.push({
-					id : tabJednostek[i][0],
-					ilosc : tabJednostek[i][1]
-				});
-				else{
-					tablica.push({
-					id : 0,
-					ilosc : 0
-				});
-				}
-			}
-			this.oddzialy.push({
-				nazwa : nazwaOddzialu,
-				jednostki : tablica,
-				x : pozycja.x,
-				y : pozycja.y
-			});
-			rysujOddzial(turaGracza);
-			
-		}
-	};
-	for(var i=0;i<jednostka.length;i++) obj.zamek.jednostki.push(0);
-	console.log(obj);
-	return obj;
-};
+
 
  
 function rysujOddzial(idGracza) {
@@ -107,6 +128,8 @@ var rycerz = Crafty.e("2D, Canvas, rycerz" + idGracza + ", Mouse, Tween, rod_" +
 				podswietlenieTab.push(podswietlenie);
 			}
 			oddzialKlikniety = this;
+            jednostkaAktywna = this;
+            console.log(jednostkaAktywna);
 			$("#miniM").css("background-image", "url(img/herby/" + Object.keys(oddzialKlikniety.get(0).__c)[6].slice(4) + ".png)");
 		}
 
@@ -121,22 +144,7 @@ var rycerz = Crafty.e("2D, Canvas, rycerz" + idGracza + ", Mouse, Tween, rod_" +
 }
 
 
-var isoH;
-var podswietlenie ;
-var podswietlenieTab = [];
-var mozliwyRuchTab = [];
-var oddzialKlikniety = null;
-var mapaTest= [];
-var mapa = [];
-var mapaDzicy;
-var oknoWalki = null;
-var gracz = [];
-var turaGracza = 0;
-var turaGlowna = 1;
-var oknoCzyZamkniete = 1;
 
-var oddzialAtk = new Array(6);
-var oddzialDef = new Array(6);
 
 
 function aktualizujSurowce(){
@@ -163,10 +171,15 @@ function nowaTura(){
 				modal : true,
 				title: "Nowa tura"
 			});
+
     $("#przychod_zlota").html(gracz[turaGracza].przychod.zloto);
     $("#przychod_drewna").html(gracz[turaGracza].przychod.drzewo);
     $("#przychod_zelaza").html(gracz[turaGracza].przychod.zelazo);
     $("#przychod_ludzi").html(gracz[turaGracza].przychod.ludzie);
+
+    //Centruje kamere na zamku
+    var pos = isoH.pos2px(gracz[turaGracza].zamek.x-2, gracz[turaGracza].zamek.y-3);
+    isoH.centerAt(pos.left,pos.top);
 }
 
 
@@ -230,8 +243,6 @@ var ruszJednostka = function(obiekt) {
 	mapa[pos.x][pos.y] = indexInGracz(rod)+3;
 	mapaTest = kopiujMape(mapa,mapaTest);
 	wypelnij(pos.x, pos.y, indexInGracz(rod)+3);
-	console.log("wielkosc:"+listaDoZajecia.length );
-	console.log(listaDoZajecia);
 
 		while (listaDoZajecia.length > 0) {
 			isoH.place(Crafty.e("2D, Canvas, "+rod), listaDoZajecia[0].x, listaDoZajecia[0].y, 1);
@@ -287,15 +298,13 @@ $(document).ready(function() {
 	gracz.push(new Gracz("Gardian","lannister"));
 	gracz.push(new Gracz("Przemek","stark"));
 	gracz.push(new Gracz("Wyczes","targaryen"));
-	
-	nowaTura();
-	
+
 	// PRZYPISUJE ZAMKI GRACZOM
 	for (var k = 0; k < pozZamku.length; k++) {
 		gracz[k].zamek.x=pozZamku[k][0];
 		gracz[k].zamek.y=pozZamku[k][1];
 	}
-	
+
 	
 	for (var i = 40; i > 0; i--) for (var y = 0; y < 40; y++) {
         var which = mapa[i][y];
@@ -375,5 +384,7 @@ $(document).ready(function() {
 			aktualizujSurowce();
 		}
 	});
+
+    nowaTura();
 
 });

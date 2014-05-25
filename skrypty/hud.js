@@ -1,13 +1,14 @@
 var oknoKoszar = null;
 var oknoSztabu = null;
+//TODO: Czyscic liste oddzialow
 function updateListyOddzialow() {
 	var iloscOddzialow =  gracz[turaGracza].oddzialy.length-1;
 	console.log(iloscOddzialow);
 	var wiersz = '<p class="odd" id="odd' + iloscOddzialow + '"> ' + gracz[turaGracza].oddzialy[iloscOddzialow].nazwa + ' </p>';
 	$("#listaOddzialow").append(wiersz);
 	$(".odd").click(function() {
-			tid = $(this).attr('id').replace(/[A-Za-z$-]/g, "");
-			var pos = isoH.pos2px(gracz[turaGracza].oddzialy[tid].x-2, gracz[turaGracza].oddzialy[tid].y-3);
+        var tid = $(this).attr('id').replace(/[A-Za-z$-]/g, "");
+		var pos = isoH.pos2px(gracz[turaGracza].oddzialy[tid].x-2, gracz[turaGracza].oddzialy[tid].y-3);
 			isoH.centerAt(pos.left,pos.top);
 		});
 
@@ -18,12 +19,9 @@ function updateListyOddzialow() {
 	$(".odd").mouseleave(function() {
 		$(this).animate({ color: "#D8D8C0" });
 	}); 
-	
 
 	
 };
-
-
 
 
 $(document).ready(function() {
@@ -40,14 +38,7 @@ $(document).ready(function() {
   //  $('#pole10').css("opacity", "0.5");
   //  $('#pole11').css("opacity", "0.5");
     $('#pole12').css("opacity", "0.5");
-    $('#pole13').css("opacity", "0.5");
-
-
-
-
-
-
-
+  //  $('#pole13').css("opacity", "0.5");
 
 
 	$('.poleSiatki,#pole13').mouseenter(function() {
@@ -76,6 +67,12 @@ $(document).ready(function() {
 		oknoSztabu = window.open("Budynki/Sztab/index.html", "_blank", "toolbar=no, scrollbars=no, resizable=no, top=100, left=100, width=1140, height=710", "sztab", "");
 
 	});
+
+    $('#pole13').click(function() {
+
+        var pos = isoH.pos2px(gracz[turaGracza].zamek.x-2, gracz[turaGracza].zamek.y-3);
+        isoH.centerAt(pos.left,pos.top);
+    });
 
 	$("body").mousemove(function() {
 		if (oknoKoszar && !oknoKoszar.closed) {
