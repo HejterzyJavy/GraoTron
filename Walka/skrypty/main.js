@@ -2,8 +2,9 @@ var broniaca;
 var oddzial_1 = new Array(6);
 var oddzial_2 = new Array(6);
 var listaStratObr = []; // Lista straconych jednostek obroncy 
-var listaStratAtk = []; 
+var listaStratAtk = [];
 
+var surowceGracza = window.opener.gracz[window.opener.turaGracza].surowce;
 
 function pokazDialog(tmp) {
 
@@ -84,7 +85,7 @@ $(document).ready(function() {
 	//TRZEBA POPRAWIC INDEKSY!!!
 
 
-    var surowceGracza = window.opener.gracz[window.opener.turaGracza].surowce;
+
 
     var dziki = window.opener.dziki;
 	oddzialAtk = window.opener.oddzialAtk;
