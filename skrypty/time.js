@@ -8,14 +8,13 @@ function add() {
     //if (oknoCzyZamkniete==1) {
     //if (oknoWalki.closed) {
     if (sek == 0) {
-        turaGracza++;
-        nowaTura();
+        ++turaGracza;
         if (turaGracza == 4) {
             turaGlowna++;
             turaGracza = 0;
-            sek = czasRundy;
         }
         sek = czasRundy;
+        nowaTura();
     }
     sek--;
     refresh();
@@ -31,26 +30,8 @@ function ustawKolor(czas){
 }
 
 function refresh() {
-    var textTura = ustawKolor(sek);
-    switch (turaGracza) {
-        case 0:
-            text1 = "baratheon";
-            break;
-        case 1:
-            text1 = "lannister";
-            break;
-        case 2:
-            text1 = "stark";
-            break;
-        case 3:
-            text1 = "targaryen";
-            break;
-    }
-    document.getElementById("belkaTura").innerHTML = "Tura " + turaGlowna + " - " + text1;
-    $("#miniM").css("background-image", "url(img/herby/" + text1 + ".png)");
-
-
-        document.getElementById("belkaCzas").innerHTML = textTura;
+    document.getElementById("belkaTura").innerHTML = "Tura " + turaGlowna + " - " + gracz[turaGracza].rod;
+    document.getElementById("belkaCzas").innerHTML = ustawKolor(sek);
 }
 
 

@@ -148,6 +148,7 @@ var rycerz = Crafty.e("2D, Canvas, rycerz" + idGracza + ", Mouse, Tween, rod_" +
 
 
 function aktualizujSurowce(){
+    console.log(turaGracza);
 	$("#zloto").find("p").html(gracz[turaGracza].surowce.zloto);
 	$("#zelazo").find("p").html(gracz[turaGracza].surowce.zelazo);
 	$("#drewno").find("p").html(gracz[turaGracza].surowce.drzewo);
@@ -162,6 +163,8 @@ function nowaTura(){
 			if(mapa[i][j] == turaGracza+3) iloscTerenu++;
 		}
 	}
+
+    $("#miniM").css("background-image", "url(img/herby/" + gracz[turaGracza].rod + ".png)");
 	
 	gracz[turaGracza].surowce.teren = iloscTerenu; // aktualizacja terenu	
 	aktualizujSurowce(); // aktualizacja Surowcow
