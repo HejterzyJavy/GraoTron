@@ -136,6 +136,7 @@ var rycerz = Crafty.e("2D, Canvas, rycerz" + idGracza + ", Mouse, Tween, rod_" +
 		id : j,
 		nazwa : gracz[idGracza].oddzialy[j].nazwa,
         idGracz : idGracza
+
 	});
 
 	isoH.place(rycerz, gracz[idGracza].oddzialy[j].x, gracz[idGracza].oddzialy[j].y, 5);
