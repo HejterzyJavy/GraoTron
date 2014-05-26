@@ -155,7 +155,7 @@ $(document).ready(function() {
 				modal : true,
 			 close: function( event, ui ) {
 			 	window.opener.gracz[turaGracza].addOddzial(nazwaOddzialu,tablicaOddzialu);
-      		    window.opener.updateListyOddzialow();
+      		    window.opener.updateListyOddzialow(window.opener.gracz[turaGracza].oddzialy.length-1);
 			 	window.close();
 			 }
 			});

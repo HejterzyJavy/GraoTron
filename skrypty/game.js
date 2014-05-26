@@ -142,13 +142,9 @@ var rycerz = Crafty.e("2D, Canvas, rycerz" + idGracza + ", Mouse, Tween, rod_" +
 	isoH.place(rycerz, gracz[idGracza].oddzialy[j].x, gracz[idGracza].oddzialy[j].y, 5);
 
 }
-
-
-
-
-
+//TODO:Nie aktualizuja sie poprawnie
 function aktualizujSurowce(){
-    console.log(turaGracza);
+    console.log(gracz[turaGracza].surowce);
 	$("#zloto").find("p").html(gracz[turaGracza].surowce.zloto);
 	$("#zelazo").find("p").html(gracz[turaGracza].surowce.zelazo);
 	$("#drewno").find("p").html(gracz[turaGracza].surowce.drzewo);
@@ -163,7 +159,8 @@ function nowaTura(){
 			if(mapa[i][j] == turaGracza+3) iloscTerenu++;
 		}
 	}
-
+    $("#listaOddzialow").html("");
+    for(i=0;i<gracz[turaGracza].oddzialy.length;i++) updateListyOddzialow(i);
     $("#miniM").css("background-image", "url(img/herby/" + gracz[turaGracza].rod + ".png)");
 	
 	gracz[turaGracza].surowce.teren = iloscTerenu; // aktualizacja terenu	
@@ -265,8 +262,7 @@ var ruszJednostka = function(obiekt) {
 		oknoCzyZamkniete = 0;
 	}
 	oddzialKlikniety = null;
-	
-	aktualizujSurowce();
+
 };
 
 
@@ -387,8 +383,8 @@ $(document).ready(function() {
 		}
 		if (oknoWalki && oknoWalki.closed) {
 			window.parent.document.getElementById("container").style.visibility = "visible";
-			aktualizujSurowce();
             czasStart();
+            aktualizujSurowce();
 		}
 	});
 

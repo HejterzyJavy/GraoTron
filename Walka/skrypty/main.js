@@ -7,8 +7,6 @@ var listaStratAtk = [];
 var surowceGracza = window.opener.gracz[window.opener.turaGracza].surowce;
 
 function pokazDialog(tmp) {
-
-
 	if (tmp == "wygrana") {
 		var tekst = "";
 		var wiersz = "";
@@ -25,7 +23,8 @@ function pokazDialog(tmp) {
 		}
 		wiersz = "<p> Zloto: " + zdobyteZloto + "</p>";
 		$("#zdobyte_tresc").html(wiersz);
-		surowceGracza.zloto += zdobyteZloto;
+        window.opener.gracz[window.opener.turaGracza].surowce.zloto += zdobyteZloto;
+
 	}
 
 	if (tmp == "przegrana") {
@@ -76,16 +75,15 @@ function sprawdzKoniecWalki(){
 		if(oddzial_1[i] != undefined)
 		if(oddzial_1[i].ilosc > 0)  { wygral = 0; break;}
 	}
-	if (wygral == 2) pokazDialog('wygrana');
-	
+	if (wygral == 2) {
+
+        pokazDialog('wygrana');
+    }
+
 	return wygral;
 }
 	
 $(document).ready(function() {
-	//TRZEBA POPRAWIC INDEKSY!!!
-
-
-
 
     var dziki = window.opener.dziki;
 	oddzialAtk = window.opener.oddzialAtk;

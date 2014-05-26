@@ -1,10 +1,9 @@
 var oknoKoszar = null;
 var oknoSztabu = null;
+
 //TODO: Czyscic liste oddzialow
-function updateListyOddzialow() {
-	var iloscOddzialow =  gracz[turaGracza].oddzialy.length-1;
-	console.log(iloscOddzialow);
-	var wiersz = '<p class="odd" id="odd' + iloscOddzialow + '"> ' + gracz[turaGracza].oddzialy[iloscOddzialow].nazwa + ' </p>';
+function updateListyOddzialow(ktoryOddzial){
+	var wiersz = '<p class="odd" id="odd' + ktoryOddzial + '"> ' + gracz[turaGracza].oddzialy[ktoryOddzial].nazwa + ' </p>';
 	$("#listaOddzialow").append(wiersz);
     $(".odd").click(function () {
         var tid = $(this).attr('id').replace(/[A-Za-z$-]/g, "");
@@ -15,8 +14,6 @@ function updateListyOddzialow() {
     }).mouseleave(function () {
             $(this).animate({ color: "#D8D8C0" });
         });
-
-
 }
 
 
