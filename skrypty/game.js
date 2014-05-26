@@ -116,7 +116,8 @@ function rysujOddzial(idGracza) {
 var rycerz = Crafty.e("2D, Canvas, rycerz" + idGracza + ", Mouse, Tween, rod_" + gracz[idGracza].rod).areaMap([0, 38], [15, 23], [48, 23], [62, 38], [48, 50], [15, 50]).bind("Click", function () {
         if (oddzialKlikniety) {
 
-		} else {
+		} else if (this.idGracz == turaGracza){
+            console.log(this.idGracz);
 			var pos = isoH.px2pos(this.x, this.y);
 			mozliwyRuchTab = isoH.obszarWokol(pos.x, pos.y);
 			for (var a = 0; a < mozliwyRuchTab.length; a++) {
@@ -133,7 +134,8 @@ var rycerz = Crafty.e("2D, Canvas, rycerz" + idGracza + ", Mouse, Tween, rod_" +
 	});
 	rycerz.attr({
 		id : j,
-		nazwa : gracz[idGracza].oddzialy[j].nazwa
+		nazwa : gracz[idGracza].oddzialy[j].nazwa,
+        idGracz : idGracza
 	});
 
 	isoH.place(rycerz, gracz[idGracza].oddzialy[j].x, gracz[idGracza].oddzialy[j].y, 5);
