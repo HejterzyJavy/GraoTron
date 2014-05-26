@@ -110,9 +110,6 @@ function wylosujPozycjeNowegoOddzialu(pozycja) {
 }
 
 
-
-
- 
 function rysujOddzial(idGracza) {
 	var j = gracz[idGracza].oddzialy.length - 1;	//id ost elementu
 
@@ -259,6 +256,7 @@ var ruszJednostka = function(obiekt) {
 	gracz[turaGracza].oddzialy[oddzialKlikniety.id].x =pos.x;
 	gracz[turaGracza].oddzialy[oddzialKlikniety.id].y =pos.y;
 	if (obecneJednostki(mapaDzicy[pos.x][pos.y])) {
+        czasStop();
 		oddzialDef = gracz[turaGracza].oddzialy[oddzialKlikniety.id];
 		oknoWalki = window.open("Walka/index.html", "_blank", "toolbar=no, scrollbars=no, resizable=no, top=100, left=100, width=1020, height=680", "walka", "");
 		oknoCzyZamkniete = 0;
@@ -352,7 +350,7 @@ $(document).ready(function() {
         }
     }
 	//Rysowanie zamków
-	for (var i = 0; i < pozZamku.length; i++) {
+	for (i = 0; i < pozZamku.length; i++) {
 		isoH.place(Crafty.e("2D, Canvas, castle"), pozZamku[i][0], pozZamku[i][1], 2);
 	}
 
@@ -387,6 +385,7 @@ $(document).ready(function() {
 		if (oknoWalki && oknoWalki.closed) {
 			window.parent.document.getElementById("container").style.visibility = "visible";
 			aktualizujSurowce();
+            czasStart();
 		}
 	});
 

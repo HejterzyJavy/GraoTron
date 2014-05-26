@@ -3,6 +3,7 @@
  */
 var czasRundy = 90;
 var sek = czasRundy;
+var petlaCzasu;
 
 function add() {
     //if (oknoCzyZamkniete==1) {
@@ -34,9 +35,16 @@ function refresh() {
     document.getElementById("belkaCzas").innerHTML = ustawKolor(sek);
 }
 
+function czasStart(){
+    petlaCzasu = setInterval("add()", 1000);
+}
 
-setInterval("add()", 1000);
+function czasStop(){
+    clearInterval(petlaCzasu);
+}
+
 
 $(document).ready(function () {
+    czasStart();
     add();
 });
