@@ -1,11 +1,24 @@
 var mapaKopaln ;
 var pozZamku;
 var listaDoZajecia = [];
-
+/**
+ * Funkcja pomocnicza w interpolacji liniowej
+ * @param before {Number} Wartość poprzednia
+ * @param after {Number} Wartość następna
+ * @param atPoint {Number}
+ * @returns {Number}
+ */
 function linearInterpolate(before, after, atPoint) {
 	return before + (after - before) * atPoint;
 };
-function interpolate(data, fitCount, prog) {
+
+/**
+ * Funkcja interpolujaca liniowo dane z szumu perlina, do tablicy o danej wartosci
+ * @param data
+ * @param fitCount
+ * @returns {Array}
+ */
+function interpolate(data, fitCount) {
 	var newData = new Array();
 	var springFactor = new Number((data.length - 1) / (fitCount - 1));
 	newData[0] = data[0];
@@ -21,7 +34,14 @@ function interpolate(data, fitCount, prog) {
 	return newData;
 };
 
-// Sprawdza czy odleglosc miedzy graczami nie jesst zbyt mala
+/**
+ * Sprawdza czy odleglosc miedzy graczami nie jest zbyt mala
+ * @param tab {Array} Tablica z graczami
+ * @param x {Number}
+ * @param y {Number}
+ * @param odleglosc {Number}
+ * @returns {boolean}
+ */
 function sprawdzOdleglosc(tab, x, y, odleglosc) {
 	for (var i = 0; i < tab.length; i++) {
 		if (Crafty.math.distance(tab[i][0], tab[i][1], x, y) < odleglosc) {
@@ -30,7 +50,13 @@ function sprawdzOdleglosc(tab, x, y, odleglosc) {
 	}
 	return true;
 };
-
+/**
+ * Losuje pozycję graczy, każdy gracz oddalony od siebie o "odleglosc"
+ * @param iluGraczy {Number}
+ * @param rozm {Number}
+ * @param odleglosc {Number}
+ * @returns {Array}
+ */
 function wylosujPoz(iluGraczy, rozm,odleglosc) {
 	var tabGraczy = [];
 	var koniec = false;
@@ -48,7 +74,13 @@ function wylosujPoz(iluGraczy, rozm,odleglosc) {
 	}
 	return tabGraczy;
 };
-
+/**
+ * Generuje mape przy pomocy algorytmu szumu Perlina
+ * @param size {Number} Wielkość mapy
+ * @param czulosc {Number} Czulosc szumu
+ * @param prog {Number} Prog odcinajacy od "wysokosci"
+ * @returns {Array}
+ */
 function generate(size, czulosc, prog) {
 
 	noise.seed(Math.random());
@@ -108,7 +140,14 @@ console.log("KONIEC GENEROWANIA MAPY");
 	return mapNowa;
 }
 
-
+/**
+ * Funkcja rekurencyjna do wypelniania obszarów pomiędzy zajętymi terenami,
+ * od zadanego punktu funkcja "rozlewa" sie po mapie, jeśli wypełni obiekt lub dotrze do krawędzi mapy
+ * zatrzymuję się
+ * @param x {Number} Wartosc x początkowa algorytmu
+ * @param y {Number} Wartość y początkowa algorytmu
+ * @param kto {Number} Rodzaj gracza który ją wywołał
+ */
 function wypelnij(x, y,kto) {
 	
 	if(x>0 && x<40 && y>0 && y<40){
@@ -135,6 +174,11 @@ function wypelnij(x, y,kto) {
 	
 }
 
+/**
+ * Funkcja generująca pozycję i typy dzikich jednostek na mapie, o podanym na stale prawdopobienstwie
+ * @param {Array} map Mapa z miejscem dla dzikich
+ * @returns {Array}
+ */
 function losujDzikich(map){
 	var mapaDzikich = new Array(map.length);
 	var wsp1 = 15; // wspolczynnik prawdopodobienstwa wystapienia dzikiego na danym polu
