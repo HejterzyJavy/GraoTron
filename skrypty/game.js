@@ -160,6 +160,7 @@ function nowaTura(){
 			if(mapa[i][j] == turaGracza+3) iloscTerenu++;
 		}
 	}
+
     $("#listaOddzialow").html("");
     for(i=0;i<gracz[turaGracza].oddzialy.length;i++) updateListyOddzialow(i);
     $("#miniM").css("background-image", "url(img/herby/" + gracz[turaGracza].rod + ".png)");
@@ -172,6 +173,11 @@ function nowaTura(){
 				modal : true,
 				title: "Nowa tura"
 			});
+
+    gracz[turaGracza].surowce.zloto+= gracz[turaGracza].przychod.zloto;
+    gracz[turaGracza].surowce.drzewo+= gracz[turaGracza].przychod.drzewo;
+    gracz[turaGracza].surowce.zelazo+= gracz[turaGracza].przychod.zelazo;
+    gracz[turaGracza].surowce.ludzie+= gracz[turaGracza].przychod.ludzie;
 
     $("#przychod_zlota").html(gracz[turaGracza].przychod.zloto);
     $("#przychod_drewna").html(gracz[turaGracza].przychod.drzewo);

@@ -63,7 +63,6 @@ $(document).ready(function() {
 
     $('#pole12').click(function() {
     sek=0;
-    nowaTura();
     });
 
     $('#pole13').click(function() {
