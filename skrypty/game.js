@@ -34,7 +34,7 @@ var Gracz = function(imieGracza, rodGracza) {
         rod : rodGracza,
         oddzialy : [],
         surowce : {
-            zloto : 10,
+            zloto : 1000,
             zelazo : 10,
             drzewo : 10,
             ludzie : 10,

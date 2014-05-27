@@ -2,13 +2,30 @@ var tablica = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var wszystkieJednostki = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var info = new Array();
 var jednostkaId = 0;
+var zlotoGracza ;
+
+function blokowanieKupowania(){
+    for(var i=0;i<jednostka.length;i++){
+        if(jednostka[i].koszt>zlotoGracza) {
+            $("#pole"+i).fadeTo( "fast" , 0.5).find(".srodekPola").find(".add").removeClass("klikalny");
+        }
+        else{ $("#pole"+i).fadeTo( "fast" , 1).find(".srodekPola").find(".add").addClass("klikalny");}
+    }
+}
 
 $(document).ready(function() {
+
+
 	var turaGracza = window.opener.turaGracza;
 	jednostkiGracza =  window.opener.gracz[turaGracza].zamek.jednostki;
+    zlotoGracza = window.opener.gracz[turaGracza].surowce.zloto;
+    console.log ("zloto:",zlotoGracza);
 	console.log(jednostkiGracza);
+    $("#pozostaleZloto_tresc").html(": "+zlotoGracza);
 
-	info =  "<p>Miotacz TOPORÓW  <strong> " + wszystkieJednostki[1] + "</strong></p>"+ 
+    blokowanieKupowania();
+
+	info =  "<p>Miotacz TOPORÓW  <strong> " + wszystkieJednostki[1] + "</strong></p>"+
 			"<p>PIKINIER         <strong> " + wszystkieJednostki[2] + "</strong></p>"+
 			"<p>ŁUCZNIK          <strong> " + wszystkieJednostki[3] + "</strong></p>"+
 			"<p>KAWALERIA        <strong> " + wszystkieJednostki[4] + "</strong></p>"+
@@ -18,22 +35,30 @@ $(document).ready(function() {
 			"<p>DOWÓDCA          <strong> " + wszystkieJednostki[8] + "</strong></p>"+
 			"<p>WILKOR           <strong>"  + wszystkieJednostki[9] + "</strong></p>";
 	menuLista.innerHTML = info;
-	var index = 0;
 
-	var lista;
-	$('.add').click(function() {
-		id = $(this).parent().parent().attr("id");
-		ilosc = ++tablica[id.charAt(id.length - 1) ];
-		$("#" + id + " .goraPola strong").html("[" + ilosc + "]");
+	$('.add.klikalny').click(function() {
+        var id = $(this).parent().parent().attr("id");
+        var jednostkaId = id[id.length - 1];
+        if (jednostka[jednostkaId ].koszt<zlotoGracza) {
+            ilosc = ++tablica[jednostkaId ];
+            $("#" + id + " .goraPola strong").html("[" + ilosc + "]");
+            zlotoGracza -= jednostka[jednostkaId ].koszt;
+            $("#pozostaleZloto_tresc").html(": " + zlotoGracza);
+            blokowanieKupowania();
+        }
 
 	});
 
 	$('.sub').click(function() {
-		id = $(this).parent().parent().attr("id");
-		klasa = $(this).parent().parent().attr("id");
-		if (tablica[id.charAt(id.length - 1)-1] > 0)
-			ilosc = --tablica[id.charAt(id.length - 1) - 1];
-		$("#" + id + " .goraPola strong").html("[" + ilosc + "]");
+        var id = $(this).parent().parent().attr("id");
+        var jednostkaId = id[id.length - 1];
+        if (tablica[jednostkaId]>0) {
+            ilosc = --tablica[jednostkaId];
+            $("#" + id + " .goraPola strong").html("[" + ilosc + "]");
+            zlotoGracza = zlotoGracza + parseInt(jednostka[jednostkaId ].koszt);
+            $("#pozostaleZloto_tresc").html(": " + zlotoGracza);
+            blokowanieKupowania();
+        }
 
 	});
 
@@ -62,9 +87,8 @@ $(document).ready(function() {
 	});
 
 	$('.poleSiatki').mouseenter(function() {
-		id = $(this).attr("id");
-		var index = 0;
-		jednostkaId = id[id.length - 1];
+		var id = $(this).attr("id");
+		var jednostkaId = id[id.length - 1];
 		$("#obrazek").css("background-image", $("#" + id + " .obrazekJednostki").css("background-image"));
 		
 		$("#tytul").html(jednostka[jednostkaId ].nazwa);

@@ -6,7 +6,7 @@ var jednostka=[
         "atk":"55",
         "def":"60",
 		"luck":"20",
-		"koszt":"1000",
+		"koszt":"100",
 		"nazwaObrazka":"topor"
     },
     {
@@ -15,7 +15,7 @@ var jednostka=[
         "atk":"65",
         "def":"60",
 		"luck":"40",
-		"koszt":"1200",
+		"koszt":"120",
 		"nazwaObrazka":"pikinier"
     },
 	    {
@@ -24,7 +24,7 @@ var jednostka=[
         "atk":"95",
         "def":"60",
 		"luck":"60",
-		"koszt":"1100",
+		"koszt":"110",
 		"nazwaObrazka":"lucznik"
     },
 	    {
@@ -33,7 +33,7 @@ var jednostka=[
         "atk":"67",
         "def":"65",
 		"luck":"46",
-		"koszt":"1700",
+		"koszt":"170",
 		"nazwaObrazka":"kawaleria"
 		
     },
@@ -43,7 +43,7 @@ var jednostka=[
         "atk":"95",
         "def":"50",
 		"luck":"60",
-		"koszt":"2200",
+		"koszt":"220",
 		"nazwaObrazka":"Ckawaleria"
     },
 	    {
@@ -52,7 +52,7 @@ var jednostka=[
         "atk":"165",
         "def":"160",
 		"luck":"140",
-		"koszt":"3200",
+		"koszt":"320",
 		"nazwaObrazka":"rycerz"
 		
     },
@@ -71,7 +71,7 @@ var jednostka=[
         "atk":"465",
         "def":"360",
 		"luck":"540",
-		"koszt":"3200"		,
+		"koszt":"320"		,
 		"nazwaObrazka":"dowodzca"
     },
 	    {
@@ -80,7 +80,7 @@ var jednostka=[
         "atk":"665",
         "def":"360",
 		"luck":"440",
-		"koszt":"4200",
+		"koszt":"420",
 		"nazwaObrazka":"wilkor"
     }
 ];

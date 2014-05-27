@@ -221,3 +221,21 @@ body {
 	background-image: url("img/wilkor.png");
 }
 
+#pozostaleZloto {
+      float: left;
+      padding-left: 170px;
+    padding-top: 5px;
+      color:#E8C23B;
+  }
+
+#pozostaleZloto img{
+    float:left;
+}
+
+#pozostaleZloto_tresc {
+    margin-left: 5px;
+    margin-top: 10px;
+    float:left;
+    font-size: 18px;
+}
+
