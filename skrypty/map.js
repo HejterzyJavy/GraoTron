@@ -181,12 +181,13 @@ function wypelnij(x, y,kto) {
  */
 function losujDzikich(map){
 	var mapaDzikich = new Array(map.length);
-	var wsp1 = 15; // wspolczynnik prawdopodobienstwa wystapienia dzikiego na danym polu
+    var wspB = 10;
+	var wsp1 = 5; // wspolczynnik prawdopodobienstwa wystapienia dzikiego na danym polu
 		for (var i = 0; i < map.length; i++) {
 			mapaDzikich[i] = new Array(map.length);
 			for (var j = 0; j < map.length; j++) {
 				if (map[i][j] == 1) wsp1 *=2;
-				else wsp1 = 15;
+				else wsp1 = wspB;
 				mapaDzikich[i][j] = new Array(7);
 				for (var k = 1; k < 7; k++) {
 					mapaDzikich[i][j][k] = new Array(3);
