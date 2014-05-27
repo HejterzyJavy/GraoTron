@@ -6,8 +6,6 @@ var sek = czasRundy;
 var petlaCzasu;
 
 function add() {
-    //if (oknoCzyZamkniete==1) {
-    //if (oknoWalki.closed) {
     if (sek == 0) {
         ++turaGracza;
         if (turaGracza == 4) {
@@ -36,6 +34,7 @@ function refresh() {
 }
 
 function czasStart(){
+    console.log("czas Start");
     petlaCzasu = setInterval("add()", 1000);
 }
 

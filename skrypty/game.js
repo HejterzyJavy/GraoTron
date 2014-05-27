@@ -144,6 +144,7 @@ var rycerz = Crafty.e("2D, Canvas, rycerz" + idGracza + ", Mouse, Tween, rod_" +
 }
 //TODO:Nie aktualizuja sie poprawnie
 function aktualizujSurowce(){
+    console.log("surowce Zaktualizowane");
     console.log(gracz[turaGracza].surowce);
 	$("#zloto").find("p").html(gracz[turaGracza].surowce.zloto);
 	$("#zelazo").find("p").html(gracz[turaGracza].surowce.zelazo);
@@ -286,7 +287,8 @@ $(document).ready(function() {
 		rycerz1:[10,0,1,1],
 		rycerz2:[11,0,1,1],
 		rycerz3:[12,0,1,1],
-		podswietl:[1,2,1,1]
+		podswietl:[1,2,1,1],
+        grob:[2,2,0,0]
 
 	});
 
@@ -383,8 +385,7 @@ $(document).ready(function() {
 		}
 		if (oknoWalki && oknoWalki.closed) {
 			window.parent.document.getElementById("container").style.visibility = "visible";
-            czasStart();
-            aktualizujSurowce();
+
 		}
 	});
 

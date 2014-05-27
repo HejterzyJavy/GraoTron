@@ -3,8 +3,8 @@ var oddzial_1 = new Array(6);
 var oddzial_2 = new Array(6);
 var listaStratObr = []; // Lista straconych jednostek obroncy 
 var listaStratAtk = [];
-
-var surowceGracza = window.opener.gracz[window.opener.turaGracza].surowce;
+var graczKomputer = true; //:TODO narazie tylko dzicy atakuja
+var walkaAktywna = true;
 
 function pokazDialog(tmp) {
 	if (tmp == "wygrana") {
@@ -24,7 +24,8 @@ function pokazDialog(tmp) {
 		wiersz = "<p> Zloto: " + zdobyteZloto + "</p>";
 		$("#zdobyte_tresc").html(wiersz);
         window.opener.gracz[window.opener.turaGracza].surowce.zloto += zdobyteZloto;
-
+        window.opener.czasStart();
+        window.opener.aktualizujSurowce();
 	}
 
 	if (tmp == "przegrana") {
@@ -39,6 +40,7 @@ function pokazDialog(tmp) {
 		}
 		$("#stracone_tresc").html(tekst);
 		$("#zdobyte_tresc").html("");
+        window.opener.czasStart();
 	}
 
 
@@ -47,6 +49,7 @@ function pokazDialog(tmp) {
 		buttons : {
 			Ok : function() {
 				$(this).dialog("close");
+
 				window.close();
 			}
 		}
@@ -56,8 +59,7 @@ function pokazDialog(tmp) {
 
 
 function sprawdzKoniecWalki(){
-	var wygral = 0;
-	wygral = 1;
+	var wygral = 1;
 	console.log(oddzial_2);
 	console.log(oddzial_2.length);
 	for (var i = 1; i < 7; i++){
@@ -65,6 +67,10 @@ function sprawdzKoniecWalki(){
 		if(oddzial_2[i].ilosc > 0)  { wygral = 0; break;}
 	}
 	if (wygral == 1){
+        walkaAktywna = false;
+        var pos = window.opener.isoH.px2pos( window.opener.jednostkaAktywna.x, window.opener.jednostkaAktywna.y)
+        console.log(pos.x,pos.y);
+        window.opener.isoH.place( window.opener.Crafty.e("2D, Canvas, grob"),pos.x,pos.y , 2);
         window.opener.jednostkaAktywna.destroy();
         pokazDialog('przegrana');
     }
@@ -76,7 +82,7 @@ function sprawdzKoniecWalki(){
 		if(oddzial_1[i].ilosc > 0)  { wygral = 0; break;}
 	}
 	if (wygral == 2) {
-
+    walkaAktywna = false;
         pokazDialog('wygrana');
     }
 
@@ -86,11 +92,10 @@ function sprawdzKoniecWalki(){
 $(document).ready(function() {
 
     var dziki = window.opener.dziki;
-	oddzialAtk = window.opener.oddzialAtk;
+    var oddzialAtk = window.opener.oddzialAtk;
     var oddzialDef = window.opener.oddzialDef;
 	var atak= window.opener.mapaDzicy[oddzialAtk[0]][oddzialAtk[1]];
 	var turaGracza = 1;
-
 
 	var atakujaca;
 
@@ -139,7 +144,7 @@ $(document).ready(function() {
 
 
 	$('.poleSiatki').mouseenter(function() {
-		id = $(this).attr("id");
+		var id = $(this).attr("id");
 
 		$(this).animate({
 			opacity : 1
@@ -153,9 +158,23 @@ $(document).ready(function() {
 		$("#atk strong").html(jednostka[jednostkaId ].atk);
 		$("#def strong").html(jednostka[jednostkaId ].def);
 		$("#luck strong").html(jednostka[jednostkaId ].luck);
-		$("#koszt strong").html(jednostka[jednostkaId].koszt); 
+		$("#koszt strong").html(jednostka[jednostkaId].koszt);
 
 	});
+
+    function AI_wybierzAtakujaca(oddzial){
+        var tmpOddzial = [];
+        for(var i=0;i<oddzial.length;i++)
+            if(oddzial[i]) tmpOddzial.push(i);
+            return window.opener.Crafty.math.randomElementOfArray(tmpOddzial);
+    }
+
+    function AI_wybierzAtakowana(oddzial){
+        var tmpOddzial = [];
+        for(var i=0;i<oddzial.length;i++)
+            if(oddzial[i]) tmpOddzial.push(i);
+        return window.opener.Crafty.math.randomElementOfArray(tmpOddzial);
+    }
 
 	function zmienGracza() {
 		
@@ -167,27 +186,40 @@ $(document).ready(function() {
 						$('#lewa_' + i).css('opacity', '0.4');
 						$('#prawa_' + i).css('opacity', '0.4');
 					}
-		if (turaGracza == 1) {
-			$('#prawa .naglowek').css('borderBottom', '0px solid #D0D63E');
-			$('#prawa .przyciski' ).hide( "fast" );
-			$('#lewa .naglowek').css('borderBottom', '10px solid #D0D63E');
-			$('#lewa .naglowek').css('height', '54px');
-			$('#lewa .przyciski' ).show( "fast" );
-			
-		}
+        if(walkaAktywna){
+        ///////////// GRACZ KOMPUTEROWY
+        if (turaGracza == 1 && graczKomputer) {
+            window.setTimeout(function(){
+                var zadaneObrazenia = 0;
+                var zabiteJednostki = 0;
+                atakujaca = AI_wybierzAtakujaca(oddzial_1);
+                broniaca = AI_wybierzAtakowana(oddzial_2);
+                zadaneObrazenia = Math.abs(oddzial_2[broniaca].hp - (oddzial_1[atakujaca].atk - oddzial_2[broniaca].def ) * oddzial_1[atakujaca].ilosc);
+                zabiteJednostki = Math.floor(zadaneObrazenia / oddzial_2[broniaca].hp);
+                $("#prawa_" + broniaca + " .ilosc").html(oddzial_2[broniaca].ilosc - zabiteJednostki);
+                oddzial_2[broniaca].ilosc -= zabiteJednostki;
+                listaStratObr.push({nazwa: oddzial_2[broniaca].nazwa, ilosc: zabiteJednostki});
+                oddzialDef.jednostki[broniaca].ilosc = oddzial_2[broniaca].ilosc;
+                $("#prawa_" + broniaca).effect("shake");
+                if (oddzial_2[broniaca].ilosc <= 0) $("#prawa_" + broniaca).hide("fast");
+                $("#prawa_" + broniaca).effect("shake");
+                $("#srodek").html("Gracz " + turaGracza + " zadal: " + zadaneObrazenia + " obrazen <br> Zabijajac: " + zabiteJednostki + " jednostki");
+                turaGracza = 2;
+                zmienGracza();
+                console.log("TURA:" + turaGracza);
+            }, 1000);
 
-		if (turaGracza == 2) {
-			$('#lewa .naglowek').css('borderBottom', '0px solid #D0D63E');
-			$('#lewa .przyciski' ).hide( "fast" );
-			$('#prawa .naglowek').css('borderBottom', '10px solid #D0D63E');
-			$('#prawa .naglowek').css('height', '54px');
-			$('#prawa .przyciski' ).show( "fast" );
-		}
+        }
+    ////////////////////////
+		if (turaGracza == 1 && !graczKomputer) {
+            $('#prawa .naglowek').css('borderBottom', '0px solid #D0D63E');
+            $('#prawa .przyciski' ).hide( "fast" );
+            $('#lewa .naglowek').css('borderBottom', '10px solid #D0D63E');
+            $('#lewa .naglowek').css('height', '54px');
+            $('#lewa .przyciski' ).show( "fast" );
 
-		if (turaGracza == 1) {
 			$('.poleSiatki').mouseleave(function() {
 				if (turaGracza == 1) {
-					//trzeba poprawic ten warunek
 					if (this.id != "lewa_" + atakujaca && this.id != "prawa_" + broniaca) {
 						$(this).animate({
 							opacity : 0.4
@@ -196,7 +228,9 @@ $(document).ready(function() {
 					}
 				}
 			});
-			$('#lewa .poleSiatki').click(function() {
+
+			$('#lewa').find('.poleSiatki').click(function() {
+                var id = $(this).attr("id");
 				if (turaGracza == 1) {
 					jednostkaId = id[id.length - 1];
 					for (var i = 0; i <= 6; i++) {
@@ -245,6 +279,11 @@ $(document).ready(function() {
 		}
 		/////////////////////////////////////////////////
 		if (turaGracza == 2) {
+            $('#lewa .naglowek').css('borderBottom', '0px solid #D0D63E');
+            $('#lewa .przyciski' ).hide( "fast" );
+            $('#prawa .naglowek').css('borderBottom', '10px solid #D0D63E');
+            $('#prawa .naglowek').css('height', '54px');
+            $('#prawa .przyciski' ).show( "fast" );
 			$('.poleSiatki').mouseleave(function() {
 				if (turaGracza == 2) {
 					//trzeba poprawic ten warunek
@@ -257,6 +296,7 @@ $(document).ready(function() {
 				}
 			});
 			$('#prawa .poleSiatki').click(function() {
+                var id = $(this).attr("id");
 				if (turaGracza == 2) {
 					jednostkaId = id[id.length - 1];
 					for (var i = 0; i <= 6; i++) {
@@ -270,6 +310,7 @@ $(document).ready(function() {
 			});
 
 			$('#lewa .poleSiatki').click(function() {
+                var id = $(this).attr("id");
                 var jednostkaId;
                 if (turaGracza == 2) {
                     jednostkaId = id[id.length - 1];
@@ -308,6 +349,7 @@ $(document).ready(function() {
 				}
 			});
 		}
+        }
 	}
 	
 	zmienGracza();
