@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="../css/jQury_UI/custom-theme/jquery-ui-1.9.2.custom.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/jQury_UI/custom-theme/jquery-ui-1.9.2.custom.min.css" />
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<script src="../skrypty/jQuery/jquery-1.8.3.js"></script>
 		<script src="../skrypty/Dane/jednostka.js"></script>
@@ -10,6 +10,15 @@
 		<meta charset="UTF-8" />
 	</head>
 	<body>
+    <div id="menuInfo">
+        <div id="tytul">STATYSTYKI</div>
+        <div id="staty">
+            <p id="hp"><img src="img/staty/hp.png"/> HP:  <strong>100</strong></p>
+            <p id="atk"><img src="img/staty/atk.png"> ATK: <strong>100</strong></p>
+            <p id="def"><img src="img/staty/def.png"/> DEF: <strong>50</strong></p>
+            <p id="luck"><img src="img/staty/luck.png"/> LUCK: <strong>20</strong></p>
+        </div>
+    </div>
 		<div id="dialog" title="Koniec Walki">
 			<h1>Wygrana!</h1>
 			<img src="img/Victory.png">
@@ -33,12 +42,12 @@
 			<div id="lewa" class="oknoGracza">
 				<div class="naglowek"> DZICY</div>
 				<div class="siatka">
-					<div class="poleSiatki" id="lewa_1"><div class="ilosc">100</div> <img src="img/lucznik.png" /> </div>
-					<div class="poleSiatki" id="lewa_2"><div class="ilosc">50</div>  <img src="img/pikinier.png" /></div>
-					<div class="poleSiatki" id="lewa_3"><div class="ilosc">16</div>  <img src="img/lucznik.png" /></div>
-					<div class="poleSiatki" id="lewa_4"><div class="ilosc">16</div>  <img src="img/kawaleria.png" /></div>
-					<div class="poleSiatki" id="lewa_5"><div class="ilosc">28</div>  <img src="img/kleryk.png" /></div>
-					<div class="poleSiatki" id="lewa_6"><div class="ilosc">2</div>  <img src="img/pikinier.png" /></div>
+					<div id="lewa_1" class="poleSiatki" ><div class="ilosc">100</div> <img src="img/lucznik.png" /> </div>
+					<div id="lewa_2" class="poleSiatki"><div class="ilosc">50</div>  <img src="img/pikinier.png" /></div>
+					<div id="lewa_3" class="poleSiatki"><div class="ilosc">16</div>  <img src="img/lucznik.png" /></div>
+					<div id="lewa_4" class="poleSiatki"><div class="ilosc">16</div>  <img src="img/kawaleria.png" /></div>
+					<div id="lewa_5" class="poleSiatki"><div class="ilosc">28</div>  <img src="img/kleryk.png" /></div>
+					<div id="lewa_6" class="poleSiatki"><div class="ilosc">2</div>  <img src="img/pikinier.png" /></div>
 
 				</div>
 				<div class="przyciski">

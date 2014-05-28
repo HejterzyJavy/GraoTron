@@ -39,7 +39,7 @@ $(document).ready(function() {
 	$('.add.klikalny').click(function() {
         var id = $(this).parent().parent().attr("id");
         var jednostkaId = id[id.length - 1];
-        if (jednostka[jednostkaId ].koszt<zlotoGracza) {
+        if (jednostka[jednostkaId ].koszt<=zlotoGracza) {
             ilosc = ++tablica[jednostkaId ];
             $("#" + id + " .goraPola strong").html("[" + ilosc + "]");
             zlotoGracza -= jednostka[jednostkaId ].koszt;
@@ -72,6 +72,8 @@ $(document).ready(function() {
 		}
 		jednostkiGracza = wszystkieJednostki;
 		window.opener.gracz[turaGracza].zamek.jednostki = wszystkieJednostki;
+        window.opener.gracz[turaGracza].surowce.zloto = zlotoGracza;
+        window.opener.aktualizujSurowce();
 		console.log(jednostkiGracza);
 		info =  
 			"<p>Miotacz TOPORÓW  <strong> " + wszystkieJednostki[1] + "</strong></p>"+ 

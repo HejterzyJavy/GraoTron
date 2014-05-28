@@ -136,3 +136,11 @@ border: 1px solid #eee;
 background: #EEEEEE;
 color: #333;
 }
+
+#menuInfo {
+    display: none;
+}
+
+.poleSiatki.aktywne{
+    display: none;
+}

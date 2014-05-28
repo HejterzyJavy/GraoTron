@@ -142,7 +142,7 @@ var rycerz = Crafty.e("2D, Canvas, rycerz" + idGracza + ", Mouse, Tween, rod_" +
 	isoH.place(rycerz, gracz[idGracza].oddzialy[j].x, gracz[idGracza].oddzialy[j].y, 5);
 
 }
-//TODO:Nie aktualizuja sie poprawnie
+
 function aktualizujSurowce(){
     console.log("surowce Zaktualizowane");
     console.log(gracz[turaGracza].surowce);

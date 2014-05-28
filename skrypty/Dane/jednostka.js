@@ -91,12 +91,14 @@ var dziki = {
 		atk:50,
 		def:100,
 		hp:40,
+        luck:50
 	},
 	zabojca :  {
 		nazwa: 'zabojca',
 		atk:100,
 		def:50,
 		hp:80,
+        luck:50
 		
 	},
 	lucznik : {
@@ -104,24 +106,28 @@ var dziki = {
 		atk:100,
 		def:20,
 		hp:40,
+        luck:50
 	},
 	olbrzym :  {
 		nazwa: 'olbrzym',
 		atk:200,
 		def:200,
 		hp:200,
+        luck:50
 	},
 	niedzwiedz :  {
 		nazwa: 'niedzwiedz',
 		atk:200,
 		def:200,
 		hp:200,
+        luck:50
 	},
 	inny :  {
 		nazwa: 'inny',
 		atk:400,
 		def:400,
 		hp:200,
+        luck:50
 	},
 	getJednostka: function(id){
 		if(id==0) return this.wlocznik;

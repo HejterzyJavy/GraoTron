@@ -90,7 +90,6 @@ function sprawdzKoniecWalki(){
 }
 	
 $(document).ready(function() {
-
     var dziki = window.opener.dziki;
     var oddzialAtk = window.opener.oddzialAtk;
     var oddzialDef = window.opener.oddzialDef;
@@ -98,6 +97,8 @@ $(document).ready(function() {
 	var turaGracza = 1;
 
 	var atakujaca;
+
+
 
 	
 	$("#prawa").find(".naglowek").html(oddzialDef.nazwa);
@@ -110,12 +111,14 @@ $(document).ready(function() {
 						ilosc : atak[i][1],
 						mozeAtakowac : true,
 						stan : 0,
-						atk : 32,
-						def : 10,
-						hp : 5
+						atk : dziki.getJednostka(atak[i][0]).atk,
+						def :dziki.getJednostka(atak[i][0]).def,
+						hp : dziki.getJednostka(atak[i][0]).hp,
+                        luck: dziki.getJednostka(atak[i][0]).luck
 					};
 					$("#lewa_" + i + " img").attr('src', "img/" + oddzial_1[i].nazwa + ".png");
 					$("#lewa_" + i + " .ilosc").html(oddzial_1[i].ilosc);
+                    $("#lewa_" + i).addClass("aktywna");
 				} else {
 
 					$("#lewa_" + i + " img").hide();
@@ -133,13 +136,22 @@ $(document).ready(function() {
 				stan : 0,
 				atk : jednostka[id].atk,
 				def : jednostka[id].def,
-				hp : jednostka[id].hp
+				hp : jednostka[id].hp,
+                luck: jednostka[id].luck
 			};
 
 			$("#prawa_" + i + " img").attr('src', "img/" + oddzial_2[i].nazwa + ".png");
 			$("#prawa_" + i + " .ilosc").html(oddzial_2[i].ilosc);
+            $("#prawa_" + i).addClass("aktywna");
 		}
 	}
+
+    $( document).tooltip({
+        content: function() {
+            return $("#menuInfo").html();
+        },
+        items: $(".poleSiatki.aktywna")
+    });
 
 
 
@@ -152,13 +164,20 @@ $(document).ready(function() {
 		});
 
         var jednostkaId = id[id.length - 1];
-
-		$("#tytul").html(jednostka[jednostkaId].nazwa);
-		$("#hp strong").html(jednostka[jednostkaId ].hp);
-		$("#atk strong").html(jednostka[jednostkaId ].atk);
-		$("#def strong").html(jednostka[jednostkaId ].def);
-		$("#luck strong").html(jednostka[jednostkaId ].luck);
-		$("#koszt strong").html(jednostka[jednostkaId].koszt);
+        if(id.length == 6) { //:TODO dziwny warunek ;p
+            $("#tytul").html(oddzial_1[jednostkaId].nazwa);
+            $("#hp strong").html(oddzial_1[jednostkaId ].hp);
+            $("#atk strong").html(oddzial_1[jednostkaId ].atk);
+            $("#def strong").html(oddzial_1[jednostkaId ].def);
+            $("#luck strong").html(oddzial_1[jednostkaId ].luck);
+        }
+        else{
+                $("#tytul").html(oddzial_2[jednostkaId].nazwa);
+                $("#hp strong").html(oddzial_2[jednostkaId ].hp);
+                $("#atk strong").html(oddzial_2[jednostkaId ].atk);
+                $("#def strong").html(oddzial_2[jednostkaId ].def);
+                $("#luck strong").html(oddzial_2[jednostkaId ].luck);
+        }
 
 	});
 
@@ -176,7 +195,13 @@ $(document).ready(function() {
         return window.opener.Crafty.math.randomElementOfArray(tmpOddzial);
     }
 
+    function ukryjZabite(oddzial,strona){
+        console.log(oddzial);
+        if(oddzial[broniaca].ilosc <= 0) $("#"+strona+"_" + broniaca).hide( "fast" );
+    }
+
 	function zmienGracza() {
+
 		
 		sprawdzKoniecWalki();
 		atakujaca = 0;
@@ -189,29 +214,32 @@ $(document).ready(function() {
         if(walkaAktywna){
         ///////////// GRACZ KOMPUTEROWY
         if (turaGracza == 1 && graczKomputer) {
+
             window.setTimeout(function(){
                 var zadaneObrazenia = 0;
                 var zabiteJednostki = 0;
                 atakujaca = AI_wybierzAtakujaca(oddzial_1);
                 broniaca = AI_wybierzAtakowana(oddzial_2);
-                zadaneObrazenia = Math.abs(oddzial_2[broniaca].hp - (oddzial_1[atakujaca].atk - oddzial_2[broniaca].def ) * oddzial_1[atakujaca].ilosc);
-                zabiteJednostki = Math.floor(zadaneObrazenia / oddzial_2[broniaca].hp);
+                zadaneObrazenia = Math.abs(oddzial_2[broniaca].hp - (oddzial_1[atakujaca].atk - oddzial_2[broniaca].def ) * oddzial_1[atakujaca].ilosc +  window.opener.Crafty.math.randomInt(0,oddzial_1[atakujaca].luck));
+                zabiteJednostki = Math.floor(zadaneObrazenia / oddzial_2[broniaca].hp);//:TODO Zdarza sie ze jednostki nie moga sie zabic
                 $("#prawa_" + broniaca + " .ilosc").html(oddzial_2[broniaca].ilosc - zabiteJednostki);
                 oddzial_2[broniaca].ilosc -= zabiteJednostki;
                 listaStratObr.push({nazwa: oddzial_2[broniaca].nazwa, ilosc: zabiteJednostki});
                 oddzialDef.jednostki[broniaca].ilosc = oddzial_2[broniaca].ilosc;
-                $("#prawa_" + broniaca).effect("shake");
                 if (oddzial_2[broniaca].ilosc <= 0) $("#prawa_" + broniaca).hide("fast");
                 $("#prawa_" + broniaca).effect("shake");
                 $("#srodek").html("Gracz " + turaGracza + " zadal: " + zadaneObrazenia + " obrazen <br> Zabijajac: " + zabiteJednostki + " jednostki");
                 turaGracza = 2;
-                zmienGracza();
                 console.log("TURA:" + turaGracza);
+                ukryjZabite(oddzial_2,"prawa");
+                zmienGracza();
+
             }, 1000);
 
         }
     ////////////////////////
 		if (turaGracza == 1 && !graczKomputer) {
+
             $('#prawa .naglowek').css('borderBottom', '0px solid #D0D63E');
             $('#prawa .przyciski' ).hide( "fast" );
             $('#lewa .naglowek').css('borderBottom', '10px solid #D0D63E');
@@ -261,24 +289,26 @@ $(document).ready(function() {
 					var zadaneObrazenia = 0;
 					var zabiteJednostki = 0;
 					console.log(oddzial_2);
-					zadaneObrazenia = Math.abs(oddzial_2[broniaca].hp - (oddzial_1[atakujaca].atk - oddzial_2[broniaca].def )*oddzial_1[atakujaca].ilosc );
+					zadaneObrazenia = Math.abs(oddzial_2[broniaca].hp - (oddzial_1[atakujaca].atk - oddzial_2[broniaca].def )*oddzial_1[atakujaca].ilosc +window.opener.Crafty.math.randomInt(0,oddzial_1[atakujaca].luck) );
 					zabiteJednostki = Math.floor(zadaneObrazenia / oddzial_2[broniaca].hp);
 					$("#prawa_" + broniaca + " .ilosc").html(oddzial_2[broniaca].ilosc - zabiteJednostki);
 					oddzial_2[broniaca].ilosc -= zabiteJednostki;
 					listaStratObr.push({nazwa:oddzial_2[broniaca].nazwa, ilosc: zabiteJednostki});
 					oddzialDef.jednostki[broniaca].ilosc = oddzial_2[broniaca].ilosc;
 					$("#prawa_" + broniaca).effect( "shake" );
-					if(oddzial_2[broniaca].ilosc <= 0) $("#prawa_" + broniaca).hide( "fast" );
-					$("#prawa_" + broniaca).effect("shake");
+
 					$("#srodek").html("Gracz " + turaGracza + " zadal: " + zadaneObrazenia + " obrazen <br> Zabijajac: " + zabiteJednostki + " jednostki");
 					turaGracza = 2;
+                    ukryjZabite(oddzial_2,"prawa");
 					zmienGracza();
 					console.log("TURA:" + turaGracza);
+
 				}
 			});
 		}
 		/////////////////////////////////////////////////
 		if (turaGracza == 2) {
+
             $('#lewa .naglowek').css('borderBottom', '0px solid #D0D63E');
             $('#lewa .przyciski' ).hide( "fast" );
             $('#prawa .naglowek').css('borderBottom', '10px solid #D0D63E');
@@ -328,7 +358,7 @@ $(document).ready(function() {
 				if (turaGracza == 2) {
 					var zadaneObrazenia = 0;
 					var zabiteJednostki = 0;
-					zadaneObrazenia = Math.abs(oddzial_1[broniaca].hp - (oddzial_2[atakujaca].atk - oddzial_1[broniaca].def ) *oddzial_2[atakujaca].ilosc);
+					zadaneObrazenia = Math.abs(oddzial_1[broniaca].hp - (oddzial_2[atakujaca].atk - oddzial_1[broniaca].def ) * oddzial_2[atakujaca].ilosc + window.opener.Crafty.math.randomInt(0,oddzial_2[atakujaca].luck));
 					zabiteJednostki = Math.floor(zadaneObrazenia / oddzial_1[broniaca].hp);
 					$("#lewa_" + broniaca + " .ilosc").html(oddzial_1[broniaca].ilosc - zabiteJednostki);
 					
@@ -336,14 +366,13 @@ $(document).ready(function() {
 					atak[broniaca][1] = oddzial_1[broniaca].ilosc;
 					listaStratAtk.push({nazwa:oddzial_1[broniaca].nazwa, ilosc: zabiteJednostki});
 					if(oddzial_1[broniaca].ilosc <= 0) $("#lewa_" + broniaca).hide( "fast" );
-
 					$("#lewa_" + broniaca).effect("shake");
-
 					$("#srodek").html("Gracz " + turaGracza + " zadal: " + zadaneObrazenia + " obrazen <br> Zabijajac: " + zabiteJednostki + " jednostki");
 					turaGracza = 1;
 					console.log("TURA:" + turaGracza);
 					
-					window.opener.mapaDzicy[oddzialAtk[0]][oddzialAtk[1]][broniaca][1] = oddzial_1[broniaca].ilosc ; 
+					window.opener.mapaDzicy[oddzialAtk[0]][oddzialAtk[1]][broniaca][1] = oddzial_1[broniaca].ilosc ;
+                    ukryjZabite(oddzial_1,"lewa");
 					zmienGracza();
 					
 				}
